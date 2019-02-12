@@ -6,6 +6,7 @@
 package codigo;
 
 import java.sql.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,17 +21,20 @@ public class GestorConexion {
     boolean estado = false;
 
     public GestorConexion() {
+        abrir_Conexion();
+        if (conn1 != null) {
+            System.out.println("Conectado a la base de datos");
+            estado = true;
+        }
+    }
+
+    public void abrir_Conexion() {
         try {
             String url1 = "jdbc:mysql://localhost:3306/pathmanager?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
             String user = "root";
             String password = "";
 
             conn1 = (Connection) DriverManager.getConnection(url1, user, password);
-
-            if (conn1 != null) {
-                System.out.println("Conectado a la base de datos");
-                estado = true;
-            }
         } catch (SQLException ex) {
             System.out.println("ERROR: direccion o usuario/clave no valida");
             ex.printStackTrace();
@@ -57,15 +61,44 @@ public class GestorConexion {
         return estado;
     }
 
-    public String consulta_Statement(String consulta) {
-        String resultado = "";
+    public boolean iniciaSesion(String usuario, String pass) {
+        boolean existe = false;
+        try {
+            Statement sta = conn1.createStatement();
+            String query = "SELECT * FROM usuario WHERE nombre like '" + usuario + "' AND pass like '" + pass + "';";
+            ResultSet rs = sta.executeQuery(query);
+            while (rs.next()) {
+                existe = true;
+            }
+            rs.close();
+            sta.close();
+            return existe;
+        } catch (SQLException ex) {
+            System.out.println("ERROR:al consultar");
+            ex.printStackTrace();
+            return existe;
+        }
+    }
+
+    //Configurar todas las tablas bien
+    public DefaultTableModel dameTabla() {
+        DefaultTableModel tabla;
+
+        tabla = new DefaultTableModel(new String[]{"Nombre", "Nivel"}, 0);
+
+        return tabla;
+    }
+
+    public DefaultTableModel consulta_Statement(String consulta) {
+        DefaultTableModel resultado = null;
         try {
             Statement sta = conn1.createStatement();
             String query = "SELECT * FROM album WHERE titulo like '%" + consulta + "%'";
             ResultSet rs = sta.executeQuery(query);
             while (rs.next()) {
-                resultado = resultado + "\n" + "ID - " + rs.getInt("id") + ", Título " + rs.getString("titulo")
-                        + ", Autor " + rs.getString("autor");
+                //Agregar los datos en la tabla poco a poco
+//                resultado = resultado + "\n" + "ID - " + rs.getInt("id") + ", Título " + rs.getString("titulo")
+//                        + ", Autor " + rs.getString("autor");
             }
             rs.close();
             sta.close();
@@ -118,42 +151,5 @@ public class GestorConexion {
             }
             ex.printStackTrace();
         }
-    }
-
-    public void insertaCanciones(String titulo1, String duracion1, String letra1,
-            String titulo2, String duracion2, String letra2) {
-        try {
-            conn1.setAutoCommit(false);
-            Statement sta = conn1.createStatement();
-            sta.executeUpdate("INSERT INTO cancion (titulo, duracion, letras) " + "VALUES ('" + titulo1 + "', '" + duracion1 + "', '" + letra1 + "')");
-            sta.executeUpdate("INSERT INTO cancion (titulo, duracion, letras) " + "VALUES ('" + titulo2 + "', '" + duracion2 + "', '" + letra2 + "')");
-            conn1.commit();
-            conn1.setAutoCommit(true);
-        } catch (SQLException ex) {
-            System.out.println("ERROR:al hacer un Insert");
-            try {
-                if (conn1 != null) {
-                    conn1.rollback();
-                }
-            } catch (SQLException se2) {
-                se2.printStackTrace();
-            }
-            ex.printStackTrace();
-        }
-    }
-
-    public void insertaColumnaImagenes() {
-        try {
-            // Crea un statement
-            Statement sta = conn1.createStatement();
-            // Ejecuta la inserción
-            sta.executeUpdate("ALTER TABLE album ADD caratula VARCHAR(100) DEFAULT NULL;");
-            // Cierra el statement
-            sta.close();
-        } catch (SQLException ex) {
-            System.out.println("ERROR: al modificar la table");
-            ex.printStackTrace();
-        }
-
     }
 }

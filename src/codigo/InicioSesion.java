@@ -11,6 +11,9 @@ package codigo;
  */
 public class InicioSesion extends javax.swing.JFrame {
 
+    GestorConexion miConexion = new GestorConexion();
+    VentanaPrincipal miVentanaPrincipal;
+
     /**
      * Creates new form InicioSesion
      */
@@ -32,6 +35,7 @@ public class InicioSesion extends javax.swing.JFrame {
         jLabelUsuario = new javax.swing.JLabel();
         jLabelPass = new javax.swing.JLabel();
         jPasswordFieldPass = new javax.swing.JPasswordField();
+        jLabelErrores = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,28 +46,46 @@ public class InicioSesion extends javax.swing.JFrame {
             }
         });
 
+        jTextFieldusuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTextFieldusuarioMousePressed(evt);
+            }
+        });
+
         jLabelUsuario.setText("Usuario");
 
         jLabelPass.setText("Contraseña");
 
-        jPasswordFieldPass.setText("jPasswordField1");
+        jPasswordFieldPass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPasswordFieldPassMousePressed(evt);
+            }
+        });
+
+        jLabelErrores.setForeground(new java.awt.Color(204, 0, 0));
+        jLabelErrores.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonEntrar)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelPass)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPasswordFieldPass, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelUsuario)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap()
+                        .addComponent(jLabelErrores, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButtonEntrar)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelPass)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPasswordFieldPass, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelUsuario)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextFieldusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -77,7 +99,9 @@ public class InicioSesion extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelPass)
                     .addComponent(jPasswordFieldPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelErrores, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonEntrar)
                 .addGap(32, 32, 32))
         );
@@ -85,9 +109,28 @@ public class InicioSesion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonEntrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEntrarMousePressed
+    public void setVentanaPrincipal(VentanaPrincipal _miVentanaPrincipal) {
+        miVentanaPrincipal = _miVentanaPrincipal;
+    }
 
+    private void jButtonEntrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEntrarMousePressed
+        jLabelErrores.setText("");
+        boolean estado = miConexion.iniciaSesion(jTextFieldusuario.getText(), String.valueOf(jPasswordFieldPass.getPassword()));
+        if (estado) {
+            this.setVisible(false);
+        } else {
+            jLabelErrores.setText("Usuario o Contraseña Incorrectos");
+        }
+        miVentanaPrincipal.setSesion(estado, jTextFieldusuario.getText());
     }//GEN-LAST:event_jButtonEntrarMousePressed
+
+    private void jTextFieldusuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldusuarioMousePressed
+        jLabelErrores.setText("");
+    }//GEN-LAST:event_jTextFieldusuarioMousePressed
+
+    private void jPasswordFieldPassMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordFieldPassMousePressed
+        jLabelErrores.setText("");
+    }//GEN-LAST:event_jPasswordFieldPassMousePressed
 
     /**
      * @param args the command line arguments
@@ -126,6 +169,7 @@ public class InicioSesion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonEntrar;
+    private javax.swing.JLabel jLabelErrores;
     private javax.swing.JLabel jLabelPass;
     private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JPasswordField jPasswordFieldPass;
