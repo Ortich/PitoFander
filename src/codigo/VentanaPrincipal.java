@@ -114,6 +114,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabelTrepar.setText("");
         jLabelUsarObjetoMagico.setText("");
         jLabelVolar.setText("");
+        jLabelNadar.setText("");
 
         //Ahora reestablecemos los titulos que se modifican
         jLabelTArtesania1.setText("Artesania");
