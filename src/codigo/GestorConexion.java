@@ -6,6 +6,7 @@
 package codigo;
 
 import java.sql.*;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -98,7 +99,7 @@ public class GestorConexion {
             "interpretar2", "interpretar2Nombre", "intimidar", "inutilizarMecanismo", "juegoDeManos", "linguistica", "montar",
             "nadar", "percepcion", "profesion1", "profesion1Nombre", "profesion2", "profesion2Nombre", "saberArcano", "saberDungeons",
             "saberGeografia", "saberHistoria", "saberIngenieria", "saberLocal", "saberNaturaleza", "saberNobleza", "saberPlanos", "saberReligion",
-            "sigilo", "supervivencia", "tasacion", "tratoConAnimales", "trepar", "usarObjetoMagico", "volar", "raza", "clase",}, 0);;
+            "sigilo", "supervivencia", "tasacion", "tratoConAnimales", "trepar", "usarObjetoMagico", "volar", "raza", "clase", "codPersonaje"}, 0);
         try {
             Statement sta = conn1.createStatement();
             String query = "select * from personaje where (codPersonaje in (select codPersonaje from usuariopersonaje where (id in (select id from usuario where nombre = '" + usuario + "'))));";
@@ -117,13 +118,50 @@ public class GestorConexion {
                     rs.getString("profesion1"), rs.getString("profesion1Nombre"), rs.getString("profesion2"), rs.getString("profesion2Nombre"), rs.getString("saberArcano"),
                     rs.getString("saberDungeons"), rs.getString("saberGeografia"), rs.getString("saberHistoria"), rs.getString("saberIngenieria"), rs.getString("saberLocal"),
                     rs.getString("saberNaturaleza"), rs.getString("saberNobleza"), rs.getString("saberPlanos"), rs.getString("saberReligion"), rs.getString("sigilo"), rs.getString("supervivencia"),
-                    rs.getString("tasacion"), rs.getString("tratoConAnimales"), rs.getString("trepar"), rs.getString("usarObjetoMagico"), rs.getString("volar"), rs.getString("raza"), rs.getString("clase")});
+                    rs.getString("tasacion"), rs.getString("tratoConAnimales"), rs.getString("trepar"), rs.getString("usarObjetoMagico"), rs.getString("volar"), rs.getString("raza"), rs.getString("clase"), rs.getString("codPersonaje")});
 
 //                resultado = resultado + "\n" + "ID - " + rs.getInt("id") + ", Título " + rs.getString("titulo")
 //                        + ", Autor " + rs.getString("autor");
             }
             rs.close();
             sta.close();
+            return resultado;
+        } catch (SQLException ex) {
+            System.out.println("ERROR:al consultar");
+            ex.printStackTrace();
+            return resultado;
+        }
+    }
+
+    public DefaultTableModel devuelveArmasPorUsuario(String usuario) {
+        DefaultTableModel resultado = new DefaultTableModel(new String[]{"id", "nombre", "peso", "magico", "dannoP", "dannoM", "critico", "rango", "tipo", "especial", "descripcion"}, 0);
+        try {
+            Statement sta = conn1.createStatement();
+            String query = "select * from armas where(codArma in (select codArma from pathmanager.personajearmas where (codPersonaje in (select codPersonaje from usuariopersonaje where (id  in ((select id from usuario where nombre = '" + usuario + "')))))));";
+
+            ResultSet rs = sta.executeQuery(query);
+            while (rs.next()) {
+                resultado.addRow(new String[]{rs.getString("codArma"), rs.getString("nombre"), rs.getString("peso"), rs.getString("magico"), rs.getString("dannoP"), rs.getString("dannoM"), rs.getString("critico"),
+                    rs.getString("rango"), rs.getString("tipo"), rs.getString("especial"), rs.getString("descripcion"),});
+            }
+            return resultado;
+        } catch (SQLException ex) {
+            System.out.println("ERROR:al consultar");
+            ex.printStackTrace();
+            return resultado;
+        }
+    }
+
+    public ArrayList devuelveRelacionArmaPersonaje(String usuario) {
+        ArrayList<String[]> resultado = new ArrayList<String[]>();
+        try {
+            Statement sta = conn1.createStatement();
+            String query = "select * from pathmanager.personajearmas where (codPersonaje in (select codPersonaje from usuariopersonaje where (id  in ((select id from usuario where nombre = 'dani')))));";
+
+            ResultSet rs = sta.executeQuery(query);
+            while (rs.next()) {
+                resultado.add(new String[]{rs.getString("codPersonaje"), rs.getString("codArma"), rs.getString("cantidad")});
+            }
             return resultado;
         } catch (SQLException ex) {
             System.out.println("ERROR:al consultar");

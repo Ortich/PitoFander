@@ -1,6 +1,7 @@
 package codigo;
 
 import java.awt.Image;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,19 +15,28 @@ import javax.swing.table.DefaultTableModel;
  * @author Daniel
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
-
+    
     GestorConexion miConexion;
     private boolean usuarioConectado = false;
     InicioSesion inicioSesion;
+    VentanaDetallesObjetos ventanaDetallesObjetos;
 
-    //Variables locales donde guardaremos los datos
+    //Tablas locales donde guardaremos los datos
     DefaultTableModel personajes;
     DefaultTableModel armas;
     DefaultTableModel armaduras;
     DefaultTableModel objetos;
     DefaultTableModel dotes;
     DefaultTableModel habilidadesDeClase;
-    DefaultTableModel hechizosersona;
+    DefaultTableModel hechizos;
+
+    //ArrayList donde guardarmos la relacion personaje-objeto
+    ArrayList<String[]> personajeArma;
+    ArrayList<String[]> personajeArmadura;
+    ArrayList<String[]> personajeObjeto;
+    ArrayList<String[]> personajeDote;
+    ArrayList<String[]> personajeHabilidadDeClase;
+    ArrayList<String[]> personajehechizos;
 
     /**
      * Creates new form VentanaPrincipal
@@ -36,12 +46,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setResizable(false);
         inicioSesion = new InicioSesion();
         inicioSesion.setVentanaPrincipal(this);
+        ventanaDetallesObjetos = new VentanaDetallesObjetos();
         miConexion = new GestorConexion();
         reseteaInterfaz();
         bloquearInterfaz(false);
-        descargaDatosGenerales();
     }
-
+    
     public void setSesion(Boolean estado, String usuario) {
         usuarioConectado = estado;
         bloquearInterfaz(estado);
@@ -60,7 +70,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jComboBoxHechizos.removeAllItems();
         jComboBoxListaPersonajes.removeAllItems();
         jComboBoxObjetos.removeAllItems();
-
+        
+        limpiaInterfaz();
+    }
+    
+    private void limpiaInterfaz() {
         //Ponemos en blanco todos los jLabels de habilidades que no sean Titulos
         jLabelAcrobacias.setText("");
         jLabelArtesania1.setText("");
@@ -154,27 +168,38 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jButtonAnnadirHabilidadDeClase.setEnabled(bloquea);
         jButtonAnnadirHechizo.setEnabled(bloquea);
         jButtonAnnadirObjeto.setEnabled(bloquea);
-
+        
         jButtonDetallesArmaduras.setEnabled(bloquea);
         jButtonDetallesArmas.setEnabled(bloquea);
         jButtonDetallesDotes.setEnabled(bloquea);
         jButtonDetallesHabilidadesDeClase.setEnabled(bloquea);
         jButtonDetallesHechizos.setEnabled(bloquea);
         jButtonDetallesObjetos.setEnabled(bloquea);
-
+        
     }
 
     //Descarga los datos de los personajes y los guarda en local
     private void descargaDatosPersonajes(String usuario) {
-        //Guardamos la tabla en local
+        //Guardamos las tablas en local
         personajes = miConexion.devuelvePersonajeUsuario(usuario);
+        armas = miConexion.devuelveArmasPorUsuario(usuario);
 
+        //Guardamos las relaciones en local
+        personajeArma = miConexion.devuelveRelacionArmaPersonaje(usuario);
+        
         insertaPersonajesEnComboBox();
-
+        insertaObjetosEnComboBox();
+        
         actualizaPersonaje(jComboBoxListaPersonajes.getSelectedIndex());
     }
-
+    
     private void actualizaPersonaje(int codigoPersonaje) {
+        //Primero ponemos en blanco la interfaz guardando 
+        limpiaInterfaz();
+
+        //Ahora metemos los objetos del personaje seleccionado en los comboBox
+        insertaObjetosEnComboBox();
+
         //Guardamos los datos base del primer personaje
         jLabelNombre.setText(personajes.getValueAt(codigoPersonaje, 0).toString());
         jLabelApellido.setText(personajes.getValueAt(codigoPersonaje, 1).toString());
@@ -200,11 +225,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //Guardamos ahora las habilidades del primer personaje
         jLabelAcrobacias.setText(personajes.getValueAt(codigoPersonaje, 19).toString());
         jLabelArtesania1.setText(personajes.getValueAt(codigoPersonaje, 20).toString());
-        //jLabelArtesania1Nombre.setText(personajes.getValueAt(codigoPersonaje, 21).toString());
         jLabelArtesania2.setText(personajes.getValueAt(codigoPersonaje, 22).toString());
-        //jLabelArtesania2Nombre.setText(personajes.getValueAt(codigoPersonaje, 23).toString());
         jLabelArtesania3.setText(personajes.getValueAt(codigoPersonaje, 24).toString());
-        //jLabelArtesania3Nombre.setText(personajes.getValueAt(codigoPersonaje, 25).toString());
         jLabelAveriguarIntenciones.setText(personajes.getValueAt(codigoPersonaje, 26).toString());
         jLabelConocimientoConjuros.setText(personajes.getValueAt(codigoPersonaje, 27).toString());
         jLabelCurar.setText(personajes.getValueAt(codigoPersonaje, 28).toString());
@@ -213,9 +235,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabelEngannar.setText(personajes.getValueAt(codigoPersonaje, 31).toString());
         jLabelEscapismo.setText(personajes.getValueAt(codigoPersonaje, 32).toString());
         jLabelInterpretar1.setText(personajes.getValueAt(codigoPersonaje, 33).toString());
-        //jLabelInterpretar1Nombre.setText(personajes.getValueAt(codigoPersonaje, 34).toString());
         jLabelInterpretar2.setText(personajes.getValueAt(codigoPersonaje, 35).toString());
-        //jLabelInterpretar2Nombre.setText(personajes.getValueAt(codigoPersonaje, 36).toString());
         jLabelIntimidar.setText(personajes.getValueAt(codigoPersonaje, 37).toString());
         jLabelInutilizarMecanismo.setText(personajes.getValueAt(codigoPersonaje, 38).toString());
         jLabelJuegoDeManos.setText(personajes.getValueAt(codigoPersonaje, 39).toString());
@@ -224,9 +244,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabelNadar.setText(personajes.getValueAt(codigoPersonaje, 42).toString());
         jLabelPercepcion.setText(personajes.getValueAt(codigoPersonaje, 43).toString());
         jLabelProfesion1.setText(personajes.getValueAt(codigoPersonaje, 44).toString());
-        //jLabelProfesion1Nombre.setText(personajes.getValueAt(codigoPersonaje, 45).toString());
         jLabelProfesion2.setText(personajes.getValueAt(codigoPersonaje, 46).toString());
-        //jLabelProfesion2Nombre.setText(personajes.getValueAt(codigoPersonaje, 47).toString());
         jLabelSaberArcano.setText(personajes.getValueAt(codigoPersonaje, 48).toString());
         jLabelSaberDungeons.setText(personajes.getValueAt(codigoPersonaje, 49).toString());
         jLabelSaberGeografia.setText(personajes.getValueAt(codigoPersonaje, 50).toString());
@@ -244,20 +262,63 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabelTrepar.setText(personajes.getValueAt(codigoPersonaje, 62).toString());
         jLabelUsarObjetoMagico.setText(personajes.getValueAt(codigoPersonaje, 63).toString());
         jLabelVolar.setText(personajes.getValueAt(codigoPersonaje, 64).toString());
-    }
 
+        //Ahora miramos si tiene habilidades con nombre propio y los cambiamos 
+        if (!personajes.getValueAt(codigoPersonaje, 21).toString().equals("-")) {
+            jLabelTArtesania1.setText(personajes.getValueAt(codigoPersonaje, 21).toString());
+        }
+        if (!personajes.getValueAt(codigoPersonaje, 23).toString().equals("-")) {
+            jLabelTArtesania2.setText(personajes.getValueAt(codigoPersonaje, 23).toString());
+        }
+        if (!personajes.getValueAt(codigoPersonaje, 25).toString().equals("-")) {
+            jLabelTArtesania3.setText(personajes.getValueAt(codigoPersonaje, 25).toString());
+        }
+        if (!personajes.getValueAt(codigoPersonaje, 34).toString().equals("-")) {
+            jLabelTInterpretar1.setText(personajes.getValueAt(codigoPersonaje, 34).toString());
+        }
+        if (!personajes.getValueAt(codigoPersonaje, 36).toString().equals("-")) {
+            jLabelTInterpretar2.setText(personajes.getValueAt(codigoPersonaje, 36).toString());
+        }
+        if (!personajes.getValueAt(codigoPersonaje, 45).toString().equals("-")) {
+            jLabelTProfesion1.setText(personajes.getValueAt(codigoPersonaje, 45).toString());
+        }
+        if (!personajes.getValueAt(codigoPersonaje, 47).toString().equals("-")) {
+            jLabelTProfesion2.setText(personajes.getValueAt(codigoPersonaje, 47).toString());
+        }
+    }
+    
     public void insertaPersonajesEnComboBox() {
         jComboBoxListaPersonajes.removeAllItems();
-
+        
         for (int i = 0; i < personajes.getRowCount(); i++) {
             jComboBoxListaPersonajes.addItem(personajes.getValueAt(i, 0).toString());
         }
-
+        
     }
-
-    //Descarga los datos generales de los objetos y los guarda en local
-    private void descargaDatosGenerales() {
-
+    
+    public void insertaObjetosEnComboBox() {
+        jComboBoxArmas.removeAllItems();
+        boolean encontrada;
+        //personajeArma.get(jComboBoxListaPersonajes.getSelectedIndex())[1]
+        for (int i = 0; i < armas.getRowCount(); i++) {
+            encontrada = false;
+            System.out.println("Compruebo siguiente arma");
+            for (int k = 0; k < personajeArma.size() && !encontrada; k++) {
+                System.out.println("Comparando " + armas.getValueAt(i, 0) + " con " + personajeArma.get(k)[1]);
+                //&& 
+                if (((armas.getValueAt(i, 0)).equals(personajeArma.get(k)[1]))) {
+                    System.out.println("hay arma");
+                    System.out.println("Compruebo si es del personaje ");
+                    System.out.println("Comparando " + personajes.getValueAt(jComboBoxListaPersonajes.getSelectedIndex(), 67) + " con " + personajeArma.get(k)[0]);
+                    if ((personajes.getValueAt(jComboBoxListaPersonajes.getSelectedIndex(), 67).equals(personajeArma.get(k)[0]))) {
+                        System.out.println("El arma es de este personaje");
+                        jComboBoxArmas.addItem(armas.getValueAt(i, 1).toString());
+                        encontrada = true;
+                    }
+                }
+            }
+            
+        }
     }
 
     /**
@@ -1184,6 +1245,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jButtonDetallesArmas.setBackground(new java.awt.Color(190, 31, 44));
         jButtonDetallesArmas.setFont(new java.awt.Font("Pokemon Classic", 0, 9)); // NOI18N
         jButtonDetallesArmas.setText("Detalles");
+        jButtonDetallesArmas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDetallesArmasActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButtonDetallesArmas, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 320, -1, -1));
 
         jButtonDetallesHabilidadesDeClase.setBackground(new java.awt.Color(190, 31, 44));
@@ -1291,7 +1357,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jMenuItemIniciarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemIniciarSesionMousePressed
         inicioSesion.setVisible(true);
     }//GEN-LAST:event_jMenuItemIniciarSesionMousePressed
-
+    
     private void jMenuItemConectarBBDDMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemConectarBBDDMousePressed
         switch (jMenuItemConectarBBDD.getText()) {
             case "Conectar":
@@ -1305,15 +1371,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 System.out.println("Cerrar");
                 break;
         }
-
+        
     }//GEN-LAST:event_jMenuItemConectarBBDDMousePressed
-
+    
     private void jComboBoxListaPersonajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxListaPersonajesActionPerformed
         try {
             actualizaPersonaje(jComboBoxListaPersonajes.getSelectedIndex());
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jComboBoxListaPersonajesActionPerformed
+    
+    private void jButtonDetallesArmasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDetallesArmasActionPerformed
+        ventanaDetallesObjetos.setVisible(true);
+        ventanaDetallesObjetos.estableceTabla(armas);
+    }//GEN-LAST:event_jButtonDetallesArmasActionPerformed
 
     /**
      * @param args the command line arguments
