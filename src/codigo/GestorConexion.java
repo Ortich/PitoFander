@@ -89,14 +89,36 @@ public class GestorConexion {
         return tabla;
     }
 
-    public DefaultTableModel consulta_Statement(String consulta) {
-        DefaultTableModel resultado = null;
+    public DefaultTableModel devuelvePersonajeUsuario(String usuario) {
+        DefaultTableModel resultado = new DefaultTableModel(new String[]{"nombre", "apellidos", "alineamiento", "religion",
+            "genero", "ptsGolpe", "idiomas", "nivel", "edad", "altura", "peso", "cabello",
+            "ojos", "fuerza", "destreza", "constitucion", "inteligencia", "sabidura", "carisma", "acrobacias", "artesania1", "artesania1Nombre",
+            "artesania2", "artesania2Nombre", "artesania3", "artesania3Nombre", "averiguarIntenciones", "conocimientoDeConjuros",
+            "curar", "diplomacia", "disfrazarse", "engannar", "escapismo", "interpretar1", "interpretar1Nombre",
+            "interpretar2", "interpretar2Nombre", "intimidar", "inutilizarMecanismo", "juegoDeManos", "linguistica", "montar",
+            "nadar", "percepcion", "profesion1", "profesion1Nombre", "profesion2", "profesion2Nombre", "saberArcano", "saberDungeons",
+            "saberGeografia", "saberHistoria", "saberIngenieria", "saberLocal", "saberNaturaleza", "saberNobleza", "saberPlanos", "saberReligion",
+            "sigilo", "supervivencia", "tasacion", "tratoConAnimales", "trepar", "usarObjetoMagico", "volar", "raza", "clase",}, 0);;
         try {
             Statement sta = conn1.createStatement();
-            String query = "SELECT * FROM album WHERE titulo like '%" + consulta + "%'";
+            String query = "select * from personaje where (codPersonaje in (select codPersonaje from usuariopersonaje where (id in (select id from usuario where nombre = '" + usuario + "'))));";
+
             ResultSet rs = sta.executeQuery(query);
             while (rs.next()) {
                 //Agregar los datos en la tabla poco a poco
+                resultado.addRow(new String[]{rs.getString("nombre"), rs.getString("apellidos"), rs.getString("alineamiento"), rs.getString("religion"), rs.getString("genero"),
+                    rs.getString("ptsGolpe"), rs.getString("idiomas"), rs.getString("nivel"), rs.getString("edad"), rs.getString("altura"), rs.getString("peso"),
+                    rs.getString("cabello"), rs.getString("ojos"), rs.getString("fuerza"), rs.getString("destreza"), rs.getString("constitucion"), rs.getString("inteligencia"),
+                    rs.getString("sabiduria"), rs.getString("carisma"), rs.getString("acrobacias"), rs.getString("artesania1"), rs.getString("artesania1Nombre"),
+                    rs.getString("artesania2"), rs.getString("artesania2Nombre"), rs.getString("artesania3"), rs.getString("artesania3Nombre"), rs.getString("averiguarIntenciones"),
+                    rs.getString("conocimientoDeConjuros"), rs.getString("curar"), rs.getString("diplomacia"), rs.getString("disfrazarse"), rs.getString("engannar"), rs.getString("escapismo"),
+                    rs.getString("interpretar1"), rs.getString("interpretar1Nombre"), rs.getString("interpretar2"), rs.getString("interpretar2Nombre"), rs.getString("intimidar"),
+                    rs.getString("inutilizarMecanismo"), rs.getString("juegoDeManos"), rs.getString("linguistica"), rs.getString("montar"), rs.getString("nadar"), rs.getString("percepcion"),
+                    rs.getString("profesion1"), rs.getString("profesion1Nombre"), rs.getString("profesion2"), rs.getString("profesion2Nombre"), rs.getString("saberArcano"),
+                    rs.getString("saberDungeons"), rs.getString("saberGeografia"), rs.getString("saberHistoria"), rs.getString("saberIngenieria"), rs.getString("saberLocal"),
+                    rs.getString("saberNaturaleza"), rs.getString("saberNobleza"), rs.getString("saberPlanos"), rs.getString("saberReligion"), rs.getString("sigilo"), rs.getString("supervivencia"),
+                    rs.getString("tasacion"), rs.getString("tratoConAnimales"), rs.getString("trepar"), rs.getString("usarObjetoMagico"), rs.getString("volar"), rs.getString("raza"), rs.getString("clase")});
+
 //                resultado = resultado + "\n" + "ID - " + rs.getInt("id") + ", Título " + rs.getString("titulo")
 //                        + ", Autor " + rs.getString("autor");
             }

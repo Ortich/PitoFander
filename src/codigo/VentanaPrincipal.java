@@ -26,7 +26,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     DefaultTableModel objetos;
     DefaultTableModel dotes;
     DefaultTableModel habilidadesDeClase;
-    DefaultTableModel hechizos;
+    DefaultTableModel hechizosersona;
 
     /**
      * Creates new form VentanaPrincipal
@@ -48,12 +48,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         if (usuarioConectado) {
             descargaDatosPersonajes(usuario);
         }
-    }
-
-    private void configuraTablasLocales() {
-        personajes = new DefaultTableModel(new String[]{"nombre", "apellidos", "alineamiento", "religion",
-            "genero", "ptsGolpe", "idiomas", "nivel", "edad", "altura", "peso", "cabello",
-            "ojos", "fuerza", "destreza", "constitucion", "inteligencia", "sabidura", "carisma"/*TODO Hay que seguir implementando*/}, 0);
     }
 
     //Pone los campos en blanco
@@ -172,6 +166,92 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     //Descarga los datos de los personajes y los guarda en local
     private void descargaDatosPersonajes(String usuario) {
+        //Guardamos la tabla en local
+        personajes = miConexion.devuelvePersonajeUsuario(usuario);
+
+        insertaPersonajesEnComboBox();
+
+        actualizaPersonaje(jComboBoxListaPersonajes.getSelectedIndex());
+    }
+
+    private void actualizaPersonaje(int codigoPersonaje) {
+        //Guardamos los datos base del primer personaje
+        jLabelNombre.setText(personajes.getValueAt(codigoPersonaje, 0).toString());
+        jLabelApellido.setText(personajes.getValueAt(codigoPersonaje, 1).toString());
+        jLabelAlineamiento.setText(personajes.getValueAt(codigoPersonaje, 2).toString());
+        jLabelDios.setText(personajes.getValueAt(codigoPersonaje, 3).toString());
+        jLabelSexo.setText(personajes.getValueAt(codigoPersonaje, 4).toString());
+        jLabelPtsGolpe.setText(personajes.getValueAt(codigoPersonaje, 5).toString());
+        jLabelNivel.setText(personajes.getValueAt(codigoPersonaje, 7).toString());
+        jLabelEdad.setText(personajes.getValueAt(codigoPersonaje, 8).toString());
+        jLabelAltura.setText(personajes.getValueAt(codigoPersonaje, 9).toString());
+        jLabelPeso.setText(personajes.getValueAt(codigoPersonaje, 10).toString());
+        jLabelCabello.setText(personajes.getValueAt(codigoPersonaje, 11).toString());
+        jLabelOjos.setText(personajes.getValueAt(codigoPersonaje, 12).toString());
+        jLabelFuerza.setText(personajes.getValueAt(codigoPersonaje, 13).toString());
+        jLabelDestreza.setText(personajes.getValueAt(codigoPersonaje, 14).toString());
+        jLabelConstitucion.setText(personajes.getValueAt(codigoPersonaje, 15).toString());
+        jLabelInteligencia.setText(personajes.getValueAt(codigoPersonaje, 16).toString());
+        jLabelSabiduria.setText(personajes.getValueAt(codigoPersonaje, 17).toString());
+        jLabelCarisma.setText(personajes.getValueAt(codigoPersonaje, 18).toString());
+        jLabelRaza.setText(personajes.getValueAt(codigoPersonaje, 65).toString());
+        jLabelClase.setText(personajes.getValueAt(codigoPersonaje, 66).toString());
+
+        //Guardamos ahora las habilidades del primer personaje
+        jLabelAcrobacias.setText(personajes.getValueAt(codigoPersonaje, 19).toString());
+        jLabelArtesania1.setText(personajes.getValueAt(codigoPersonaje, 20).toString());
+        //jLabelArtesania1Nombre.setText(personajes.getValueAt(codigoPersonaje, 21).toString());
+        jLabelArtesania2.setText(personajes.getValueAt(codigoPersonaje, 22).toString());
+        //jLabelArtesania2Nombre.setText(personajes.getValueAt(codigoPersonaje, 23).toString());
+        jLabelArtesania3.setText(personajes.getValueAt(codigoPersonaje, 24).toString());
+        //jLabelArtesania3Nombre.setText(personajes.getValueAt(codigoPersonaje, 25).toString());
+        jLabelAveriguarIntenciones.setText(personajes.getValueAt(codigoPersonaje, 26).toString());
+        jLabelConocimientoConjuros.setText(personajes.getValueAt(codigoPersonaje, 27).toString());
+        jLabelCurar.setText(personajes.getValueAt(codigoPersonaje, 28).toString());
+        jLabelDiplomacia.setText(personajes.getValueAt(codigoPersonaje, 29).toString());
+        jLabelDisfrazarse.setText(personajes.getValueAt(codigoPersonaje, 30).toString());
+        jLabelEngannar.setText(personajes.getValueAt(codigoPersonaje, 31).toString());
+        jLabelEscapismo.setText(personajes.getValueAt(codigoPersonaje, 32).toString());
+        jLabelInterpretar1.setText(personajes.getValueAt(codigoPersonaje, 33).toString());
+        //jLabelInterpretar1Nombre.setText(personajes.getValueAt(codigoPersonaje, 34).toString());
+        jLabelInterpretar2.setText(personajes.getValueAt(codigoPersonaje, 35).toString());
+        //jLabelInterpretar2Nombre.setText(personajes.getValueAt(codigoPersonaje, 36).toString());
+        jLabelIntimidar.setText(personajes.getValueAt(codigoPersonaje, 37).toString());
+        jLabelInutilizarMecanismo.setText(personajes.getValueAt(codigoPersonaje, 38).toString());
+        jLabelJuegoDeManos.setText(personajes.getValueAt(codigoPersonaje, 39).toString());
+        jLabelLinguistica.setText(personajes.getValueAt(codigoPersonaje, 40).toString());
+        jLabelMontar.setText(personajes.getValueAt(codigoPersonaje, 41).toString());
+        jLabelNadar.setText(personajes.getValueAt(codigoPersonaje, 42).toString());
+        jLabelPercepcion.setText(personajes.getValueAt(codigoPersonaje, 43).toString());
+        jLabelProfesion1.setText(personajes.getValueAt(codigoPersonaje, 44).toString());
+        //jLabelProfesion1Nombre.setText(personajes.getValueAt(codigoPersonaje, 45).toString());
+        jLabelProfesion2.setText(personajes.getValueAt(codigoPersonaje, 46).toString());
+        //jLabelProfesion2Nombre.setText(personajes.getValueAt(codigoPersonaje, 47).toString());
+        jLabelSaberArcano.setText(personajes.getValueAt(codigoPersonaje, 48).toString());
+        jLabelSaberDungeons.setText(personajes.getValueAt(codigoPersonaje, 49).toString());
+        jLabelSaberGeografia.setText(personajes.getValueAt(codigoPersonaje, 50).toString());
+        jLabelSaberHistoria.setText(personajes.getValueAt(codigoPersonaje, 51).toString());
+        jLabelSaberIngenieria.setText(personajes.getValueAt(codigoPersonaje, 52).toString());
+        jLabelSaberLocal.setText(personajes.getValueAt(codigoPersonaje, 53).toString());
+        jLabelSaberNaturaleza.setText(personajes.getValueAt(codigoPersonaje, 54).toString());
+        jLabelSaberNobleza.setText(personajes.getValueAt(codigoPersonaje, 55).toString());
+        jLabelSaberLosPlanos.setText(personajes.getValueAt(codigoPersonaje, 56).toString());
+        jLabelSaberReligion.setText(personajes.getValueAt(codigoPersonaje, 57).toString());
+        jLabelSigilo.setText(personajes.getValueAt(codigoPersonaje, 58).toString());
+        jLabelSupervivencia.setText(personajes.getValueAt(codigoPersonaje, 59).toString());
+        jLabelTasacion.setText(personajes.getValueAt(codigoPersonaje, 60).toString());
+        jLabelTratoConAnimales.setText(personajes.getValueAt(codigoPersonaje, 61).toString());
+        jLabelTrepar.setText(personajes.getValueAt(codigoPersonaje, 62).toString());
+        jLabelUsarObjetoMagico.setText(personajes.getValueAt(codigoPersonaje, 63).toString());
+        jLabelVolar.setText(personajes.getValueAt(codigoPersonaje, 64).toString());
+    }
+
+    public void insertaPersonajesEnComboBox() {
+        jComboBoxListaPersonajes.removeAllItems();
+
+        for (int i = 0; i < personajes.getRowCount(); i++) {
+            jComboBoxListaPersonajes.addItem(personajes.getValueAt(i, 0).toString());
+        }
 
     }
 
@@ -340,6 +420,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jButtonDetallesDotes = new javax.swing.JButton();
         jLabelTHechizos = new javax.swing.JLabel();
         jLabelTArmas = new javax.swing.JLabel();
+        jLabelNadar = new javax.swing.JLabel();
+        jLabelTNadar = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuConexion = new javax.swing.JMenu();
         jMenuItemConectarBBDD = new javax.swing.JMenuItem();
@@ -409,6 +491,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jComboBoxListaPersonajes.setFont(new java.awt.Font("Pokemon Classic", 0, 9)); // NOI18N
         jComboBoxListaPersonajes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxListaPersonajes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxListaPersonajesActionPerformed(evt);
+            }
+        });
         getContentPane().add(jComboBoxListaPersonajes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 181, -1));
 
         jLabelAlineamiento.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
@@ -528,6 +615,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelAcrobacias, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 26, 20));
 
         jLabelTAcrobacias.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTAcrobacias.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTAcrobacias.setText("Acrobacias");
         getContentPane().add(jLabelTAcrobacias, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, -1, -1));
 
@@ -538,6 +626,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelArtesania1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 26, 20));
 
         jLabelTArtesania1.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTArtesania1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTArtesania1.setText("Artesania");
         getContentPane().add(jLabelTArtesania1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, -1, -1));
 
@@ -548,6 +637,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelArtesania2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 26, 20));
 
         jLabelTArtesania2.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTArtesania2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTArtesania2.setText("Artesania");
         getContentPane().add(jLabelTArtesania2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, -1, -1));
 
@@ -558,6 +648,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelArtesania3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, 26, 20));
 
         jLabelTArtesania3.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTArtesania3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTArtesania3.setText("Artesania");
         getContentPane().add(jLabelTArtesania3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, -1, -1));
 
@@ -568,6 +659,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelAveriguarIntenciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, 26, 20));
 
         jLabelTAveriguarIntenciones.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTAveriguarIntenciones.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTAveriguarIntenciones.setText("Averiguar Intenciones");
         getContentPane().add(jLabelTAveriguarIntenciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, -1, -1));
 
@@ -578,6 +670,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelConocimientoConjuros, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 410, 26, 20));
 
         jLabelTConocimientoConjuros.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTConocimientoConjuros.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTConocimientoConjuros.setText("Conocimiento de Conjuros");
         getContentPane().add(jLabelTConocimientoConjuros, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, -1, -1));
 
@@ -588,6 +681,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelCurar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 440, 26, 20));
 
         jLabelTCurar.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTCurar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTCurar.setText("Curar");
         getContentPane().add(jLabelTCurar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 440, -1, -1));
 
@@ -598,6 +692,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelDiplomacia, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, 26, 20));
 
         jLabelTDiplomacia.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTDiplomacia.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTDiplomacia.setText("Diplomacia");
         getContentPane().add(jLabelTDiplomacia, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 470, -1, -1));
 
@@ -608,6 +703,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelDisfrazarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 500, 26, 20));
 
         jLabelTDisfrazarse.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTDisfrazarse.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTDisfrazarse.setText("Disfrazarse");
         getContentPane().add(jLabelTDisfrazarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 500, -1, -1));
 
@@ -618,6 +714,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelEngannar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 530, 26, 20));
 
         jLabelTEngannar.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTEngannar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTEngannar.setText("Engañar");
         getContentPane().add(jLabelTEngannar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 530, -1, -1));
 
@@ -628,6 +725,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelEscapismo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 560, 26, 20));
 
         jLabelTEscapismo.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTEscapismo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTEscapismo.setText("Escapismo");
         getContentPane().add(jLabelTEscapismo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 560, -1, -1));
 
@@ -638,6 +736,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelInterpretar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 590, 26, 20));
 
         jLabelTInterpretar1.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTInterpretar1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTInterpretar1.setText("Interpretar");
         getContentPane().add(jLabelTInterpretar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 590, -1, -1));
 
@@ -728,6 +827,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelInterpretar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 620, 26, 20));
 
         jLabelTInterpretar2.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTInterpretar2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTInterpretar2.setText("Interpretar");
         getContentPane().add(jLabelTInterpretar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 620, -1, -1));
 
@@ -738,6 +838,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelIntimidar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 650, 26, 20));
 
         jLabelTIntimidar.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTIntimidar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTIntimidar.setText("Intimidar");
         getContentPane().add(jLabelTIntimidar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 650, -1, -1));
 
@@ -748,6 +849,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelInutilizarMecanismo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 680, 26, 20));
 
         jLabelTInutilizarMecanismo.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTInutilizarMecanismo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTInutilizarMecanismo.setText("Inutilizar Mecanismo");
         getContentPane().add(jLabelTInutilizarMecanismo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 680, -1, -1));
 
@@ -758,6 +860,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelJuegoDeManos, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 710, 26, 20));
 
         jLabelTJuegosDeManos.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTJuegosDeManos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTJuegosDeManos.setText("Juego de Manos");
         getContentPane().add(jLabelTJuegosDeManos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 710, -1, -1));
 
@@ -768,6 +871,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelLinguistica, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 740, 26, 20));
 
         jLabelTLinguistica.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTLinguistica.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTLinguistica.setText("Lingüistica");
         getContentPane().add(jLabelTLinguistica, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 740, -1, -1));
 
@@ -778,6 +882,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelMontar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 770, 26, 20));
 
         jLabelTMontar.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTMontar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTMontar.setText("Montar");
         getContentPane().add(jLabelTMontar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 770, -1, -1));
 
@@ -785,11 +890,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabelPercepcion.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelPercepcion.setText("99");
         jLabelPercepcion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        getContentPane().add(jLabelPercepcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 800, 26, 20));
+        getContentPane().add(jLabelPercepcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 230, 26, 20));
 
         jLabelTPercepcion.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTPercepcion.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTPercepcion.setText("Percepcion");
-        getContentPane().add(jLabelTPercepcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 800, -1, -1));
+        getContentPane().add(jLabelTPercepcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, -1, -1));
 
         jLabelProfesion1.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
         jLabelProfesion1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -798,6 +904,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelProfesion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 26, 20));
 
         jLabelTProfesion1.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTProfesion1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTProfesion1.setText("Profesion");
         getContentPane().add(jLabelTProfesion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, -1, -1));
 
@@ -808,6 +915,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelProfesion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 290, 26, 20));
 
         jLabelTProfesion2.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTProfesion2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTProfesion2.setText("Profesion");
         getContentPane().add(jLabelTProfesion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, -1, -1));
 
@@ -818,6 +926,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelSaberArcano, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, 26, 20));
 
         jLabelTSaberArcano.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTSaberArcano.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTSaberArcano.setText("Saber (Arcano)");
         getContentPane().add(jLabelTSaberArcano, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, -1, -1));
 
@@ -828,6 +937,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelSaberDungeons, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 350, 26, 20));
 
         jLabelTSaberDungeons.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTSaberDungeons.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTSaberDungeons.setText("Saber (Dugeons");
         getContentPane().add(jLabelTSaberDungeons, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 350, -1, -1));
 
@@ -838,6 +948,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelSaberGeografia, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 380, 26, 20));
 
         jLabelTSaberGeografia.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTSaberGeografia.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTSaberGeografia.setText("Saber (Geografia) ");
         getContentPane().add(jLabelTSaberGeografia, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 380, -1, -1));
 
@@ -848,6 +959,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelSaberHistoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 410, 26, 20));
 
         jLabelTSaberHistoria.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTSaberHistoria.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTSaberHistoria.setText("Saber (Historia)");
         getContentPane().add(jLabelTSaberHistoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 410, -1, -1));
 
@@ -858,6 +970,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelSaberIngenieria, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 440, 26, 20));
 
         jLabelTSaberIngenieria.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTSaberIngenieria.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTSaberIngenieria.setText("Saber (Ingenieria)");
         getContentPane().add(jLabelTSaberIngenieria, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 440, -1, -1));
 
@@ -868,6 +981,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelSaberLocal, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 470, 26, 20));
 
         jLabelTSaberLocal.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTSaberLocal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTSaberLocal.setText("Saber (Local)");
         getContentPane().add(jLabelTSaberLocal, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 470, -1, -1));
 
@@ -878,6 +992,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelSaberLosPlanos, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 500, 26, 20));
 
         jLabelTSaberLosPlanos.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTSaberLosPlanos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTSaberLosPlanos.setText("Saber (Los Planos)");
         getContentPane().add(jLabelTSaberLosPlanos, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 500, -1, -1));
 
@@ -888,6 +1003,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelSaberNaturaleza, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 530, 26, 20));
 
         jLabelTSaberNaturaleza.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTSaberNaturaleza.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTSaberNaturaleza.setText("Saber (Naturaleza)");
         getContentPane().add(jLabelTSaberNaturaleza, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 530, -1, -1));
 
@@ -898,6 +1014,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelSaberNobleza, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 560, 26, 20));
 
         jLabelTSaberNobleza.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTSaberNobleza.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTSaberNobleza.setText("Saber (Nobleza)");
         getContentPane().add(jLabelTSaberNobleza, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 560, -1, -1));
 
@@ -908,6 +1025,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelSaberReligion, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 590, 26, 20));
 
         jLabelTSaberReligion.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTSaberReligion.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTSaberReligion.setText("Saber (Religion)");
         getContentPane().add(jLabelTSaberReligion, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 590, -1, -1));
 
@@ -918,6 +1036,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelSigilo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 620, 26, 20));
 
         jLabelTSigilo.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTSigilo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTSigilo.setText("Sigilo");
         getContentPane().add(jLabelTSigilo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 620, -1, -1));
 
@@ -928,6 +1047,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelSupervivencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 650, 26, 20));
 
         jLabelTSupervivencia.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTSupervivencia.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTSupervivencia.setText("Supervivencia");
         getContentPane().add(jLabelTSupervivencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 650, -1, -1));
 
@@ -938,6 +1058,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelTasacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 680, 26, 20));
 
         jLabelTTasacion.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTTasacion.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTTasacion.setText("Tasacion");
         getContentPane().add(jLabelTTasacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 680, -1, -1));
 
@@ -948,6 +1069,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelTratoConAnimales, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 710, 26, 20));
 
         jLabelTTratoConAnimales.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTTratoConAnimales.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTTratoConAnimales.setText("Trato con Animales");
         getContentPane().add(jLabelTTratoConAnimales, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 710, -1, -1));
 
@@ -958,6 +1080,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelTrepar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 740, 26, 20));
 
         jLabelTTrepar.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTTrepar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTTrepar.setText("Trepar");
         getContentPane().add(jLabelTTrepar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 740, -1, -1));
 
@@ -968,6 +1091,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelUsarObjetoMagico, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 770, 26, 20));
 
         jLabelTUsarObjetoMagico.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTUsarObjetoMagico.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTUsarObjetoMagico.setText("Usar Objeto Magico");
         getContentPane().add(jLabelTUsarObjetoMagico, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 770, -1, -1));
 
@@ -978,6 +1102,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabelVolar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 800, 26, 20));
 
         jLabelTVolar.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTVolar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTVolar.setText("Volar");
         getContentPane().add(jLabelTVolar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 800, -1, -1));
 
@@ -1089,6 +1214,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabelTArmas.setText("Armas");
         getContentPane().add(jLabelTArmas, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 270, -1, -1));
 
+        jLabelNadar.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
+        jLabelNadar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelNadar.setText("99");
+        jLabelNadar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        getContentPane().add(jLabelNadar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 800, 26, 20));
+
+        jLabelTNadar.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTNadar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelTNadar.setText("Nadar");
+        getContentPane().add(jLabelTNadar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 800, -1, -1));
+
         jMenuBar.setBackground(new java.awt.Color(190, 31, 44));
         jMenuBar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
@@ -1171,6 +1307,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jMenuItemConectarBBDDMousePressed
+
+    private void jComboBoxListaPersonajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxListaPersonajesActionPerformed
+        try {
+            actualizaPersonaje(jComboBoxListaPersonajes.getSelectedIndex());
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jComboBoxListaPersonajesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1257,6 +1400,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelJuegoDeManos;
     private javax.swing.JLabel jLabelLinguistica;
     private javax.swing.JLabel jLabelMontar;
+    private javax.swing.JLabel jLabelNadar;
     private javax.swing.JLabel jLabelNivel;
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JLabel jLabelOjos;
@@ -1320,6 +1464,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTJuegosDeManos;
     private javax.swing.JLabel jLabelTLinguistica;
     private javax.swing.JLabel jLabelTMontar;
+    private javax.swing.JLabel jLabelTNadar;
     private javax.swing.JLabel jLabelTNivel;
     private javax.swing.JLabel jLabelTNombre;
     private javax.swing.JLabel jLabelTObjetos;
