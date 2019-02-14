@@ -15,11 +15,11 @@ import javax.swing.table.DefaultTableModel;
  * @author Daniel
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
-    
+
     GestorConexion miConexion;
     private boolean usuarioConectado = false;
     InicioSesion inicioSesion;
-    VentanaDetallesObjetos ventanaDetallesObjetos;
+    VentanaDetallesArmas ventanaDetallesObjetos;
 
     //Tablas locales donde guardaremos los datos
     DefaultTableModel personajes;
@@ -30,14 +30,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     DefaultTableModel habilidadesDeClase;
     DefaultTableModel hechizos;
 
-    //ArrayList donde guardarmos la relacion personaje-objeto
-    ArrayList<String[]> personajeArma;
-    ArrayList<String[]> personajeArmadura;
-    ArrayList<String[]> personajeObjeto;
-    ArrayList<String[]> personajeDote;
-    ArrayList<String[]> personajeHabilidadDeClase;
-    ArrayList<String[]> personajehechizos;
-
     /**
      * Creates new form VentanaPrincipal
      */
@@ -46,12 +38,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setResizable(false);
         inicioSesion = new InicioSesion();
         inicioSesion.setVentanaPrincipal(this);
-        ventanaDetallesObjetos = new VentanaDetallesObjetos();
+        ventanaDetallesObjetos = new VentanaDetallesArmas();
         miConexion = new GestorConexion();
         reseteaInterfaz();
         bloquearInterfaz(false);
     }
-    
+
     public void setSesion(Boolean estado, String usuario) {
         usuarioConectado = estado;
         bloquearInterfaz(estado);
@@ -70,10 +62,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jComboBoxHechizos.removeAllItems();
         jComboBoxListaPersonajes.removeAllItems();
         jComboBoxObjetos.removeAllItems();
-        
+
         limpiaInterfaz();
     }
-    
+
     private void limpiaInterfaz() {
         //Ponemos en blanco todos los jLabels de habilidades que no sean Titulos
         jLabelAcrobacias.setText("");
@@ -169,40 +161,34 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jButtonAnnadirHabilidadDeClase.setEnabled(bloquea);
         jButtonAnnadirHechizo.setEnabled(bloquea);
         jButtonAnnadirObjeto.setEnabled(bloquea);
-        
+
         jButtonDetallesArmaduras.setEnabled(bloquea);
         jButtonDetallesArmas.setEnabled(bloquea);
         jButtonDetallesDotes.setEnabled(bloquea);
         jButtonDetallesHabilidadesDeClase.setEnabled(bloquea);
         jButtonDetallesHechizos.setEnabled(bloquea);
         jButtonDetallesObjetos.setEnabled(bloquea);
-        
+
     }
 
     //Descarga los datos de los personajes y los guarda en local
     private void descargaDatosPersonajes(String usuario) {
         //Guardamos las tablas en local
         personajes = miConexion.devuelvePersonajeUsuario(usuario);
-        armas = miConexion.devuelveArmasPorUsuario(usuario);
 
-        //Guardamos las relaciones en local
-        personajeArma = miConexion.devuelveRelacionArmaPersonaje(usuario);
-        
         insertaPersonajesEnComboBox();
-        insertaObjetosEnComboBox();
-        
+
+        rellenaComboBox();
+
         actualizaPersonaje(jComboBoxListaPersonajes.getSelectedIndex());
     }
-    
+
     private void actualizaPersonaje(int codigoPersonaje) {
         //Primero ponemos en blanco la interfaz guardando 
         limpiaInterfaz();
 
         //Ahora metemos los objetos del personaje seleccionado en los comboBox
-        insertaObjetosEnComboBox();
-        insertaArmadurasCB();
-        insertaObjetosCB();
-        insertaDotesCB();
+        rellenaComboBox();
 
         //Guardamos los datos base del primer personaje
         jLabelNombre.setText(personajes.getValueAt(codigoPersonaje, 0).toString());
@@ -290,77 +276,62 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             jLabelTProfesion2.setText(personajes.getValueAt(codigoPersonaje, 47).toString());
         }
     }
-    
+
+    public void rellenaComboBox() {
+        insertaArmasEnComboBox();
+        insertaArmadurasEnComboBox();
+        insertaObjetosEnComboBox();
+        insertaDotesEnComboBox();
+    }
+
     public void insertaPersonajesEnComboBox() {
         jComboBoxListaPersonajes.removeAllItems();
-        
+
         for (int i = 0; i < personajes.getRowCount(); i++) {
             jComboBoxListaPersonajes.addItem(personajes.getValueAt(i, 0).toString());
         }
-        
+
     }
-    
-    public void insertaObjetosEnComboBox() {
+
+    public void insertaArmasEnComboBox() {
         jComboBoxArmas.removeAllItems();
-        boolean encontrada;
-        //personajeArma.get(jComboBoxListaPersonajes.getSelectedIndex())[1]
+        String a = personajes.getValueAt(jComboBoxListaPersonajes.getSelectedIndex(), 67).toString();
+        armas = miConexion.devuelveArmaPorPersonaje(a);
+        System.out.println(a);
         for (int i = 0; i < armas.getRowCount(); i++) {
-            encontrada = false;
-            System.out.println("Compruebo siguiente arma");
-            for (int k = 0; k < personajeArma.size() && !encontrada; k++) {
-                System.out.println("Comparando " + armas.getValueAt(i, 0) + " con " + personajeArma.get(k)[1]);
-                //&& 
-                if (((armas.getValueAt(i, 0)).equals(personajeArma.get(k)[1]))) {
-                    System.out.println("hay arma");
-                    System.out.println("Compruebo si es del personaje ");
-                    System.out.println("Comparando " + personajes.getValueAt(jComboBoxListaPersonajes.getSelectedIndex(), 67) + " con " + personajeArma.get(k)[0]);
-                    if ((personajes.getValueAt(jComboBoxListaPersonajes.getSelectedIndex(), 67).equals(personajeArma.get(k)[0]))) {
-                        System.out.println("El arma es de este personaje");
-                        jComboBoxArmas.addItem(armas.getValueAt(i, 1).toString());
-                        encontrada = true;
-                    }
-                }
-            }
-            
+            jComboBoxArmas.addItem(armas.getValueAt(i, 1).toString());
         }
     }
-    
-    public void insertaArmadurasCB()
-    {
+
+    public void insertaArmadurasEnComboBox() {
         jComboBoxArmaduras.removeAllItems();
         String a = personajes.getValueAt(jComboBoxListaPersonajes.getSelectedIndex(), 67).toString();
         armaduras = miConexion.devuelveArmaduraPorPersonaje(a);
         System.out.println(a);
-        for (int i = 0; i < armaduras.getRowCount(); i++) 
-        {
+        for (int i = 0; i < armaduras.getRowCount(); i++) {
             jComboBoxArmaduras.addItem(armaduras.getValueAt(i, 1).toString());
         }
     }
-    
-    public void insertaObjetosCB()
-    {
+
+    public void insertaObjetosEnComboBox() {
         jComboBoxObjetos.removeAllItems();
         String a = personajes.getValueAt(jComboBoxListaPersonajes.getSelectedIndex(), 67).toString();
         objetos = miConexion.devuelveObjetosPorPersonaje(a);
         System.out.println(a);
-        for (int i = 0; i < objetos.getRowCount(); i++) 
-        {
+        for (int i = 0; i < objetos.getRowCount(); i++) {
             jComboBoxObjetos.addItem(objetos.getValueAt(i, 1).toString());
         }
     }
-    
-    public void insertaDotesCB()
-    {
+
+    public void insertaDotesEnComboBox() {
         jComboBoxDotes.removeAllItems();
         String a = personajes.getValueAt(jComboBoxListaPersonajes.getSelectedIndex(), 67).toString();
         dotes = miConexion.devuelveDotesPorPersonaje(a);
         System.out.println(a);
-        for (int i = 0; i < dotes.getRowCount(); i++) 
-        {
+        for (int i = 0; i < dotes.getRowCount(); i++) {
             jComboBoxDotes.addItem(dotes.getValueAt(i, 1).toString());
         }
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1398,7 +1369,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jMenuItemIniciarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemIniciarSesionMousePressed
         inicioSesion.setVisible(true);
     }//GEN-LAST:event_jMenuItemIniciarSesionMousePressed
-    
+
     private void jMenuItemConectarBBDDMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemConectarBBDDMousePressed
         switch (jMenuItemConectarBBDD.getText()) {
             case "Conectar":
@@ -1412,16 +1383,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 System.out.println("Cerrar");
                 break;
         }
-        
+
     }//GEN-LAST:event_jMenuItemConectarBBDDMousePressed
-    
+
     private void jComboBoxListaPersonajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxListaPersonajesActionPerformed
         try {
             actualizaPersonaje(jComboBoxListaPersonajes.getSelectedIndex());
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jComboBoxListaPersonajesActionPerformed
-    
+
     private void jButtonDetallesArmasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDetallesArmasActionPerformed
         ventanaDetallesObjetos.setVisible(true);
         ventanaDetallesObjetos.estableceTabla(armas);

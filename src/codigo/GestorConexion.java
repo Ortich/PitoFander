@@ -133,16 +133,16 @@ public class GestorConexion {
         }
     }
 
-    public DefaultTableModel devuelveArmasPorUsuario(String usuario) {
+    public DefaultTableModel devuelveArmaPorPersonaje(String codPersonaje) {
         DefaultTableModel resultado = new DefaultTableModel(new String[]{"id", "nombre", "peso", "magico", "dannoP", "dannoM", "critico", "rango", "tipo", "especial", "descripcion"}, 0);
         try {
             Statement sta = conn1.createStatement();
-            String query = "select * from armas where(codArma in (select codArma from pathmanager.personajearmas where (codPersonaje in (select codPersonaje from usuariopersonaje where (id  in ((select id from usuario where nombre = '" + usuario + "')))))));";
-
+            String query = "select * from armas , (select * from personajeArmas where codPersonaje = " + codPersonaje + ") c where c.codArma = armas.codArma;";
+            System.out.println("select * from armas , (select * from personajeArmas where codPersonaje = " + codPersonaje + ") c where c.codArma = armas.codArma;");
             ResultSet rs = sta.executeQuery(query);
             while (rs.next()) {
-                resultado.addRow(new String[]{rs.getString("codArma"), rs.getString("nombre"), rs.getString("peso"), rs.getString("magico"), rs.getString("dannoP"), rs.getString("dannoM"), rs.getString("critico"),
-                    rs.getString("rango"), rs.getString("tipo"), rs.getString("especial"), rs.getString("descripcion"),});
+                resultado.addRow(new String[]{rs.getString("codArma"), rs.getString("nombre"), rs.getString("peso"), rs.getString("magico"), rs.getString("dannoP"), rs.getString("dannoM"),
+                    rs.getString("critico"), rs.getString("rango"), rs.getString("tipo"), rs.getString("especial"), rs.getString("descripcion")});
             }
             return resultado;
         } catch (SQLException ex) {
@@ -152,26 +152,7 @@ public class GestorConexion {
         }
     }
 
-    public ArrayList devuelveRelacionArmaPersonaje(String usuario) {
-        ArrayList<String[]> resultado = new ArrayList<String[]>();
-        try {
-            Statement sta = conn1.createStatement();
-            String query = "select * from pathmanager.personajearmas where (codPersonaje in (select codPersonaje from usuariopersonaje where (id  in ((select id from usuario where nombre = 'dani')))));";
-
-            ResultSet rs = sta.executeQuery(query);
-            while (rs.next()) {
-                resultado.add(new String[]{rs.getString("codPersonaje"), rs.getString("codArma"), rs.getString("cantidad")});
-            }
-            return resultado;
-        } catch (SQLException ex) {
-            System.out.println("ERROR:al consultar");
-            ex.printStackTrace();
-            return resultado;
-        }
-    }
-    
-    public DefaultTableModel devuelveArmaduraPorPersonaje(String codPersonaje) 
-    {
+    public DefaultTableModel devuelveArmaduraPorPersonaje(String codPersonaje) {
         DefaultTableModel resultado = new DefaultTableModel(new String[]{"id", "nombre", "bonificador", "peso", "magico", "descripcion", "velocidad", "dexBonus", "penalizacion", "falloHechizo", "cantidad"}, 0);
         try {
             Statement sta = conn1.createStatement();
@@ -180,7 +161,7 @@ public class GestorConexion {
             ResultSet rs = sta.executeQuery(query);
             while (rs.next()) {
                 resultado.addRow(new String[]{rs.getString("codArmadura"), rs.getString("nombre"), rs.getString("bonificador"), rs.getString("peso"), rs.getString("magico"), rs.getString("descripcion"), rs.getString("velocidad"),
-                    rs.getString("dexBonus"), rs.getString("penalizacion"), rs.getString("falloHechizo"),rs.getString("cantidad")});
+                    rs.getString("dexBonus"), rs.getString("penalizacion"), rs.getString("falloHechizo"), rs.getString("cantidad")});
             }
             return resultado;
         } catch (SQLException ex) {
@@ -189,9 +170,8 @@ public class GestorConexion {
             return resultado;
         }
     }
-    
-    public DefaultTableModel devuelveObjetosPorPersonaje(String codPersonaje) 
-    {
+
+    public DefaultTableModel devuelveObjetosPorPersonaje(String codPersonaje) {
         DefaultTableModel resultado = new DefaultTableModel(new String[]{"id", "nombre", "peso", "magico", "descripcion", "cantidad"}, 0);
         try {
             Statement sta = conn1.createStatement();
@@ -208,9 +188,8 @@ public class GestorConexion {
             return resultado;
         }
     }
-    
-    public DefaultTableModel devuelveDotesPorPersonaje(String codPersonaje) 
-    {
+
+    public DefaultTableModel devuelveDotesPorPersonaje(String codPersonaje) {
         DefaultTableModel resultado = new DefaultTableModel(new String[]{"id", "nombre", "beneficio", "normal", "especial", "descripcion", "preRequisitos"}, 0);
         try {
             Statement sta = conn1.createStatement();
@@ -218,7 +197,7 @@ public class GestorConexion {
             System.out.println("select * from dotes , (select * from personajeDotes where codPersonaje = " + codPersonaje + ") c where c.codDote = dotes.codDote;");
             ResultSet rs = sta.executeQuery(query);
             while (rs.next()) {
-                resultado.addRow(new String[]{rs.getString("codDote"), rs.getString("nombre"), rs.getString("beneficio"), rs.getString("normal"), 
+                resultado.addRow(new String[]{rs.getString("codDote"), rs.getString("nombre"), rs.getString("beneficio"), rs.getString("normal"),
                     rs.getString("especial"), rs.getString("descripcion"), rs.getString("preRequisitos")});
             }
             return resultado;
@@ -228,7 +207,7 @@ public class GestorConexion {
             return resultado;
         }
     }
-    
+
     public DefaultTableModel devuelveHabilidadesDeClasePorPersonaje(String codPersonaje) //FALTA POR TERMINAR.
     {
         DefaultTableModel resultado = new DefaultTableModel(new String[]{"id", "nombre", "ex", "descripcion", "objeto", "nombreClase"}, 0);
@@ -238,7 +217,7 @@ public class GestorConexion {
             System.out.println("select * from dotes , (select * from personajeDotes where codPersonaje = " + codPersonaje + ") c where c.codDote = dotes.codDote;");
             ResultSet rs = sta.executeQuery(query);
             while (rs.next()) {
-                resultado.addRow(new String[]{rs.getString("codDote"), rs.getString("nombre"), rs.getString("beneficio"), rs.getString("normal"), 
+                resultado.addRow(new String[]{rs.getString("codDote"), rs.getString("nombre"), rs.getString("beneficio"), rs.getString("normal"),
                     rs.getString("especial"), rs.getString("descripcion"), rs.getString("preRequisitos")});
             }
             return resultado;

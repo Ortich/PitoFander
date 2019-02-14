@@ -36,11 +36,11 @@ CREATE TABLE IF NOT EXISTS `personaje`
     `artesania3` int(3)  NOT NULL,
     `artesania3Nombre` varchar(20),
     `averiguarIntenciones` int(3)  NOT NULL,
-    `conociemientoDeConjuros` int(3)  NOT NULL,
+    `conocimientoDeConjuros` int(3)  NOT NULL,
     `curar` int(3)  NOT NULL,
     `diplomacia` int(3)  NOT NULL,
     `disfrazarse` int(3)  NOT NULL,
-    `engañar` int(3)  NOT NULL,
+    `engannar` int(3)  NOT NULL,
     `escapismo` int(3)  NOT NULL,
     `interpretar1` int(3)  NOT NULL,
     `interpretar1Nombre` varchar(20),
@@ -79,26 +79,26 @@ CREATE TABLE IF NOT EXISTS `personaje`
 ) 
 ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-INSERT INTO `personaje` (`codPersonaje`,`nombre`,`apellidos`,`alineamiento`,`religion`,`genero`,`ptsGolpe`,`idiomas`,
+INSERT INTO `personaje` (`nombre`,`apellidos`,`alineamiento`,`religion`,`genero`,`ptsGolpe`,`idiomas`,
 `nivel`, `edad`, `altura`, `peso`, `cabello`, `ojos`, `pc`, `pp`, `po`, `ppr`, `fuerza`, `destreza`, `constitucion`, `inteligencia`, `sabiduria`, `carisma`,
 `acrobacias`,`artesania1`,`artesania1Nombre`,`artesania2`,`artesania2Nombre`,  
-`artesania3`,`artesania3Nombre`,`averiguarIntenciones`,`conociemientoDeConjuros`,`curar`,`diplomacia`,`disfrazarse`,`engañar`,`escapismo`,
+`artesania3`,`artesania3Nombre`,`averiguarIntenciones`,`conocimientoDeConjuros`,`curar`,`diplomacia`,`disfrazarse`,`engannar`,`escapismo`,
 `interpretar1`,`interpretar1Nombre`,`interpretar2`,`interpretar2Nombre`,`intimidar`,`inutilizarMecanismo`,`juegoDeManos`,`linguistica`,
 `montar`,`nadar`,`percepcion`,`profesion1`,`profesion1Nombre`,`profesion2`,`profesion2Nombre`,`saberArcano`,`saberDungeons`,`saberGeografia`,
 `saberHistoria`,`saberIngenieria`,`saberLocal`,`saberNaturaleza`,`saberNobleza`,`saberPlanos`,`saberReligion`,`sigilo`,`supervivencia`,`tasacion`,
 `tratoConAnimales`,`trepar`,`usarObjetoMagico`,`volar`,
 `raza`, `clase`) 
 VALUES 
-(1, 'Caladrel', 'Fëanor', 'CN', 'Nethys', 'Hombre', 14, 'Común, Elfo, Celestial, Abisal, Draconico, Abisal',
+('Caladrel', 'Fëanor', 'CN', 'Nethys', 'Hombre', 14, 'Común, Elfo, Celestial, Abisal, Draconico, Abisal',
 3, 165, 185, 72, 'Rubio', 'Azules', 0, 5, 136, 0, 11, 17, 11, 19, 14, 10,
 3, 4, 'Panadero', 2, 'Agricultor',
-3, '-', 1, 4, 2, 1, 0, 0, 2, 
+0, '-', 1, 4, 2, 1, 0, 0, 2, 
 0, '-', 0, '-', 0, 1, 1, 10,
 0, 0, 5, 3, 'Escritor', 0, '-', 4, 4, 4, 
 4, 4, 4, 4, 4, 4, 4, 2, 0, 0, 
 0, 0, 4, 3, 
 'Elfo', 'Bardo'),
-(2, 'Adolfito', 'Vendetta', 'LB', 'JesuCristo', 'Mujer', 23, 'Común y Enano',
+('Adolfito', 'Vendetta', 'LB', 'JesuCristo', 'Mujer', 23, 'Común y Enano',
 4, 40, 154, 84, 'Moreno', 'Verde', 4, 17, 157, 0, 10, 15, 11, 12, 12, 14,
 2, 3, 'Adobe', 1, '-',
 0, '-', 1, 2, 3, 2, 1, 0, 2, 
@@ -106,7 +106,16 @@ VALUES
 0, 2, 1, 2, 'Lector', 0, '-', 4, 4, 4, 
 4, 2, 0, 0, 0, 0, 0, 0, 1, 0, 
 0, 1, 2, 3, 
-'Enano', 'Bárbaro');
+'Enano', 'Bárbaro'),
+('Patxi', 'Urrutia', 'LN', 'Olentxero', 'Hombre', 22, 'Común y Abisal',
+5, 223, 181, 87, 'Moreno', 'Verdes', 0, 5, 121, 0, 13, 18, 12, 14, 15, 11,
+2, 4, 'Verdulero', 1, 'Hostelero',
+0, '-', 1, 2, 1, 5, 0, 0, 2, 
+0, '-', 0, '-', 1, 1, 1, 3,
+0, 1, 1, 3, 'Escudero', 0, '-', 4, 1, 2, 
+4, 1, 1, 1, 1, 4, 1, 2, 0, 1, 
+0, 1, 1, 3, 
+'Gnomo', 'Clérigo');
 
 CREATE TABLE IF NOT EXISTS `raza`
 (
@@ -129,9 +138,9 @@ ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 INSERT INTO `raza` (`nombre`,`fuerza`,`destreza`,`constitucion`,`inteligencia`,`sabiduria`,`carisma`,`adaptativo`,
 `tamaño`,`velocidad`,`idiomas`,`idiomasAprendibles`,`aptitudesEspeciales`) 
 VALUES 
-('Elfo',0,2,-2,2,0,0,0,'Mediano','30 pies/9 m/6 casillas','Común, Elfo','Celestial, Dracónico, Goblin, Gnoll, Gnomo, Orco, Silvano', 'Vision en la penumbra, Magia Elfica, Sentidos Agudos, Familiaridad con Arcos largos, Espadas largas, Espadas roperas, Arcos Cortos y cualquier arma con la palabra "élfico".'),
-('Enano', 0,0,2,0,2,-2,0, 'Mediano', '20 pies/6 m/4 casillas', 'Común, Enano','Gigante, Gnomo, Goblin, Infracomún, Orco, Térraro', 'Visión en la oscuridad, Entrenamiento defensivo, Avaricia, Odio, Resistencia, Estabilidad, Afinidad de la piedra, Familiaridad con las armas: Hachas de batalla, picos pesados, martillos de guerra y cualquier arma con la palabra "enano".'),
-('Gnomo',-2,0,2,0,0,2,0,'Pequeño', '20 pies/6 m/4 casillas', 'Común, Gnomo, Silvano', 'Dracónico, Elfo, Enano, Gigante, Goblin, Orco', 'Visión en la penumbra, Entrenamiento defensivo, Magia de los Gnomos, Odio, Resistencia a la ilusión, Sentidos Agudos, Obsesivo, Familiaridad con las armas: cualquier arma con la palabra "Gnomo".');
+('Elfo',0,2,-2,2,0,0,0,'Mediano','30 pies/9 m','Común, Elfo','Celestial, Dracónico, Goblin, Gnoll, Gnomo, Orco, Silvano', 'Vision en la penumbra, Magia Elfica, Sentidos Agudos, Familiaridad con Arcos largos, Espadas largas, Espadas roperas, Arcos Cortos y cualquier arma con la palabra "élfico".'),
+('Enano', 0,0,2,0,2,-2,0, 'Mediano', '20 pies/6 m', 'Común, Enano','Gigante, Gnomo, Goblin, Infracomún, Orco, Térraro', 'Visión en la oscuridad, Entrenamiento defensivo, Avaricia, Odio, Resistencia, Estabilidad, Afinidad de la piedra, Familiaridad con las armas: Hachas de batalla, picos pesados, martillos de guerra y cualquier arma con la palabra "enano".'),
+('Gnomo',-2,0,2,0,0,2,0,'Pequeño', '20 pies/6 m', 'Común, Gnomo, Silvano', 'Dracónico, Elfo, Enano, Gigante, Goblin, Orco', 'Visión en la penumbra, Entrenamiento defensivo, Magia de los Gnomos, Odio, Resistencia a la ilusión, Sentidos Agudos, Obsesivo, Familiaridad con las armas: cualquier arma con la palabra "Gnomo".');
 
 CREATE TABLE IF NOT EXISTS `objetos`
 (
@@ -143,11 +152,19 @@ CREATE TABLE IF NOT EXISTS `objetos`
 )
 ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-INSERT INTO `objetos` (`codObjeto`,`nombre`,`peso`,`magico`,`descripcion`) 
+INSERT INTO `objetos` (`nombre`,`peso`,`magico`,`descripcion`) 
 VALUES 
-(1,'Abrojos', '2 libras(900g)', 0, 'Pequeñas puas metalicas que tiran al suelo.'),
-(2,'Aceite(1 pinta[0,5L])', '1 libra(450g)', 0, 'Una pequeña botella de aceite de multiples usos.'),
-(3,'Aguja de costura', '-', 0, 'Una pequeña aguja utilizada para la costura.');
+('Abrojos', '2 libras(900g)', 0, 'Pequeñas puas metalicas que tiran al suelo.'),
+('Aceite(1 pinta[0,5L])', '1 libra(450g)', 0, 'Una pequeña botella de aceite de multiples usos.'),
+('Aguja de costura', '-', 0, 'Una pequeña aguja utilizada para la costura.'),
+('Almádena', '10 libras(4,5kg)', 0, 'herramienta similar a un martillo que consiste en una gran cabeza metálica introducida en el extremo de un palo de madera que se usa como mango.'),
+('Antorcha', '1 libra(450g)', 0, 'Un palo de madera recubierto en un extremo de tela que puede iluminar si se enciende.'),
+('Anzuelo', '-', 0, 'Dispositivo para la captura de peces, que se engancha en el paladar, en la boca y muy raramente en el cuerpo del pez.'),
+('Aparejo de poleas', '5 libras(2,25kg)', 0, 'Un complicado sistema de poleas que puede usarse para elevar cosas de mucho peso.'),
+('Ariete portátil', '20 libras(9 kg)', 0, 'Herramienta grande y pesada usada para tirar puertas y muros.'),
+('Barril(vacío)', '30 libras(13,5kg)', 0, 'Un barril de gran tamaño usado para almacenar todo tipo de liquidos.'),
+('Bolsa para el cinto(vacía)', '1/2libra(225)', 0, 'Pequeña bolsa que se pone en el cinto, usada para guardar pequeños objetos.');
+
 
 
 CREATE TABLE IF NOT EXISTS `armas`
@@ -166,11 +183,18 @@ CREATE TABLE IF NOT EXISTS `armas`
 )
 ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-INSERT INTO `armas` (`codArma`,`nombre`,`peso`,`magico`,`descripcion`,`dannoP`,`dannoM`,`critico`,`rango`,`tipo`,`especial`) 
+INSERT INTO `armas` (`nombre`,`peso`,`magico`,`descripcion`,`dannoP`,`dannoM`,`critico`,`rango`,`tipo`,`especial`) 
 VALUES 
-(1, 'Guantelete', '1 libra(450g)', 0, 'Guante considerado como ataque sin arma', '1d2', '1d3', 'x2', '-', 'Con', '-'),
-(2,'Impacto sin armas', '-', 0, 'Ataque con las manos desnudas', '1d2', '1d3', 'x2', '-', 'Con', 'No letal'),
-(3,'Daga', '1 libra(450g)', 0, 'Pequeño cuchillo utilizado por asesinos y picaros', '1d3', '1d4', '19-20/x2', '10 pies(3m)', 'Per o Cor', '-');
+('Guantelete', '1 libra(450g)', 0, 'Ataques sin armas. Guante considerado como ataque sin arma', '1d2', '1d3', 'x2', '-', 'Con', '-'),
+('Impacto sin armas', '-', 0, 'Ataques sin armas. Ataque con las manos desnudas', '1d2', '1d3', 'x2', '-', 'Con', 'No letal'),
+('Daga', '1 libra(450g)', 0, 'Armas cuerpo a cuerpo ligeras. Pequeño cuchillo utilizado por asesinos y picaros', '1d3', '1d4', '19-20/x2', '10 pies(3m)', 'Per o Cor', '-'),
+('Guantelete armado', '1 libra(450g)', 0, 'Armas cuerpo a cuerpo ligeras. Guantelete armado de pinchos para maximizar el daño de los golpes', '1d3', '1d4', 'x2', '-', 'Per', '-'),
+('Hoz', '2 libras(900g)', 0, 'Armas cuerpo a cuerpo ligeras. Consiste en una cuchilla metálica en forma de media luna y un mango para poder dirigirla.', '1d4', '1d6', 'x2', '-', 'Cor', 'derribar'),
+('Maza ligera', '4 libras(1,80kg)', 0, 'Armas cuerpo a cuerpo ligeras. Maza de una mano usada para dar golpes rapidos', '1d4', '1d6', 'x2', '-', 'Con', '-'),
+('Puñal', '1 libra(450g)', 0, 'Armas cuerpo a cuerpo ligeras. Pequeño puñal usado para asesinar de forma sigiloso', '1d3', '1d4', 'x2', '-', 'Per', '-'),
+('Clava', '3 libras(1,35kg)', 0, 'Armas cuerpo a una mano. Maza de tamaño pequeño y redondo', '1d4', '1d6', 'x2', '10 pies(3m)', 'Con', '-'),
+('Lanza corta', '3 libras(1,35kg)', 0, 'Armas cuerpo a cuerpo a una mano. Pequeña lanza que se lanza para perforar', '1d4', '1d6', 'x2', '20 pies(6m)', 'Per', '-'),
+('Maza pesada', '8 libras(3,60kg)', 0, 'Armas cuerpo a cuerpo a una mano. Maza muy pesada que puede hacer mucho daño', '1d6', '1d8', 'x2', '-', 'Con', '-');
 
 CREATE TABLE IF NOT EXISTS `armaduras`
 (
@@ -187,15 +211,23 @@ CREATE TABLE IF NOT EXISTS `armaduras`
 )
 ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-INSERT INTO `armaduras` (`codArmadura`,`nombre`,`bonificador`,`peso`,`magico`,`descripcion`,`velocidad`,`dexBonus`,`penalizacion`,`falloHechizo`) 
+INSERT INTO `armaduras` (`nombre`,`bonificador`,`peso`,`magico`,`descripcion`,`velocidad`,`dexBonus`,`penalizacion`,`falloHechizo`) 
 VALUES 
-(1,'Acolchada', 1,'10 libras(4,5kg)', 0, 'Armadura ligera basica. Poco más que ropa gruesa y acolchada.', '30 pies(9m) / 20 pies(6m)', 8, 0, 5),
-(2,'Cuero', 2, '15 libras(6,8kg)', 0, 'Armadura ligera. Hecha con trozos de cuero hervido, cuidadosamente cosidos.', '30 pies(9m) / 20 pies(6m)', 6, 0, 10),
-(3,'Cuero tachonado', 3, '20 libras(9kg)', 0, 'Armadura ligera. Similar a la de cuero pero con pequeños trozos de metal.', '30 pies(9m) / 20 pies(6m)', 5, -1, 15);
+('Acolchada', 1,'10 libras(4,5kg)', 0, 'Armadura ligera basica. Poco más que ropa gruesa y acolchada.', '30 pies(9m) / 20 pies(6m)', 8, 0, 5),
+('Cuero', 2, '15 libras(6,8kg)', 0, 'Armadura ligera. Hecha con trozos de cuero hervido, cuidadosamente cosidos.', '30 pies(9m) / 20 pies(6m)', 6, 0, 10),
+('Cuero tachonado', 3, '20 libras(9kg)', 0, 'Armadura ligera. Similar a la de cuero pero con pequeños trozos de metal.', '30 pies(9m) / 20 pies(6m)', 5, -1, 15),
+('Camisote de mallas', 4,'25 libras(11kg)', 0, 'Armadura ligera. Cubriendo el torso, este camisote está hecha de miles de anillos de metal entrelazados.', '30 pies(9m) / 20 pies(6m)', 4, -2, 20),
+('De pieles', 4,'25 libras(11kg)', 0, 'Armadura intermedia. Hecha de piel curtida y preservada de cualquier bestia de piel gruesa.', '20 pies(6m) / 15 pies(4,5m)', 4, -3, 20),
+('Cota de escamas', 5,'30 libras(13,6kg)', 0, 'Armadura intermedia. Compuesta de docenas de pequeñas placas de metal superpuestas.', '20 pies(6m) / 15 pies(4,5m)', 3, -4, 25),
+('Cota de mallas', 6,'40 libras(18kg)', 0, 'Armadura intermedia. Cubre piernas y brazos, además incluye guanteletes.', '20 pies(6m) / 15 pies(4,5m)', 2, -5, 30),
+('Coraza', 6,'30 libras(13,6kg)', 0, 'Armadura intermedia. Cubre solo el torso, una gran pieza de metal cincelado.', '20 pies(6m) / 15 pies(4,5m)', 3, -4, 25),
+('Laminada', 7,'45 libras(20,4kg)', 0, 'Armadura pesada. Hecha de tiras de metal, incluye guanteletes.', '20 pies(6m) / 15 pies(4,5m)', 0, -7, 40),
+('Cota de bandas', 7,'35 libras(15,9kg)', 0, 'Armadura pesada. Hecha a base de tiras metal superpuestas, atadas a una base de cuero.', '20 pies(6m) / 15 pies(4,5m)', 1, -6, 35);
 
 CREATE TABLE IF NOT EXISTS `dotes`
 (
-	`nombre` varchar(40) NOT NULL PRIMARY KEY,
+	`codDote` int(3) NOT NULL PRIMARY KEY auto_increment,
+	`nombre` varchar(40) NOT NULL,
     `beneficio` TEXT NOT NULL,
     `normal` TEXT,
     `especial` TEXT,
@@ -212,11 +244,24 @@ de tu alcance.','ataque base +6'),
 ('Acrobático', 'Obtienes un bonificador +2 a todas las pruebas de habilidad de Acrobacias y de Volar. Si tienes 10 o más rangos en una de estas habilidades, 
 el bonificador se incrementa en un +4 para dicha habilidad.', '', '', 'Eres hábil en dar saltos de altura y de longitud, y en volar.', ''),
 ('Afinidad con los animales', 'Obtienes un bonificador +2 a las pruebas de habilidad de Montar y de Trato con animales. Con 10 o más rangos en una de ellas,
- el bonificador se incrementa a +4 para dicha habilidad.', '', '', 'Eres hábil trabajando con animales y con monturas.', '');
+ el bonificador se incrementa a +4 para dicha habilidad.', '', '', 'Eres hábil trabajando con animales y con monturas.', ''),
+('Aguante', 'Obtienes un bonificador +4 a las pruebas y salvaciones: pruebas de nadar, pruebas de constitucion, salvaciones de Fortaleza. 
+Puedes dormir don armadura intermedia o pesada sin quedar fatigado.', 'Un personaje sin esta dote que duerme con una armadura intermedia o mas pesada puesta, queda fatigado.', '', 
+'Ni las condiciones desfavorables, ni los esfuerzos prolongados te cansan con facilidad', ''),
+('Alerta', 'Obtienes un bonificador +2 a las pruebas de Percepcion y de Averiguar intenciones. 
+Si tienes 10 o mas rangos en una de estas habilidades el bonificador se incrementa a +4.', '', '', 'A menudo te das cuenta de cosas que otros podrian perderse.', ''),
+('Ampliar conjuro(MetaMagica)', 'Puedes alterar un conjuro con un alcance de cercano medio, o largo para incrementar su alcance un 100%. 
+Hechizos cuyos alcances no este definidos no reciben beneficio de esta dote.', '', '', 'Puedes incrementar el rango de tus conjuros.', ''),
+('Apresurar conjuro(MetaMagica)', 'Lanzar un conjuro apresurado es un accion rapida. 
+Puedes llevar a cabo otra accion, e incluso lanzar otro el mismo asalto en el que lo lanzas. Lanzarlo no provoca ataques de oprtunidad.', '', 
+'Puedes lanzar los efectos de esta dote a un conjuro lanzado espontaneamente.', 'Puedes lanzar conjuros en una fraccion del tiempo normal', ''),
+('Aptitudes Magicas', 'Obtienes un bonificador +2 a todas las pruebas de Conocimiento de Conjuros y de Usar Objeto Magico. 
+Si tienes 10 o mas rangos en una de estas habilidades el bonificador se incrementa a +4.', '', '', 'Eres habil lanzando conjuros, y utilizando objetos magicos.', '');
 
 CREATE TABLE IF NOT EXISTS `hechizos`
 (
-	`nombre` varchar(40) NOT NULL PRIMARY KEY,
+	`codHechizo` int(3) NOT NULL PRIMARY KEY auto_increment,
+	`nombre` varchar(40) NOT NULL,
     `escuela` varchar(20) NOT NULL,
     `tiempoCasteo` varchar(20) NOT NULL,
     `componentes` TEXT NOT NULL,
@@ -250,13 +295,17 @@ botella, barril o cualquier otro recipiente. Si algo se opone a esta actividad(c
 'Voluntado niega(objeto)', 'si(objeto)', -1, 0, -1, -1, -1, -1, -1, -1, -1, 0, 0),
 ('Adivinación', 'adivinación', '10 minutos', 'V, S, M(incienso y una ofrenda apropiada de 25 po)', 'El conjuro de adivinación puede darte un consejo útil en 
 respuesta a un apregunta concreta sobre un objetivo, acontecimiento, o actividad que vaya a tener lugar antes de 1 semana, que puede ser tan sencillo 
-como una frase corta, o tan elaborado como una rima cr´ptica o un presagio. Si tu grupo no actúa basándose en la información, 
+como una frase corta, o tan elaborado como una rima criptica o un presagio. Si tu grupo no actúa basándose en la información, 
 las condiciones pueden cambiar e invalidarla. La probabilidad base de llevar a cabo una adivinación correcta es del 70% + 1 % por nivel de lanzador. 
 Si la tirada falla eres consciente de que el conjuro ha fracasado, a no ser que haya una magia concreta que te facilite respuestas falsas.', 
 'personal', 'Tú', '', 'instantanea', '', '', -1, -1, 4, -1, -1, -1, -1, -1, -1, -1, -1),
 ('Alineamiento Indetectable', 'Abjuracion', '1 acción estandar', 'V,S', 'Este conjuro oculta el alineamiento de un 
 objeto o criatura de toda forma de adivinación.','Corto(25 pies [7,5m] + 5 pies[1,5m]/2 niveles)', '1 criatura u objeto', '', '24 horas',
-'Voluntad niega(Objeto)', 'Sí(Objeto)', -1, 1, 2, -1, -1, -1, -1, 2, -1, -1, -1);
+'Voluntad niega(Objeto)', 'Sí(Objeto)', -1, 1, 2, -1, -1, -1, -1, 2, -1, -1, -1),
+('Acelerar', 'transmutación', '1 acción estandar', 'V, S, M(Una viruta de raiz de regaliz)', 'la criatura transmutada se mueve y actua mas rapido de lo normal. 
+Cuando lleva a cabo una accion de ataque completo puede llevar acabo una ataque adicional con un arma natural. Una criatura acelerada obtiene un bonificador +1 a las tiradas de ataque.',
+'Corto(25 pies [7,5m] + 5 pies[1,5m]/2 niveles)', '1 criatura', '', '1 asalto/nivel', 
+'Fortaleza niega (inofensivo)', 'Si', -1, 3,-1,-1,-1,-1,-1,-1,-1,3,3);
 
 CREATE TABLE IF NOT EXISTS `clases`
 (
@@ -277,11 +326,11 @@ CREATE TABLE IF NOT EXISTS `clases`
     `artesania3` BOOL NOT NULL,
     `artesania3Nombre` BOOL NOT NULL,
     `averiguarIntenciones` BOOL NOT NULL,
-    `conociemientoDeConjuros` BOOL NOT NULL,
+    `conocimientoDeConjuros` BOOL NOT NULL,
     `curar` BOOL NOT NULL,
     `diplomacia` BOOL NOT NULL,
     `disfrazarse` BOOL NOT NULL,
-    `engañar` BOOL NOT NULL,
+    `engannar` BOOL NOT NULL,
     `escapismo` BOOL NOT NULL,
     `interpretar1` BOOL NOT NULL,
     `interpretar1Nombre` BOOL NOT NULL,
@@ -320,7 +369,7 @@ ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `clases` (`nombre`,`alineamiento`,`rol`,`dadoDeGolpe`,`rangoPorNivel`,`ataqueBase`,`tiradaSalvacionFortaleza`,
 `tiradaSalvacionReflejos`,`tiradaSalvacionVoluntad`,`acrobacias`,`artesania1`,`artesania1Nombre`,`artesania2`,`artesania2Nombre`,  
-`artesania3`,`artesania3Nombre`,`averiguarIntenciones`,`conociemientoDeConjuros`,`curar`,`diplomacia`,`disfrazarse`,`engañar`,`escapismo`,
+`artesania3`,`artesania3Nombre`,`averiguarIntenciones`,`conocimientoDeConjuros`,`curar`,`diplomacia`,`disfrazarse`,`engannar`,`escapismo`,
 `interpretar1`,`interpretar1Nombre`,`interpretar2`,`interpretar2Nombre`,`intimidar`,`inutilizarMecanismo`,`juegoDeManos`,`linguistica`,
 `montar`,`nadar`,`percepcion`,`profesion1`,`profesion1Nombre`,`profesion2`,`profesion2Nombre`,`saberArcano`,`saberDungeons`,`saberGeografia`,
 `saberHistoria`,`saberIngenieria`,`saberLocal`,`saberNaturaleza`,`saberNobleza`,`saberPlanos`,`saberReligion`,`sigilo`,`supervivencia`,`tasacion`,
@@ -351,7 +400,8 @@ VALUES
 
 CREATE TABLE IF NOT EXISTS `habilidadesDeClases`
 (
-	`nombre` varchar(40) NOT NULL PRIMARY KEY,
+	`codHabilidadDeClase` int(3) NOT NULL PRIMARY KEY auto_increment,
+    `nombre` varchar(40) NOT NULL,
     `ex` BOOL NOT NULL,
     `descripcion` TEXT NOT NULL,
     `objeto` TEXT,
@@ -362,7 +412,10 @@ ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 INSERT INTO `habilidadesDeClases` (`nombre`,`ex`,`descripcion`,`objeto`, `nombreClase`) 
 VALUES 
 ('Movimiento rápido', 1, 'La velocidad terrestre de un bárbaro es mayor que la normal de su raza en +10 pies(3m), beneficio que sólo se aplica cuando no lleva armadura, o lleva armadura ligera o intermedia, y no lleva una carga pesada', '', 'Bárbaro'),
+('Esquiva Asombrosa', 1, 'Un bárbaro con esta dote no puede ser sorprendido. No pierde su bonificador de CA si su atacante es invisible. La pierde si es inmovilizado', '', 'Bárbaro'),
+('Sentido de las trampas', 1, 'El bárbaro obtiene un bonificador +1 a las salvaciones de Reflejos para evitar trampas, y un bonificador +1 por esquiva a la CA contra ataques de trampa.', '', 'Bárbaro'),
 ('Conocimiento de bardo', 1, 'Un bardo suma la mitad de su nivel de clase (mínimo 1) a todas las pruebas de Saber, y puede llevar a cabo todas las pruebas de Saber sin estar entrenado.', '', 'Bardo'),
+('Interpretacion versatil', 1, 'Un bardo puede escoger un tipo de habilidad de Interpretacion, y utilizar su bonificador en dicha habilidad en lugar de su bonificador en las habilidades.', '', 'Bardo'),
 ('Aura', 1, 'Un clérigo  de un dios caótico, maligno, bueno o legal, tiene un aura particularmente poderosa que corresponde al alineamiento del dios', '', 'Clérigo');
 
 CREATE TABLE IF NOT EXISTS `personajeObjetos`
@@ -376,8 +429,27 @@ ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `personajeObjetos` (`codPersonaje`,`codObjeto`,`cantidad`) 
 VALUES 
-(1, 1, 1),
-(1, 2, 2);
+(1, 1, 3),
+(1, 4, 2),
+(1, 5, 1),
+(1, 6, 2),
+(1, 7, 1),
+(1, 8, 2),
+(2, 1, 4),
+(2, 2, 2),
+(2, 3, 1),
+(2, 5, 3),
+(2, 6, 5),
+(2, 7, 1),
+(2, 8, 2),
+(2, 10, 1),
+(3, 1, 1),
+(3, 3, 1),
+(3, 4, 2),
+(3, 5, 1),
+(3, 8, 2),
+(3, 9, 1),
+(3, 10, 2);
 
 CREATE TABLE IF NOT EXISTS `personajeArmas`
 (
@@ -390,8 +462,14 @@ ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `personajeArmas` (`codPersonaje`,`codArma`,`cantidad`) 
 VALUES 
-(1, 1, 1),
-(1, 2, 1);
+(1, 5, 2),
+(1, 2, 1),
+(2, 5, 1),
+(2, 6, 3),
+(3, 7, 1),
+(3, 8, 2),
+(3, 9, 1),
+(3, 10, 1);
 
 CREATE TABLE IF NOT EXISTS `personajeArmaduras`
 (
@@ -404,31 +482,64 @@ ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `personajeArmaduras` (`codPersonaje`,`codArmadura`,`cantidad`) 
 VALUES 
-(1, 1, 1);
+(1, 1, 1),
+(1, 2, 2),
+(1, 6, 1),
+(2, 3, 1),
+(2, 4, 4),
+(3, 5, 1);
 
 CREATE TABLE IF NOT EXISTS `personajeDotes`
 (
 	`codPersonaje` int(255) NOT NULL,
-    `nombreDote` varchar(40) NOT NULL,
+    `nombreDote` int(3) NOT NULL,
     PRIMARY KEY(`nombreDote`,`codPersonaje`)
 )
 ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `personajeDotes` (`codPersonaje`,`nombreDote`) 
 VALUES 
-(1, 1);
+(1, 'Acrobático'),
+(1, 'Aguante'),
+(1, 'Acometer(Combate)'),
+(2, 'Afinidad con los animales'),
+(2, 'Alerta'),
+(2, 'Aguante'),
+(2, 'Apresurar conjuro(MetaMagica)'),
+(3, 'Acometer(Combate)'),
+(3, 'Aptitudes Magicas'),
+(3, 'Ampliar conjuro(MetaMagica)');
+
+CREATE TABLE IF NOT EXISTS `clasesHabilidadesDeClases`
+(
+	`nombreClase` varchar(40) NOT NULL,
+    `codHabilidadDeClase` int(3) NOT NULL,
+    PRIMARY KEY(`nombreClase`,`codHabilidadDeClase`)
+)
+ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+INSERT INTO `clasesHabilidadesDeClases` (`nombreClase`,`codHabilidadDeClase`)
+VALUES 
+('Bárbaro', 1),
+('Bárbaro', 2),
+('Bárbaro', 3),
+('Bardo', 4),
+('Bardo', 5),
+('Clérigo', 6);
 
 CREATE TABLE IF NOT EXISTS `personajeHechizos`
 (
 	`codPersonaje` int(255) NOT NULL,
-    `nombreHechizo` varchar(40) NOT NULL,
-    PRIMARY KEY(`nombreHechizo`,`codPersonaje`)
+    `codHechizo` int(3) NOT NULL,
+    PRIMARY KEY(`codHechizo`,`codPersonaje`)
 )
 ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `personajeHechizos` (`codPersonaje`,`nombreHechizo`) 
 VALUES 
-(1, 'Abrir/Cerrar');
+(1, 1),
+(1, 4),
+(3, 2);
 
 CREATE TABLE IF NOT EXISTS `usuario`
 (
@@ -438,10 +549,10 @@ CREATE TABLE IF NOT EXISTS `usuario`
     PRIMARY KEY (`id`)
 )ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-INSERT INTO `usuario` (`id`,`nombre`,`pass`) 
+INSERT INTO `usuario` (`nombre`,`pass`) 
 VALUES 
-(1, 'root', ''),
-(2, 'dani', 'barba');
+('root', ''),
+('dani', 'barba');
 
 CREATE TABLE IF NOT EXISTS `usuarioPersonaje`
 (
@@ -449,6 +560,12 @@ CREATE TABLE IF NOT EXISTS `usuarioPersonaje`
     `id` int(255) NOT NULL,
     PRIMARY KEY (`id`, `codPersonaje`)
 )ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+INSERT INTO `usuarioPersonaje` (`codPersonaje`,`id`) 
+VALUES 
+( 1, 2),
+( 2, 2),
+( 3, 1);
 
 
 
