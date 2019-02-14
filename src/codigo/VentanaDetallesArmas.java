@@ -20,6 +20,9 @@ public class VentanaDetallesArmas extends javax.swing.JFrame {
 
     DefaultTableModel tabla;
 
+    GestorConexion miConexion;
+    String personaje;
+
     boolean adaptada = false;
     boolean abiertaVentanaTodas = false;
 
@@ -77,8 +80,13 @@ public class VentanaDetallesArmas extends javax.swing.JFrame {
         //Hay que poner el Magico
     }
 
-    public void abreVentanaAnnadir() {
-        jButtonAnnadir.setVisible(true);
+    public void abreVentanaAnnadir(boolean abre) {
+        jButtonAnnadir.setVisible(abre);
+    }
+
+    public void guardaConexion(GestorConexion conexion, String _pesonaje) {
+        miConexion = conexion;
+        personaje = _pesonaje;
     }
 
     /**
@@ -226,10 +234,21 @@ public class VentanaDetallesArmas extends javax.swing.JFrame {
         getContentPane().add(jLabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 320, 30));
 
         jButtonAnnadir.setText("Añadir");
+        jButtonAnnadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAnnadirActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButtonAnnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 350, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonAnnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnadirActionPerformed
+        jButtonAnnadir.setVisible(false);
+        setVisible(false);
+        miConexion.annadirArmaPersonaje(personaje, tabla.getValueAt(jTableObjetos.getSelectedRow(), 1).toString());
+    }//GEN-LAST:event_jButtonAnnadirActionPerformed
 
     /**
      * @param args the command line arguments

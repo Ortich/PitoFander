@@ -39,6 +39,7 @@ public class InicioSesion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jButtonEntrar.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
         jButtonEntrar.setText("Entrar");
         jButtonEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -46,16 +47,20 @@ public class InicioSesion extends javax.swing.JFrame {
             }
         });
 
+        jTextFieldusuario.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
         jTextFieldusuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTextFieldusuarioMousePressed(evt);
             }
         });
 
+        jLabelUsuario.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
         jLabelUsuario.setText("Usuario");
 
+        jLabelPass.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
         jLabelPass.setText("Contraseña");
 
+        jPasswordFieldPass.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
         jPasswordFieldPass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jPasswordFieldPassMousePressed(evt);
@@ -86,7 +91,7 @@ public class InicioSesion extends javax.swing.JFrame {
                                 .addComponent(jLabelUsuario)
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextFieldusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,9 +114,13 @@ public class InicioSesion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void setVentanaPrincipal(VentanaPrincipal _miVentanaPrincipal) {
-        miVentanaPrincipal = _miVentanaPrincipal;
-    }
+    private void jPasswordFieldPassMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordFieldPassMousePressed
+        jLabelErrores.setText("");
+    }//GEN-LAST:event_jPasswordFieldPassMousePressed
+
+    private void jTextFieldusuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldusuarioMousePressed
+        jLabelErrores.setText("");
+    }//GEN-LAST:event_jTextFieldusuarioMousePressed
 
     private void jButtonEntrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEntrarMousePressed
         jLabelErrores.setText("");
@@ -124,13 +133,9 @@ public class InicioSesion extends javax.swing.JFrame {
         miVentanaPrincipal.setSesion(estado, jTextFieldusuario.getText());
     }//GEN-LAST:event_jButtonEntrarMousePressed
 
-    private void jTextFieldusuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldusuarioMousePressed
-        jLabelErrores.setText("");
-    }//GEN-LAST:event_jTextFieldusuarioMousePressed
-
-    private void jPasswordFieldPassMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordFieldPassMousePressed
-        jLabelErrores.setText("");
-    }//GEN-LAST:event_jPasswordFieldPassMousePressed
+    public void setVentanaPrincipal(VentanaPrincipal _miVentanaPrincipal) {
+        miVentanaPrincipal = _miVentanaPrincipal;
+    }
 
     /**
      * @param args the command line arguments
@@ -169,6 +174,16 @@ public class InicioSesion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonEntrar;
+    private javax.swing.JComboBox<String> jComboBoxListaPersonajes;
+    private javax.swing.JComboBox<String> jComboBoxListaPersonajes1;
+    private javax.swing.JComboBox<String> jComboBoxListaPersonajes2;
+    private javax.swing.JComboBox<String> jComboBoxListaPersonajes3;
+    private javax.swing.JComboBox<String> jComboBoxListaPersonajes4;
+    private javax.swing.JComboBox<String> jComboBoxListaPersonajes5;
+    private javax.swing.JComboBox<String> jComboBoxListaPersonajes6;
+    private javax.swing.JComboBox<String> jComboBoxListaPersonajes7;
+    private javax.swing.JComboBox<String> jComboBoxListaPersonajes8;
+    private javax.swing.JComboBox<String> jComboBoxListaPersonajes9;
     private javax.swing.JLabel jLabelErrores;
     private javax.swing.JLabel jLabelPass;
     private javax.swing.JLabel jLabelUsuario;
