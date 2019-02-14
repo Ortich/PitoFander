@@ -170,6 +170,52 @@ public class GestorConexion {
             return resultado;
         }
     }
+    
+    public ArrayList<String> nombreClase()
+    {
+        ArrayList<String> a = new ArrayList<String>();
+        try 
+        {
+            Statement sta = conn1.createStatement();
+            String query = "select nombre from clases";
+            System.out.println("select nombre from clases");
+            ResultSet rs = sta.executeQuery(query);
+            while (rs.next()) 
+            {
+                a.add(rs.getString("nombre"));
+            }
+            return a;
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println("ERROR:al consultar");
+            ex.printStackTrace();
+            return a;
+        }
+    }
+    
+    public ArrayList<String> nombreRaza()
+    {
+        ArrayList<String> b = new ArrayList<String>();
+        try 
+        {
+            Statement sta = conn1.createStatement();
+            String query = "select nombre from raza";
+            System.out.println("select nombre from raza");
+            ResultSet rs = sta.executeQuery(query);
+            while (rs.next()) 
+            {
+                b.add(rs.getString("nombre"));
+            }
+            return b;
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println("ERROR:al consultar");
+            ex.printStackTrace();
+            return b;
+        }
+    }
 
     public void annadirArmaPersonaje(String codPersonaje, String codArma)
     {
