@@ -171,6 +171,43 @@ public class GestorConexion {
         }
     }
 
+    public void annadirArmaPersonaje(String codPersonaje, String codArma)
+    {
+        try 
+        {
+            Statement sta = conn1.createStatement();
+            String query = "select cantidad from personajeArmas as pa where pa.codPersonaje = " + codPersonaje + " and pa.codArma = " + codArma + ";";
+            System.out.println("select cantidad from personajeArmas as pa where pa.codPersonaje = " + codPersonaje + " and pa.codArma = " + codArma + ";");
+            ResultSet rs = sta.executeQuery(query);
+            int size = 0;
+            if (rs != null) //VIVA STACKOVERFLOW
+            {
+                rs.last();    // moves cursor to the last row
+                size = rs.getRow(); // get row id 
+            }
+            if(size == 0)
+            {
+                query = "INSERT INTO personajeArmas (`codPersonaje`,`codArma`,`cantidad`) " + "VALUES" + " (" + codPersonaje + ", " + codArma + ", 1);";
+                sta.executeUpdate(query);
+            }
+            else
+            {
+                String cantidad = rs.getString("cantidad");
+                int cant = Integer.valueOf(cantidad) + 1;
+                System.out.println("Cantidad " + cantidad);
+                String query2 = "UPDATE personajeArmas SET cantidad = " + cant + " WHERE codPersonaje = " + codPersonaje + " AND codArma = " + codArma + ";";
+                System.out.println(query2);
+                sta.executeUpdate(query2);
+            }
+            
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println("ERROR:al consultar");
+            ex.printStackTrace();
+        }
+    }
+    
     public DefaultTableModel devuelveArmaduraPorPersonaje(String codPersonaje) {
         DefaultTableModel resultado = new DefaultTableModel(new String[]{"id", "nombre", "bonificador", "peso", "magico", "descripcion", "velocidad", "dexBonus", "penalizacion", "falloHechizo", "cantidad"}, 0);
         try {
