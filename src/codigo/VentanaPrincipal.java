@@ -282,6 +282,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         insertaArmadurasEnComboBox();
         insertaObjetosEnComboBox();
         insertaDotesEnComboBox();
+        insertaHabilidadesDeClasesEnComboBox();
+        insertaHechizosEnComboBox();
     }
 
     public void insertaPersonajesEnComboBox() {
@@ -328,8 +330,35 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         String a = personajes.getValueAt(jComboBoxListaPersonajes.getSelectedIndex(), 67).toString();
         dotes = miConexion.devuelveDotesPorPersonaje(a);
         System.out.println(a);
+        
         for (int i = 0; i < dotes.getRowCount(); i++) {
             jComboBoxDotes.addItem(dotes.getValueAt(i, 1).toString());
+        }
+    }
+    
+    public void insertaHabilidadesDeClasesEnComboBox() 
+    {
+        jComboBoxHabilidadesDeClase.removeAllItems();
+        String a = personajes.getValueAt(jComboBoxListaPersonajes.getSelectedIndex(), 67).toString();
+        habilidadesDeClase = miConexion.devuelveHabilidadesDeClasePorPersonaje(a);
+        System.out.println(a);
+        
+        for (int i = 0; i < habilidadesDeClase.getRowCount(); i++) 
+        {
+            jComboBoxHabilidadesDeClase.addItem(habilidadesDeClase.getValueAt(i, 1).toString());
+        }
+    }
+    
+    public void insertaHechizosEnComboBox() 
+    {
+        jComboBoxHechizos.removeAllItems();
+        String a = personajes.getValueAt(jComboBoxListaPersonajes.getSelectedIndex(), 67).toString();
+        hechizos = miConexion.devuelveHechizosPorPersonaje(a);
+        System.out.println(a);
+        
+        for (int i = 0; i < hechizos.getRowCount(); i++) 
+        {
+            jComboBoxHechizos.addItem(hechizos.getValueAt(i, 1).toString());
         }
     }
 
