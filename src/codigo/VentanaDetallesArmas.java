@@ -17,10 +17,11 @@ import javax.swing.table.TableColumnModel;
  * @author Daniel
  */
 public class VentanaDetallesArmas extends javax.swing.JFrame {
-    
+
     DefaultTableModel tabla;
-    
+
     boolean adaptada = false;
+    boolean abiertaVentanaTodas = false;
 
     /**
      * Creates new form ventanaDetallesObjetos
@@ -31,34 +32,38 @@ public class VentanaDetallesArmas extends javax.swing.JFrame {
         setResizable(false);
         jButton1.setVisible(false);
     }
-    
+
     public void estableceTabla(DefaultTableModel _tabla) {
         tabla = _tabla;
         jTableObjetos.setModel(tabla);
-        
-        if (!adaptada) {
+
+        if (!adaptada || abiertaVentanaTodas) {
             jTableObjetos.removeColumn(jTableObjetos.getColumnModel().getColumn(jTableObjetos.getColumnCount() - 1));
             jTableObjetos.removeColumn(jTableObjetos.getColumnModel().getColumn(jTableObjetos.getColumnCount() - 1));
             jTableObjetos.removeColumn(jTableObjetos.getColumnModel().getColumn(0));
-            
+
             TableColumnModel columnModel = jTableObjetos.getColumnModel();
-            
+
             columnModel.getColumn(0).setPreferredWidth(250);
             adaptada = true;
-            
+            abiertaVentanaTodas = false;
             jTableObjetos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
                 public void valueChanged(ListSelectionEvent e) {
                     cambiaSeleccion();
                 }
             });
         }
-        
+
     }
-    
+
     public void cambioDeTabla() {
         adaptada = false;
     }
-    
+
+    public void abriendoVentanaTotal() {
+        abiertaVentanaTodas = true;
+    }
+
     public void cambiaSeleccion() {
         jLabelNombre.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 1).toString());
         jLabelPeso.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 2).toString());

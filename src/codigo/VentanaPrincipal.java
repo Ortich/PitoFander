@@ -1458,7 +1458,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jMenuItemArmasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemArmasActionPerformed
         if (usuarioConectado) {
             ventanaDetallesArmas.setVisible(true);
+            ventanaDetallesArmas.cambioDeTabla();
             ventanaDetallesArmas.estableceTabla(devuelveTodasLasArmas());
+            ventanaDetallesArmas.abriendoVentanaTotal();
         }
     }//GEN-LAST:event_jMenuItemArmasActionPerformed
 
