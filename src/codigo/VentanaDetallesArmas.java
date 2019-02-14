@@ -7,7 +7,10 @@ package codigo;
 
 import java.awt.Color;
 import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -17,6 +20,8 @@ public class VentanaDetallesArmas extends javax.swing.JFrame {
 
     DefaultTableModel tabla;
 
+    boolean adaptada = false;
+
     /**
      * Creates new form ventanaDetallesObjetos
      */
@@ -24,12 +29,46 @@ public class VentanaDetallesArmas extends javax.swing.JFrame {
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setResizable(false);
-        jLabelNombre.setText("<html><p align='center' margin-top=2em;>" + "DESCRIPCION " + "</p></html>");
     }
 
     public void estableceTabla(DefaultTableModel _tabla) {
         tabla = _tabla;
         jTableObjetos.setModel(tabla);
+
+        if (!adaptada) {
+            jTableObjetos.removeColumn(jTableObjetos.getColumnModel().getColumn(jTableObjetos.getColumnCount() - 1));
+            jTableObjetos.removeColumn(jTableObjetos.getColumnModel().getColumn(jTableObjetos.getColumnCount() - 1));
+            jTableObjetos.removeColumn(jTableObjetos.getColumnModel().getColumn(0));
+
+            TableColumnModel columnModel = jTableObjetos.getColumnModel();
+
+            columnModel.getColumn(0).setPreferredWidth(250);
+            adaptada = true;
+
+            jTableObjetos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+                public void valueChanged(ListSelectionEvent e) {
+                    cambiaSeleccion();
+                }
+            });
+        }
+
+    }
+
+    public void cambioDeTabla() {
+        adaptada = false;
+    }
+
+    public void cambiaSeleccion() {
+        jLabelNombre.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 1).toString());
+        jLabelPeso.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 2).toString());
+        jLabelDannoP.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 4).toString());
+        jLabelDannoM.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 5).toString());
+        jLabelCritico.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 6).toString());
+        jLabelRango.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 7).toString());
+        jLabelTipo.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 8).toString());
+        jLabelEspecial.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 9).toString());
+        jLabelDescripcion.setText("<html><p align='center' margin-top=2em;>" + tabla.getValueAt(jTableObjetos.getSelectedRow(), 10).toString() + "</p></html>");
+        //Hay que poner el Magico
     }
 
     /**
@@ -43,28 +82,29 @@ public class VentanaDetallesArmas extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableObjetos = new javax.swing.JTable();
-        jLabelNombre = new javax.swing.JLabel();
+        jLabelDescripcion = new javax.swing.JLabel();
         jLabelTNombre = new javax.swing.JLabel();
-        jLabelNombre1 = new javax.swing.JLabel();
-        jLabelTNombre1 = new javax.swing.JLabel();
-        jLabelNombre2 = new javax.swing.JLabel();
-        jLabelTNombre2 = new javax.swing.JLabel();
-        jLabelNombre3 = new javax.swing.JLabel();
-        jLabelTNombre3 = new javax.swing.JLabel();
-        jLabelNombre4 = new javax.swing.JLabel();
-        jLabelTNombre4 = new javax.swing.JLabel();
-        jLabelNombre5 = new javax.swing.JLabel();
-        jLabelTNombre5 = new javax.swing.JLabel();
-        jLabelNombre6 = new javax.swing.JLabel();
-        jLabelTNombre6 = new javax.swing.JLabel();
-        jLabelNombre7 = new javax.swing.JLabel();
-        jLabelTNombre7 = new javax.swing.JLabel();
-        jLabelNombre8 = new javax.swing.JLabel();
+        jLabelPeso = new javax.swing.JLabel();
+        jLabelTPeso = new javax.swing.JLabel();
+        jLabelDannoP = new javax.swing.JLabel();
+        jLabelTDannoP = new javax.swing.JLabel();
+        jLabelDannoM = new javax.swing.JLabel();
+        jLabelTDannoM = new javax.swing.JLabel();
+        jLabelCritico = new javax.swing.JLabel();
+        jLabelTCritico = new javax.swing.JLabel();
+        jLabelRango = new javax.swing.JLabel();
+        jLabelTRango = new javax.swing.JLabel();
+        jLabelTipo = new javax.swing.JLabel();
+        jLabelTTipo = new javax.swing.JLabel();
+        jLabelEspecial = new javax.swing.JLabel();
+        jLabelTEspecial = new javax.swing.JLabel();
+        jLabelNombre = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(190, 31, 44));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jTableObjetos.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
         jTableObjetos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -80,99 +120,99 @@ public class VentanaDetallesArmas extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 659, 130));
 
-        jLabelNombre.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
-        jLabelNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelNombre.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabelNombre.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        getContentPane().add(jLabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 650, 170));
+        jLabelDescripcion.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
+        jLabelDescripcion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelDescripcion.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabelDescripcion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        getContentPane().add(jLabelDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 650, 170));
 
         jLabelTNombre.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
         jLabelTNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTNombre.setText("Nombre");
         getContentPane().add(jLabelTNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 320, -1));
 
-        jLabelNombre1.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
-        jLabelNombre1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabelNombre1.setText("Caladrel");
-        jLabelNombre1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        getContentPane().add(jLabelNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 80, 20));
+        jLabelPeso.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
+        jLabelPeso.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelPeso.setText("Caladrel");
+        jLabelPeso.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        getContentPane().add(jLabelPeso, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 80, 20));
 
-        jLabelTNombre1.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
-        jLabelTNombre1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTNombre1.setText("Peso");
-        getContentPane().add(jLabelTNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 80, -1));
+        jLabelTPeso.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTPeso.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTPeso.setText("Peso");
+        getContentPane().add(jLabelTPeso, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 80, -1));
 
-        jLabelNombre2.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
-        jLabelNombre2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabelNombre2.setText("Caladrel");
-        jLabelNombre2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        getContentPane().add(jLabelNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, 80, 20));
+        jLabelDannoP.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
+        jLabelDannoP.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelDannoP.setText("Caladrel");
+        jLabelDannoP.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        getContentPane().add(jLabelDannoP, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, 80, 20));
 
-        jLabelTNombre2.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
-        jLabelTNombre2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTNombre2.setText("Daño P");
-        getContentPane().add(jLabelTNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, 80, -1));
+        jLabelTDannoP.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTDannoP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTDannoP.setText("Daño P");
+        getContentPane().add(jLabelTDannoP, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, 80, -1));
 
-        jLabelNombre3.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
-        jLabelNombre3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabelNombre3.setText("Caladrel");
-        jLabelNombre3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        getContentPane().add(jLabelNombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 300, 80, 20));
+        jLabelDannoM.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
+        jLabelDannoM.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelDannoM.setText("Caladrel");
+        jLabelDannoM.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        getContentPane().add(jLabelDannoM, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 300, 80, 20));
 
-        jLabelTNombre3.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
-        jLabelTNombre3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTNombre3.setText("Daño M");
-        getContentPane().add(jLabelTNombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 330, 80, -1));
+        jLabelTDannoM.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTDannoM.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTDannoM.setText("Daño M");
+        getContentPane().add(jLabelTDannoM, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 330, 80, -1));
 
-        jLabelNombre4.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
-        jLabelNombre4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabelNombre4.setText("Caladrel");
-        jLabelNombre4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        getContentPane().add(jLabelNombre4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, 80, 20));
+        jLabelCritico.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
+        jLabelCritico.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelCritico.setText("Caladrel");
+        jLabelCritico.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        getContentPane().add(jLabelCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 120, 20));
 
-        jLabelTNombre4.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
-        jLabelTNombre4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTNombre4.setText("Critico");
-        getContentPane().add(jLabelTNombre4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, 80, -1));
+        jLabelTCritico.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTCritico.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTCritico.setText("Critico");
+        getContentPane().add(jLabelTCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 270, 80, -1));
 
-        jLabelNombre5.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
-        jLabelNombre5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabelNombre5.setText("Caladrel");
-        jLabelNombre5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        getContentPane().add(jLabelNombre5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 240, 80, 20));
+        jLabelRango.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
+        jLabelRango.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelRango.setText("Caladrel");
+        jLabelRango.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        getContentPane().add(jLabelRango, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, 110, 20));
 
-        jLabelTNombre5.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
-        jLabelTNombre5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTNombre5.setText("Rango");
-        getContentPane().add(jLabelTNombre5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 270, 80, -1));
+        jLabelTRango.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTRango.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTRango.setText("Rango");
+        getContentPane().add(jLabelTRango, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 270, 80, -1));
 
-        jLabelNombre6.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
-        jLabelNombre6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabelNombre6.setText("Caladrel");
-        jLabelNombre6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        getContentPane().add(jLabelNombre6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 80, -1));
+        jLabelTipo.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
+        jLabelTipo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelTipo.setText("Caladrel");
+        jLabelTipo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        getContentPane().add(jLabelTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 90, -1));
 
-        jLabelTNombre6.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
-        jLabelTNombre6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTNombre6.setText("Tipo");
-        getContentPane().add(jLabelTNombre6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 80, 10));
+        jLabelTTipo.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTTipo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTTipo.setText("Tipo");
+        getContentPane().add(jLabelTTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 80, 10));
 
-        jLabelNombre7.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
-        jLabelNombre7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabelNombre7.setText("Caladrel");
-        jLabelNombre7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        getContentPane().add(jLabelNombre7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 80, 20));
+        jLabelEspecial.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
+        jLabelEspecial.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelEspecial.setText("Caladrel");
+        jLabelEspecial.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        getContentPane().add(jLabelEspecial, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 100, 20));
 
-        jLabelTNombre7.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
-        jLabelTNombre7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTNombre7.setText("Especial");
-        getContentPane().add(jLabelTNombre7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 80, -1));
+        jLabelTEspecial.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTEspecial.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTEspecial.setText("Especial");
+        getContentPane().add(jLabelTEspecial, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 80, -1));
 
-        jLabelNombre8.setFont(new java.awt.Font("Pokemon Classic", 0, 12)); // NOI18N
-        jLabelNombre8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelNombre8.setText("Caladrel");
-        jLabelNombre8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        getContentPane().add(jLabelNombre8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 320, 30));
+        jLabelNombre.setFont(new java.awt.Font("Pokemon Classic", 0, 12)); // NOI18N
+        jLabelNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelNombre.setText("Caladrel");
+        jLabelNombre.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        getContentPane().add(jLabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 320, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -216,23 +256,23 @@ public class VentanaDetallesArmas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabelCritico;
+    private javax.swing.JLabel jLabelDannoM;
+    private javax.swing.JLabel jLabelDannoP;
+    private javax.swing.JLabel jLabelDescripcion;
+    private javax.swing.JLabel jLabelEspecial;
     private javax.swing.JLabel jLabelNombre;
-    private javax.swing.JLabel jLabelNombre1;
-    private javax.swing.JLabel jLabelNombre2;
-    private javax.swing.JLabel jLabelNombre3;
-    private javax.swing.JLabel jLabelNombre4;
-    private javax.swing.JLabel jLabelNombre5;
-    private javax.swing.JLabel jLabelNombre6;
-    private javax.swing.JLabel jLabelNombre7;
-    private javax.swing.JLabel jLabelNombre8;
+    private javax.swing.JLabel jLabelPeso;
+    private javax.swing.JLabel jLabelRango;
+    private javax.swing.JLabel jLabelTCritico;
+    private javax.swing.JLabel jLabelTDannoM;
+    private javax.swing.JLabel jLabelTDannoP;
+    private javax.swing.JLabel jLabelTEspecial;
     private javax.swing.JLabel jLabelTNombre;
-    private javax.swing.JLabel jLabelTNombre1;
-    private javax.swing.JLabel jLabelTNombre2;
-    private javax.swing.JLabel jLabelTNombre3;
-    private javax.swing.JLabel jLabelTNombre4;
-    private javax.swing.JLabel jLabelTNombre5;
-    private javax.swing.JLabel jLabelTNombre6;
-    private javax.swing.JLabel jLabelTNombre7;
+    private javax.swing.JLabel jLabelTPeso;
+    private javax.swing.JLabel jLabelTRango;
+    private javax.swing.JLabel jLabelTTipo;
+    private javax.swing.JLabel jLabelTipo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableObjetos;
     // End of variables declaration//GEN-END:variables

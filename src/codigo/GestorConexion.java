@@ -152,6 +152,25 @@ public class GestorConexion {
         }
     }
 
+    public DefaultTableModel devuelveTodasLasArmas() {
+        DefaultTableModel resultado = new DefaultTableModel(new String[]{"id", "nombre", "peso", "magico", "dannoP", "dannoM", "critico", "rango", "tipo", "especial", "descripcion"}, 0);
+        try {
+            Statement sta = conn1.createStatement();
+            String query = "select * from armas";
+            System.out.println("select * from armas");
+            ResultSet rs = sta.executeQuery(query);
+            while (rs.next()) {
+                resultado.addRow(new String[]{rs.getString("codArma"), rs.getString("nombre"), rs.getString("peso"), rs.getString("magico"), rs.getString("dannoP"), rs.getString("dannoM"),
+                    rs.getString("critico"), rs.getString("rango"), rs.getString("tipo"), rs.getString("especial"), rs.getString("descripcion")});
+            }
+            return resultado;
+        } catch (SQLException ex) {
+            System.out.println("ERROR:al consultar");
+            ex.printStackTrace();
+            return resultado;
+        }
+    }
+
     public DefaultTableModel devuelveArmaduraPorPersonaje(String codPersonaje) {
         DefaultTableModel resultado = new DefaultTableModel(new String[]{"id", "nombre", "bonificador", "peso", "magico", "descripcion", "velocidad", "dexBonus", "penalizacion", "falloHechizo", "cantidad"}, 0);
         try {
@@ -227,11 +246,11 @@ public class GestorConexion {
             return resultado;
         }
     }
-    
+
     public DefaultTableModel devuelveHechizosPorPersonaje(String codPersonaje) //FALTA POR TERMINAR.
     {
-        DefaultTableModel resultado = new DefaultTableModel(new String[]{"id", "nombre", "escuela", "tiempoCasteo", "componentes", "descripcion", 
-            "rango", "objetivo", "efecto", "duracion", "tiradaSalvacion", "resistenciaHechizo", "barbaro", "bardo", "clerigo", "druida", "explorador", 
+        DefaultTableModel resultado = new DefaultTableModel(new String[]{"id", "nombre", "escuela", "tiempoCasteo", "componentes", "descripcion",
+            "rango", "objetivo", "efecto", "duracion", "tiradaSalvacion", "resistenciaHechizo", "barbaro", "bardo", "clerigo", "druida", "explorador",
             "guerrero", "monje", "paladin", "picaro", "hechicero", "mago"}, 0);
         try {
             Statement sta = conn1.createStatement();
@@ -240,7 +259,7 @@ public class GestorConexion {
             ResultSet rs = sta.executeQuery(query);
             while (rs.next()) {
                 resultado.addRow(new String[]{rs.getString("codHechizo"), rs.getString("nombre"), rs.getString("escuela"), rs.getString("tiempoCasteo"),
-                    rs.getString("componentes"), rs.getString("descripcion"), rs.getString("rango"), rs.getString("objetivo"), rs.getString("efecto"), 
+                    rs.getString("componentes"), rs.getString("descripcion"), rs.getString("rango"), rs.getString("objetivo"), rs.getString("efecto"),
                     rs.getString("duracion"), rs.getString("tiradaSalvacion"), rs.getString("resistenciaHechizo")});
             }
             return resultado;
