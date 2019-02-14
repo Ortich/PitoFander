@@ -17,9 +17,9 @@ import javax.swing.table.TableColumnModel;
  * @author Daniel
  */
 public class VentanaDetallesArmas extends javax.swing.JFrame {
-
+    
     DefaultTableModel tabla;
-
+    
     boolean adaptada = false;
 
     /**
@@ -29,35 +29,36 @@ public class VentanaDetallesArmas extends javax.swing.JFrame {
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setResizable(false);
+        jButton1.setVisible(false);
     }
-
+    
     public void estableceTabla(DefaultTableModel _tabla) {
         tabla = _tabla;
         jTableObjetos.setModel(tabla);
-
+        
         if (!adaptada) {
             jTableObjetos.removeColumn(jTableObjetos.getColumnModel().getColumn(jTableObjetos.getColumnCount() - 1));
             jTableObjetos.removeColumn(jTableObjetos.getColumnModel().getColumn(jTableObjetos.getColumnCount() - 1));
             jTableObjetos.removeColumn(jTableObjetos.getColumnModel().getColumn(0));
-
+            
             TableColumnModel columnModel = jTableObjetos.getColumnModel();
-
+            
             columnModel.getColumn(0).setPreferredWidth(250);
             adaptada = true;
-
+            
             jTableObjetos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
                 public void valueChanged(ListSelectionEvent e) {
                     cambiaSeleccion();
                 }
             });
         }
-
+        
     }
-
+    
     public void cambioDeTabla() {
         adaptada = false;
     }
-
+    
     public void cambiaSeleccion() {
         jLabelNombre.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 1).toString());
         jLabelPeso.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 2).toString());
@@ -99,6 +100,7 @@ public class VentanaDetallesArmas extends javax.swing.JFrame {
         jLabelEspecial = new javax.swing.JLabel();
         jLabelTEspecial = new javax.swing.JLabel();
         jLabelNombre = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(190, 31, 44));
@@ -214,6 +216,9 @@ public class VentanaDetallesArmas extends javax.swing.JFrame {
         jLabelNombre.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         getContentPane().add(jLabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 320, 30));
 
+        jButton1.setText("jButton1");
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -256,6 +261,7 @@ public class VentanaDetallesArmas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabelCritico;
     private javax.swing.JLabel jLabelDannoM;
     private javax.swing.JLabel jLabelDannoP;
