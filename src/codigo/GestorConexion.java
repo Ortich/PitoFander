@@ -169,6 +169,85 @@ public class GestorConexion {
             return resultado;
         }
     }
+    
+    public DefaultTableModel devuelveArmaduraPorPersonaje(String codPersonaje) 
+    {
+        DefaultTableModel resultado = new DefaultTableModel(new String[]{"id", "nombre", "bonificador", "peso", "magico", "descripcion", "velocidad", "dexBonus", "penalizacion", "falloHechizo", "cantidad"}, 0);
+        try {
+            Statement sta = conn1.createStatement();
+            String query = "select * from armaduras , (select * from personajeArmaduras where codPersonaje = " + codPersonaje + ") c where c.codArmadura = armaduras.codArmadura;";
+            System.out.println("select * from armaduras , (select * from personajeArmaduras where codPersonaje = " + codPersonaje + ") c where c.codArmadura = armaduras.codArmadura;");
+            ResultSet rs = sta.executeQuery(query);
+            while (rs.next()) {
+                resultado.addRow(new String[]{rs.getString("codArmadura"), rs.getString("nombre"), rs.getString("bonificador"), rs.getString("peso"), rs.getString("magico"), rs.getString("descripcion"), rs.getString("velocidad"),
+                    rs.getString("dexBonus"), rs.getString("penalizacion"), rs.getString("falloHechizo"),rs.getString("cantidad")});
+            }
+            return resultado;
+        } catch (SQLException ex) {
+            System.out.println("ERROR:al consultar");
+            ex.printStackTrace();
+            return resultado;
+        }
+    }
+    
+    public DefaultTableModel devuelveObjetosPorPersonaje(String codPersonaje) 
+    {
+        DefaultTableModel resultado = new DefaultTableModel(new String[]{"id", "nombre", "peso", "magico", "descripcion", "cantidad"}, 0);
+        try {
+            Statement sta = conn1.createStatement();
+            String query = "select * from objetos , (select * from personajeObjetos where codPersonaje = " + codPersonaje + ") c where c.codObjeto = objetos.codObjeto;";
+            System.out.println("select * from objetos , (select * from personajeObjetos where codPersonaje = " + codPersonaje + ") c where c.codObjeto = objetos.codObjeto;");
+            ResultSet rs = sta.executeQuery(query);
+            while (rs.next()) {
+                resultado.addRow(new String[]{rs.getString("codObjeto"), rs.getString("nombre"), rs.getString("peso"), rs.getString("magico"), rs.getString("descripcion"), rs.getString("cantidad")});
+            }
+            return resultado;
+        } catch (SQLException ex) {
+            System.out.println("ERROR:al consultar");
+            ex.printStackTrace();
+            return resultado;
+        }
+    }
+    
+    public DefaultTableModel devuelveDotesPorPersonaje(String codPersonaje) 
+    {
+        DefaultTableModel resultado = new DefaultTableModel(new String[]{"id", "nombre", "beneficio", "normal", "especial", "descripcion", "preRequisitos"}, 0);
+        try {
+            Statement sta = conn1.createStatement();
+            String query = "select * from dotes , (select * from personajeDotes where codPersonaje = " + codPersonaje + ") c where c.codDote = dotes.codDote;";
+            System.out.println("select * from dotes , (select * from personajeDotes where codPersonaje = " + codPersonaje + ") c where c.codDote = dotes.codDote;");
+            ResultSet rs = sta.executeQuery(query);
+            while (rs.next()) {
+                resultado.addRow(new String[]{rs.getString("codDote"), rs.getString("nombre"), rs.getString("beneficio"), rs.getString("normal"), 
+                    rs.getString("especial"), rs.getString("descripcion"), rs.getString("preRequisitos")});
+            }
+            return resultado;
+        } catch (SQLException ex) {
+            System.out.println("ERROR:al consultar");
+            ex.printStackTrace();
+            return resultado;
+        }
+    }
+    
+    public DefaultTableModel devuelveHabilidadesDeClasePorPersonaje(String codPersonaje) //FALTA POR TERMINAR.
+    {
+        DefaultTableModel resultado = new DefaultTableModel(new String[]{"id", "nombre", "ex", "descripcion", "objeto", "nombreClase"}, 0);
+        try {
+            Statement sta = conn1.createStatement();
+            String query = "select * from dotes , (select * from personajeDotes where codPersonaje = " + codPersonaje + ") c where c.codDote = dotes.codDote;";
+            System.out.println("select * from dotes , (select * from personajeDotes where codPersonaje = " + codPersonaje + ") c where c.codDote = dotes.codDote;");
+            ResultSet rs = sta.executeQuery(query);
+            while (rs.next()) {
+                resultado.addRow(new String[]{rs.getString("codDote"), rs.getString("nombre"), rs.getString("beneficio"), rs.getString("normal"), 
+                    rs.getString("especial"), rs.getString("descripcion"), rs.getString("preRequisitos")});
+            }
+            return resultado;
+        } catch (SQLException ex) {
+            System.out.println("ERROR:al consultar");
+            ex.printStackTrace();
+            return resultado;
+        }
+    }
 
     public String consulta_preparedStatement(String consulta) {
         String resultado = "";

@@ -200,6 +200,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         //Ahora metemos los objetos del personaje seleccionado en los comboBox
         insertaObjetosEnComboBox();
+        insertaArmadurasCB();
+        insertaObjetosCB();
+        insertaDotesCB();
 
         //Guardamos los datos base del primer personaje
         jLabelNombre.setText(personajes.getValueAt(codigoPersonaje, 0).toString());
@@ -321,6 +324,43 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             
         }
     }
+    
+    public void insertaArmadurasCB()
+    {
+        jComboBoxArmaduras.removeAllItems();
+        String a = personajes.getValueAt(jComboBoxListaPersonajes.getSelectedIndex(), 67).toString();
+        armaduras = miConexion.devuelveArmaduraPorPersonaje(a);
+        System.out.println(a);
+        for (int i = 0; i < armaduras.getRowCount(); i++) 
+        {
+            jComboBoxArmaduras.addItem(armaduras.getValueAt(i, 1).toString());
+        }
+    }
+    
+    public void insertaObjetosCB()
+    {
+        jComboBoxObjetos.removeAllItems();
+        String a = personajes.getValueAt(jComboBoxListaPersonajes.getSelectedIndex(), 67).toString();
+        objetos = miConexion.devuelveObjetosPorPersonaje(a);
+        System.out.println(a);
+        for (int i = 0; i < objetos.getRowCount(); i++) 
+        {
+            jComboBoxObjetos.addItem(objetos.getValueAt(i, 1).toString());
+        }
+    }
+    
+    public void insertaDotesCB()
+    {
+        jComboBoxDotes.removeAllItems();
+        String a = personajes.getValueAt(jComboBoxListaPersonajes.getSelectedIndex(), 67).toString();
+        dotes = miConexion.devuelveDotesPorPersonaje(a);
+        System.out.println(a);
+        for (int i = 0; i < dotes.getRowCount(); i++) 
+        {
+            jComboBoxDotes.addItem(dotes.getValueAt(i, 1).toString());
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
