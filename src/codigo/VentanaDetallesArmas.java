@@ -247,7 +247,7 @@ public class VentanaDetallesArmas extends javax.swing.JFrame {
     private void jButtonAnnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnadirActionPerformed
         jButtonAnnadir.setVisible(false);
         setVisible(false);
-        miConexion.annadirArmaPersonaje(personaje, tabla.getValueAt(jTableObjetos.getSelectedRow(), 1).toString());
+        miConexion.annadirArmaPersonaje(personaje, tabla.getValueAt(jTableObjetos.getSelectedRow(), 0).toString());
     }//GEN-LAST:event_jButtonAnnadirActionPerformed
 
     /**
