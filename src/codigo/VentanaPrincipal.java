@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Daniel
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
-
+    
     GestorConexion miConexion;
     private boolean usuarioConectado = false;
     InicioSesion inicioSesion;
@@ -43,7 +43,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         reseteaInterfaz();
         bloquearInterfaz(false);
     }
-
+    
     public void setSesion(Boolean estado, String usuario) {
         usuarioConectado = estado;
         bloquearInterfaz(estado);
@@ -62,10 +62,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jComboBoxHechizos.removeAllItems();
         jComboBoxListaPersonajes.removeAllItems();
         jComboBoxObjetos.removeAllItems();
-
+        
         limpiaInterfaz();
     }
-
+    
     private void limpiaInterfaz() {
         //Ponemos en blanco todos los jLabels de habilidades que no sean Titulos
         jLabelAcrobacias.setText("");
@@ -161,29 +161,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jButtonAnnadirHabilidadDeClase.setEnabled(bloquea);
         jButtonAnnadirHechizo.setEnabled(bloquea);
         jButtonAnnadirObjeto.setEnabled(bloquea);
-
+        
         jButtonDetallesArmaduras.setEnabled(bloquea);
         jButtonDetallesArmas.setEnabled(bloquea);
         jButtonDetallesDotes.setEnabled(bloquea);
         jButtonDetallesHabilidadesDeClase.setEnabled(bloquea);
         jButtonDetallesHechizos.setEnabled(bloquea);
         jButtonDetallesObjetos.setEnabled(bloquea);
-
+        
     }
 
     //Descarga los datos de los personajes y los guarda en local
     private void descargaDatosPersonajes(String usuario) {
         //Guardamos las tablas en local
         personajes = miConexion.devuelvePersonajeUsuario(usuario);
-
+        
         insertaPersonajesEnComboBox();
-
+        
         rellenaComboBox();
-
+        
         actualizaPersonaje(jComboBoxListaPersonajes.getSelectedIndex());
-
+        
     }
-
+    
     private void actualizaPersonaje(int codigoPersonaje) {
         //Primero ponemos en blanco la interfaz guardando 
         limpiaInterfaz();
@@ -281,7 +281,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             jLabelTProfesion2.setText(personajes.getValueAt(codigoPersonaje, 47).toString());
         }
     }
-
+    
     public void rellenaComboBox() {
         insertaArmasEnComboBox();
         insertaArmadurasEnComboBox();
@@ -290,16 +290,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         insertaHabilidadesDeClasesEnComboBox();
         insertaHechizosEnComboBox();
     }
-
+    
     public void insertaPersonajesEnComboBox() {
         jComboBoxListaPersonajes.removeAllItems();
-
+        
         for (int i = 0; i < personajes.getRowCount(); i++) {
             jComboBoxListaPersonajes.addItem(personajes.getValueAt(i, 0).toString());
         }
-
+        
     }
-
+    
     public void insertaArmasEnComboBox() {
         jComboBoxArmas.removeAllItems();
         String a = personajes.getValueAt(jComboBoxListaPersonajes.getSelectedIndex(), 67).toString();
@@ -309,7 +309,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             jComboBoxArmas.addItem(armas.getValueAt(i, 1).toString());
         }
     }
-
+    
     public void insertaArmadurasEnComboBox() {
         jComboBoxArmaduras.removeAllItems();
         String a = personajes.getValueAt(jComboBoxListaPersonajes.getSelectedIndex(), 67).toString();
@@ -319,7 +319,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             jComboBoxArmaduras.addItem(armaduras.getValueAt(i, 1).toString());
         }
     }
-
+    
     public void insertaObjetosEnComboBox() {
         jComboBoxObjetos.removeAllItems();
         String a = personajes.getValueAt(jComboBoxListaPersonajes.getSelectedIndex(), 67).toString();
@@ -329,40 +329,40 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             jComboBoxObjetos.addItem(objetos.getValueAt(i, 1).toString());
         }
     }
-
+    
     public void insertaDotesEnComboBox() {
         jComboBoxDotes.removeAllItems();
         String a = personajes.getValueAt(jComboBoxListaPersonajes.getSelectedIndex(), 67).toString();
         dotes = miConexion.devuelveDotesPorPersonaje(a);
         System.out.println(a);
-
+        
         for (int i = 0; i < dotes.getRowCount(); i++) {
             jComboBoxDotes.addItem(dotes.getValueAt(i, 1).toString());
         }
     }
-
+    
     public void insertaHabilidadesDeClasesEnComboBox() {
         jComboBoxHabilidadesDeClase.removeAllItems();
         String a = personajes.getValueAt(jComboBoxListaPersonajes.getSelectedIndex(), 67).toString();
         habilidadesDeClase = miConexion.devuelveHabilidadesDeClasePorPersonaje(a);
         System.out.println(a);
-
+        
         for (int i = 0; i < habilidadesDeClase.getRowCount(); i++) {
             jComboBoxHabilidadesDeClase.addItem(habilidadesDeClase.getValueAt(i, 1).toString());
         }
     }
-
+    
     public void insertaHechizosEnComboBox() {
         jComboBoxHechizos.removeAllItems();
         String a = personajes.getValueAt(jComboBoxListaPersonajes.getSelectedIndex(), 67).toString();
         hechizos = miConexion.devuelveHechizosPorPersonaje(a);
         System.out.println(a);
-
+        
         for (int i = 0; i < hechizos.getRowCount(); i++) {
             jComboBoxHechizos.addItem(hechizos.getValueAt(i, 1).toString());
         }
     }
-
+    
     public DefaultTableModel devuelveTodasLasArmas() {
         return miConexion.devuelveTodasLasArmas();
     }
@@ -1281,6 +1281,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jButtonAnnadirArma.setBackground(new java.awt.Color(190, 31, 44));
         jButtonAnnadirArma.setFont(new java.awt.Font("Pokemon Classic", 0, 9)); // NOI18N
         jButtonAnnadirArma.setText("+");
+        jButtonAnnadirArma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAnnadirArmaActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButtonAnnadirArma, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 320, -1, -1));
 
         jButtonDetallesArmaduras.setBackground(new java.awt.Color(190, 31, 44));
@@ -1418,7 +1423,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jMenuItemIniciarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemIniciarSesionMousePressed
         inicioSesion.setVisible(true);
     }//GEN-LAST:event_jMenuItemIniciarSesionMousePressed
-
+    
     private void jMenuItemConectarBBDDMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemConectarBBDDMousePressed
         switch (jMenuItemConectarBBDD.getText()) {
             case "Conectar":
@@ -1432,29 +1437,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 System.out.println("Cerrar");
                 break;
         }
-
+        
     }//GEN-LAST:event_jMenuItemConectarBBDDMousePressed
-
+    
     private void jComboBoxListaPersonajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxListaPersonajesActionPerformed
         try {
             actualizaPersonaje(jComboBoxListaPersonajes.getSelectedIndex());
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jComboBoxListaPersonajesActionPerformed
-
+    
     private void jButtonDetallesArmasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDetallesArmasActionPerformed
         ventanaDetallesArmas.setVisible(true);
         ventanaDetallesArmas.estableceTabla(armas);
     }//GEN-LAST:event_jButtonDetallesArmasActionPerformed
-
+    
     private void jMenuConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultasActionPerformed
-
+        
     }//GEN-LAST:event_jMenuConsultasActionPerformed
-
+    
     private void jMenuConsultasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuConsultasMousePressed
-
+        
     }//GEN-LAST:event_jMenuConsultasMousePressed
-
+    
     private void jMenuItemArmasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemArmasActionPerformed
         if (usuarioConectado) {
             ventanaDetallesArmas.setVisible(true);
@@ -1463,6 +1468,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             ventanaDetallesArmas.abriendoVentanaTotal();
         }
     }//GEN-LAST:event_jMenuItemArmasActionPerformed
+    
+    private void jButtonAnnadirArmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnadirArmaActionPerformed
+        ventanaDetallesArmas.abreVentanaAnnadir();
+        ventanaDetallesArmas.setVisible(true);
+    }//GEN-LAST:event_jButtonAnnadirArmaActionPerformed
 
     /**
      * @param args the command line arguments
