@@ -321,7 +321,8 @@ public class GestorConexion {
             String interpretar1Nombre, String interpretar2, String interpretar2Nombre, String intimidar, String inutilizarMecanismo, String juegoDeManos, String linguistica, String montar,
             String nadar, String percepcion, String profesion1, String profesion1Nombre, String profesion2, String profesion2Nombre, String saberArcano, String saberDungeons,
             String saberGeografia, String saberHistoria, String saberIngenieria, String saberLocal, String saberNaturaleza, String saberNobleza, String saberPlanos, String saberReligion,
-            String sigilo, String supervivencia, String tasacion, String tratoConAnimales, String trepar, String usarObjetoMagico, String volar, String raza, String clase, String codUsuario) {
+            String sigilo, String supervivencia, String tasacion, String tratoConAnimales, String trepar, String usarObjetoMagico, String volar, String raza, String clase, String usuario) {
+        String codUsuario = devuelveNombreUsuario(usuario);
         try {
             Statement sta = conn1.createStatement();
             String query = "INSERT INTO `personaje` (`nombre`,`apellidos`,`alineamiento`,`religion`,`genero`,`ptsGolpe`,`idiomas`,"

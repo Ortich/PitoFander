@@ -2143,7 +2143,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldArtesaniaq1Nombre">
+    <Component class="javax.swing.JTextField" name="jTextFieldArtesania1Nombre">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Pokemon Classic" size="10" style="0"/>

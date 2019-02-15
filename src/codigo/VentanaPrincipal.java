@@ -10,7 +10,6 @@ import javax.swing.table.DefaultTableModel;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Daniel Y Marco
@@ -45,7 +44,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventanaDetallesArmas = new VentanaDetallesArmas();
         ventanaDetallesArmas.guardaVentanaPrincipal(this);
         ventanaNuevoPersonaje = new NuevoPersonaje();
-        ventanaNuevoPersonaje.guardaConexion(miConexion);
+        ventanaNuevoPersonaje.guardaConexion(miConexion, this);
         ventanaNuevoPersonaje.rellenaComboBox();
         reseteaInterfaz();
         bloquearInterfaz(false);
@@ -550,7 +549,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItemHabilidadesDeClase = new javax.swing.JMenuItem();
         jMenuItemhechizos = new javax.swing.JMenuItem();
         jMenuAnnadirPJ = new javax.swing.JMenu();
-        jMenuAnnadirPJ1 = new javax.swing.JMenu();
+        jMenuModificarPJ = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1441,15 +1440,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenuBar.add(jMenuAnnadirPJ);
 
-        jMenuAnnadirPJ1.setBackground(new java.awt.Color(190, 31, 44));
-        jMenuAnnadirPJ1.setText("Modificar Personaje");
-        jMenuAnnadirPJ1.setFont(new java.awt.Font("Pokemon Classic", 0, 9)); // NOI18N
-        jMenuAnnadirPJ1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jMenuModificarPJ.setBackground(new java.awt.Color(190, 31, 44));
+        jMenuModificarPJ.setText("Modificar Personaje");
+        jMenuModificarPJ.setFont(new java.awt.Font("Pokemon Classic", 0, 9)); // NOI18N
+        jMenuModificarPJ.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenuAnnadirPJ1MousePressed(evt);
+                jMenuModificarPJMousePressed(evt);
             }
         });
-        jMenuBar.add(jMenuAnnadirPJ1);
+        jMenuBar.add(jMenuModificarPJ);
 
         setJMenuBar(jMenuBar);
 
@@ -1521,15 +1520,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jMenuAnnadirPJMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuAnnadirPJMousePressed
         if (usuarioConectado) {
             ventanaNuevoPersonaje.setVisible(true);
+            ventanaNuevoPersonaje.abreModificacion(false, null, null, 0);
         }
     }//GEN-LAST:event_jMenuAnnadirPJMousePressed
 
-    private void jMenuAnnadirPJ1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuAnnadirPJ1MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuAnnadirPJ1MousePressed
+    private void jMenuModificarPJMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuModificarPJMousePressed
+        if (usuarioConectado) {
+            ventanaNuevoPersonaje.setVisible(true);
+            ventanaNuevoPersonaje.abreModificacion(true, personajes.getValueAt(jComboBoxListaPersonajes.getSelectedIndex(), 67).toString(), personajes, jComboBoxListaPersonajes.getSelectedIndex());
+        }
+    }//GEN-LAST:event_jMenuModificarPJMousePressed
 
     private void jMenuItemArmadurasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemArmadurasActionPerformed
-        
+
     }//GEN-LAST:event_jMenuItemArmadurasActionPerformed
 
     /**
@@ -1722,7 +1725,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelVelocidad;
     private javax.swing.JLabel jLabelVolar;
     private javax.swing.JMenu jMenuAnnadirPJ;
-    private javax.swing.JMenu jMenuAnnadirPJ1;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuConexion;
     private javax.swing.JMenu jMenuConsultas;
@@ -1734,5 +1736,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemIniciarSesion;
     private javax.swing.JMenuItem jMenuItemhechizos;
     private javax.swing.JMenuItem jMenuItemobjetos;
+    private javax.swing.JMenu jMenuModificarPJ;
     // End of variables declaration//GEN-END:variables
 }
