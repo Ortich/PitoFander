@@ -83,6 +83,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Armaduras"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemArmadurasActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemobjetos">
               <Properties>

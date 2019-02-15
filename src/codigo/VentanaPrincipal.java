@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
  */
 /**
  *
- * @author Daniel
+ * @author Daniel Y Marco
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
@@ -1405,6 +1405,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenuItemArmaduras.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
         jMenuItemArmaduras.setText("Armaduras");
+        jMenuItemArmaduras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemArmadurasActionPerformed(evt);
+            }
+        });
         jMenuConsultas.add(jMenuItemArmaduras);
 
         jMenuItemobjetos.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
@@ -1521,6 +1526,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jMenuAnnadirPJ1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuAnnadirPJ1MousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuAnnadirPJ1MousePressed
+
+    private void jMenuItemArmadurasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemArmadurasActionPerformed
+        
+    }//GEN-LAST:event_jMenuItemArmadurasActionPerformed
 
     /**
      * @param args the command line arguments
