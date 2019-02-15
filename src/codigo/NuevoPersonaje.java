@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class NuevoPersonaje extends javax.swing.JFrame {
 
     GestorConexion miConexion;
+    VentanaPrincipal vP;
 
     /**
      * Creates new form NuevoPersonaje
@@ -121,7 +122,7 @@ public class NuevoPersonaje extends javax.swing.JFrame {
                 jTextFieldSaberIngenieria.getText(), jTextFieldSaberLocal.getText(), jTextFieldSaberNaturaleza.getText(), jTextFieldSaberNobleza.getText(),
                 jTextFieldSaberLosPlanos.getText(), jTextFieldSaberReligion.getText(), jTextFieldSigilo.getText(), jTextFieldSupervivencia.getText(), jTextFieldTasacion.getText(),
                 jTextFieldTratoConAnimales.getText(), jTextFieldTrepar.getText(), jTextFieldUsarObjetoMagico.getText(), jTextFieldVolar.getText(),
-                jComboBoxRaza.getSelectedItem().toString(), jComboBoxClase.getSelectedItem().toString());
+                jComboBoxRaza.getSelectedItem().toString(), jComboBoxClase.getSelectedItem().toString(), vP.miUsuario);
 
     }
 
@@ -1041,6 +1042,8 @@ public class NuevoPersonaje extends javax.swing.JFrame {
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         annadePersonaje();
+
+        vP.actualizaPersonaje(vP.jComboBoxListaPersonajes.getSelectedIndex());
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     /**

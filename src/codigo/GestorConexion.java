@@ -316,7 +316,7 @@ public class GestorConexion {
             String interpretar1Nombre, String interpretar2, String interpretar2Nombre, String intimidar, String inutilizarMecanismo, String juegoDeManos, String linguistica, String montar,
             String nadar, String percepcion, String profesion1, String profesion1Nombre, String profesion2, String profesion2Nombre, String saberArcano, String saberDungeons,
             String saberGeografia, String saberHistoria, String saberIngenieria, String saberLocal, String saberNaturaleza, String saberNobleza, String saberPlanos, String saberReligion,
-            String sigilo, String supervivencia, String tasacion, String tratoConAnimales, String trepar, String usarObjetoMagico, String volar, String raza, String clase) {
+            String sigilo, String supervivencia, String tasacion, String tratoConAnimales, String trepar, String usarObjetoMagico, String volar, String raza, String clase, String codUsuario) {
         try {
             Statement sta = conn1.createStatement();
             String query = "INSERT INTO `personaje` (`nombre`,`apellidos`,`alineamiento`,`religion`,`genero`,`ptsGolpe`,`idiomas`,"
@@ -327,7 +327,7 @@ public class GestorConexion {
                     + "`montar`,`nadar`,`percepcion`,`profesion1`,`profesion1Nombre`,`profesion2`,`profesion2Nombre`,`saberArcano`,`saberDungeons`,`saberGeografia`,\n"
                     + "`saberHistoria`,`saberIngenieria`,`saberLocal`,`saberNaturaleza`,`saberNobleza`,`saberPlanos`,`saberReligion`,`sigilo`,`supervivencia`,`tasacion`,\n"
                     + "`tratoConAnimales`,`trepar`,`usarObjetoMagico`,`volar`,\n"
-                    + "`raza`, `clase`) \n"
+                    + "`raza`, `clase`, `codUsuario`) \n"
                     + "VALUES \n"
                     + "('" + nombre + "', '" + apellidos + "', '" + alineamiento + "', '" + religion + "', '" + genero + "', " + ptsGolpe + ", '" + idiomas + "',\n"
                     + "" + nivel + ", " + edad + ", " + altura + ", " + peso + ", '" + cabello + "', '" + ojos + "', " + fuerza + ", " + destreza + ", " + constitucion + ", " + inteligencia + ", " + sabiduria + ", " + carisma + ",\n"
@@ -337,8 +337,12 @@ public class GestorConexion {
                     + "" + montar + ", " + nadar + ", " + percepcion + ", " + profesion1 + ", '" + profesion1Nombre + "', " + profesion2 + ", '" + profesion2Nombre + "', " + saberArcano + ", " + saberDungeons + ", " + saberGeografia + ", \n"
                     + "" + saberHistoria + ", " + saberIngenieria + ", " + saberLocal + ", " + saberNaturaleza + ", " + saberNobleza + ", " + saberPlanos + ", " + saberReligion + ", " + sigilo + ", " + supervivencia + ", " + tasacion + ", \n"
                     + "" + tratoConAnimales + ", " + trepar + ", " + usarObjetoMagico + ", " + volar + ", \n"
-                    + "'" + raza + "', '" + clase + "');";
+                    + "'" + raza + "', '" + clase + "', " + codUsuario + ");";
             sta.executeUpdate(query);
+//            query = "INSERT INTO usuarioPersonaje (`codPersonaje`,`id`) \n" +
+//                "VALUES \n" +
+//                "((SELECT MAX(codPersonaje) FROM personaje)" + +1 + ", " + codUsuario + ");";
+//            sta.executeUpdate(query);
         } catch (SQLException ex) {
             System.out.println("ERROR:al consultar");
             ex.printStackTrace();

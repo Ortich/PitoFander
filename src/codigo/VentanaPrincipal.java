@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 /**
  *
  * @author Daniel Y Marco
@@ -1584,7 +1585,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxDotes;
     private javax.swing.JComboBox<String> jComboBoxHabilidadesDeClase;
     private javax.swing.JComboBox<String> jComboBoxHechizos;
-    private javax.swing.JComboBox<String> jComboBoxListaPersonajes;
+    public javax.swing.JComboBox<String> jComboBoxListaPersonajes;
     private javax.swing.JComboBox<String> jComboBoxObjetos;
     private javax.swing.JLabel jLabelAcrobacias;
     private javax.swing.JLabel jLabelAlineamiento;
