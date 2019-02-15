@@ -90,7 +90,26 @@ public class GestorConexion {
         return tabla;
     }
 
+    public String devuelveNombreUsuario(String usuario) {
+        String resultado = "";
+        try {
+            Statement sta = conn1.createStatement();
+            String query = "select codUsuario from usuario where nombre = '" + usuario + "';";
+            System.out.println("select codUsuario from usuario where nombre = '" + usuario + "';");
+            ResultSet rs = sta.executeQuery(query);
+            while (rs.next()) {
+                resultado = rs.getString("codUsuario");
+            }
+            return resultado;
+        } catch (SQLException ex) {
+            System.out.println("ERROR:al consultar");
+            ex.printStackTrace();
+            return resultado;
+        }
+    }
+
     public DefaultTableModel devuelvePersonajeUsuario(String usuario) {
+        String codigoUsuario = devuelveNombreUsuario(usuario);
         DefaultTableModel resultado = new DefaultTableModel(new String[]{"nombre", "apellidos", "alineamiento", "religion",
             "genero", "ptsGolpe", "idiomas", "nivel", "edad", "altura", "peso", "cabello",
             "ojos", "fuerza", "destreza", "constitucion", "inteligencia", "sabidura", "carisma", "acrobacias", "artesania1", "artesania1Nombre",
@@ -102,7 +121,7 @@ public class GestorConexion {
             "sigilo", "supervivencia", "tasacion", "tratoConAnimales", "trepar", "usarObjetoMagico", "volar", "raza", "clase", "codPersonaje"}, 0);
         try {
             Statement sta = conn1.createStatement();
-            String query = "select * from personaje where (codPersonaje in (select codPersonaje from usuariopersonaje where (id in (select id from usuario where nombre = '" + usuario + "'))));";
+            String query = "select * from personaje where codUsuario = '" + codigoUsuario + "';";
 
             ResultSet rs = sta.executeQuery(query);
             while (rs.next()) {
@@ -236,11 +255,9 @@ public class GestorConexion {
             ex.printStackTrace();
         }
     }
-    
-    public void annadirArmaduraPersonaje(String codPersonaje, String codArmadura) 
-    {
-        try 
-        {
+
+    public void annadirArmaduraPersonaje(String codPersonaje, String codArmadura) {
+        try {
             Statement sta = conn1.createStatement();
             String query = "select cantidad from personajeArmaduras as pa where pa.codPersonaje = " + codPersonaje + " and pa.codArmadura = " + codArmadura + ";";
             System.out.println("select cantidad from personajeArmas as pa where pa.codPersonaje = " + codPersonaje + " and pa.codArmadura = " + codArmadura + ";");
@@ -251,13 +268,10 @@ public class GestorConexion {
                 rs.last();    // moves cursor to the last row
                 size = rs.getRow(); // get row id 
             }
-            if (size == 0) 
-            {
+            if (size == 0) {
                 query = "INSERT INTO personajeArmaduras (`codPersonaje`,`codArmadura`,`cantidad`) " + "VALUES" + " (" + codPersonaje + ", " + codArmadura + ", 1);";
                 sta.executeUpdate(query);
-            } 
-            else 
-            {
+            } else {
                 String cantidad = rs.getString("cantidad");
                 int cant = Integer.valueOf(cantidad) + 1;
                 System.out.println("Cantidad " + cantidad);
@@ -265,18 +279,14 @@ public class GestorConexion {
                 System.out.println(query2);
                 sta.executeUpdate(query2);
             }
-        } 
-        catch (SQLException ex) 
-        {
+        } catch (SQLException ex) {
             System.out.println("ERROR:al consultar");
             ex.printStackTrace();
         }
     }
-    
-    public void annadirObjetoPersonaje(String codPersonaje, String codObjeto) 
-    {
-        try 
-        {
+
+    public void annadirObjetoPersonaje(String codPersonaje, String codObjeto) {
+        try {
             Statement sta = conn1.createStatement();
             String query = "select cantidad from personajeObjetos as pa where pa.codPersonaje = " + codPersonaje + " and pa.codObjeto = " + codObjeto + ";";
             System.out.println("select cantidad from personajeArmas as pa where pa.codPersonaje = " + codPersonaje + " and pa.codArmadura = " + codObjeto + ";");
@@ -287,13 +297,10 @@ public class GestorConexion {
                 rs.last();    // moves cursor to the last row
                 size = rs.getRow(); // get row id 
             }
-            if (size == 0) 
-            {
+            if (size == 0) {
                 query = "INSERT INTO personajeObjetos (`codPersonaje`,`codObjeto`,`cantidad`) " + "VALUES" + " (" + codPersonaje + ", " + codObjeto + ", 1);";
                 sta.executeUpdate(query);
-            } 
-            else 
-            {
+            } else {
                 String cantidad = rs.getString("cantidad");
                 int cant = Integer.valueOf(cantidad) + 1;
                 System.out.println("Cantidad " + cantidad);
@@ -301,9 +308,7 @@ public class GestorConexion {
                 System.out.println(query2);
                 sta.executeUpdate(query2);
             }
-        } 
-        catch (SQLException ex) 
-        {
+        } catch (SQLException ex) {
             System.out.println("ERROR:al consultar");
             ex.printStackTrace();
         }
@@ -400,12 +405,10 @@ public class GestorConexion {
             return resultado;
         }
     }
-    
-    public DefaultTableModel devuelveTodasLasArmaduras() 
-    {
+
+    public DefaultTableModel devuelveTodasLasArmaduras() {
         DefaultTableModel resultado = new DefaultTableModel(new String[]{"id", "nombre", "bonificador", "peso", "magico", "descripcion", "velocidad", "dexBonus", "penalizacion", "falloHechizo", "cantidad"}, 0);
-        try 
-        {
+        try {
             Statement sta = conn1.createStatement();
             String query = "select * from armaduras";
             System.out.println("select * from armaduras");
@@ -439,12 +442,10 @@ public class GestorConexion {
             return resultado;
         }
     }
-    
-    public DefaultTableModel devuelveTodasLosObjetos() 
-    {
+
+    public DefaultTableModel devuelveTodasLosObjetos() {
         DefaultTableModel resultado = new DefaultTableModel(new String[]{"id", "nombre", "peso", "magico", "descripcion", "cantidad"}, 0);
-        try 
-        {
+        try {
             Statement sta = conn1.createStatement();
             String query = "select * from objetos";
             System.out.println("select * from objetos");
@@ -478,12 +479,10 @@ public class GestorConexion {
             return resultado;
         }
     }
-    
-    public DefaultTableModel devuelveTodasLasDotes() 
-    {
+
+    public DefaultTableModel devuelveTodasLasDotes() {
         DefaultTableModel resultado = new DefaultTableModel(new String[]{"id", "nombre", "beneficio", "normal", "especial", "descripcion", "preRequisitos"}, 0);
-        try 
-        {
+        try {
             Statement sta = conn1.createStatement();
             String query = "select * from dotes";
             System.out.println("select * from dotes");
@@ -519,12 +518,10 @@ public class GestorConexion {
             return resultado;
         }
     }
-    
-    public DefaultTableModel devuelveTodasLasHabilidadesDeClase() 
-    {
+
+    public DefaultTableModel devuelveTodasLasHabilidadesDeClase() {
         DefaultTableModel resultado = new DefaultTableModel(new String[]{"id", "nombre", "ex", "descripcion", "objeto", "nombreClase"}, 0);
-        try 
-        {
+        try {
             Statement sta = conn1.createStatement();
             String query = "select * from habilidadesDeClase";
             System.out.println("select * from habilidadesDeClase");
@@ -563,14 +560,12 @@ public class GestorConexion {
             return resultado;
         }
     }
-    
-    public DefaultTableModel devuelveTodosLosHechizos() 
-    {
+
+    public DefaultTableModel devuelveTodosLosHechizos() {
         DefaultTableModel resultado = new DefaultTableModel(new String[]{"id", "nombre", "escuela", "tiempoCasteo", "componentes", "descripcion",
             "rango", "objetivo", "efecto", "duracion", "tiradaSalvacion", "resistenciaHechizo", "barbaro", "bardo", "clerigo", "druida", "explorador",
             "guerrero", "monje", "paladin", "picaro", "hechicero", "mago"}, 0);
-        try 
-        {
+        try {
             Statement sta = conn1.createStatement();
             String query = "select * from hechizos";
             System.out.println("select * from hechizos");

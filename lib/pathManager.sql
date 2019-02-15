@@ -75,7 +75,8 @@ CREATE TABLE IF NOT EXISTS `personaje`
     `usarObjetoMagico` int(3)  NOT NULL,
     `volar` int(3)  NOT NULL, 
     `raza` varchar(20)  NOT NULL,
-    `clase` varchar(40) NOT NULL
+    `clase` varchar(40) NOT NULL,
+    `codUsuario` int(255) NOT NULL
 ) 
 ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -87,7 +88,7 @@ INSERT INTO `personaje` (`nombre`,`apellidos`,`alineamiento`,`religion`,`genero`
 `montar`,`nadar`,`percepcion`,`profesion1`,`profesion1Nombre`,`profesion2`,`profesion2Nombre`,`saberArcano`,`saberDungeons`,`saberGeografia`,
 `saberHistoria`,`saberIngenieria`,`saberLocal`,`saberNaturaleza`,`saberNobleza`,`saberPlanos`,`saberReligion`,`sigilo`,`supervivencia`,`tasacion`,
 `tratoConAnimales`,`trepar`,`usarObjetoMagico`,`volar`,
-`raza`, `clase`) 
+`raza`, `clase`, `codUsuario`) 
 VALUES 
 ('Caladrel', 'Fëanor', 'CN', 'Nethys', 'Hombre', 14, 'Común, Elfo, Celestial, Abisal, Draconico, Abisal',
 3, 165, 185, 72, 'Rubio', 'Azules', 0, 5, 136, 0, 11, 17, 11, 19, 14, 10,
@@ -97,7 +98,7 @@ VALUES
 0, 0, 5, 3, 'Escritor', 0, '-', 4, 4, 4, 
 4, 4, 4, 4, 4, 4, 4, 2, 0, 0, 
 0, 0, 4, 3, 
-'Elfo', 'Bardo'),
+'Elfo', 'Bardo', 2),
 ('Adolfito', 'Vendetta', 'LB', 'JesuCristo', 'Mujer', 23, 'Común y Enano',
 4, 40, 154, 84, 'Moreno', 'Verde', 4, 17, 157, 0, 10, 15, 11, 12, 12, 14,
 2, 3, 'Adobe', 1, '-',
@@ -106,7 +107,7 @@ VALUES
 0, 2, 1, 2, 'Lector', 0, '-', 4, 4, 4, 
 4, 2, 0, 0, 0, 0, 0, 0, 1, 0, 
 0, 1, 2, 3, 
-'Enano', 'Bárbaro'),
+'Enano', 'Bárbaro', 2),
 ('Patxi', 'Urrutia', 'LN', 'Olentxero', 'Hombre', 22, 'Común y Abisal',
 5, 223, 181, 87, 'Moreno', 'Verdes', 0, 5, 121, 0, 13, 18, 12, 14, 15, 11,
 2, 4, 'Verdulero', 1, 'Hostelero',
@@ -115,7 +116,7 @@ VALUES
 0, 1, 1, 3, 'Escudero', 0, '-', 4, 1, 2, 
 4, 1, 1, 1, 1, 4, 1, 2, 0, 1, 
 0, 1, 1, 3, 
-'Gnomo', 'Clérigo');
+'Gnomo', 'Clérigo', 1);
 
 CREATE TABLE IF NOT EXISTS `raza`
 (
@@ -542,10 +543,10 @@ VALUES
 
 CREATE TABLE IF NOT EXISTS `usuario`
 (
-	`id` int(255) NOT NULL AUTO_INCREMENT,
+	`codUsuario` int(255) NOT NULL AUTO_INCREMENT,
 	`nombre` varchar(20) NOT NULL,
     `pass` varchar(20) NOT NULL,
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`codUsuario`)
 )ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `usuario` (`nombre`,`pass`) 
@@ -553,18 +554,7 @@ VALUES
 ('root', ''),
 ('dani', 'barba');
 
-CREATE TABLE IF NOT EXISTS `usuarioPersonaje`
-(
-	`codPersonaje` int(255) NOT NULL,
-    `id` int(255) NOT NULL,
-    PRIMARY KEY (`id`, `codPersonaje`)
-)ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-INSERT INTO `usuarioPersonaje` (`codPersonaje`,`id`) 
-VALUES 
-( 1, 2),
-( 2, 2),
-( 3, 1);
 
 
 
