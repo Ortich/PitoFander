@@ -236,6 +236,78 @@ public class GestorConexion {
             ex.printStackTrace();
         }
     }
+    
+    public void annadirArmaduraPersonaje(String codPersonaje, String codArmadura) 
+    {
+        try 
+        {
+            Statement sta = conn1.createStatement();
+            String query = "select cantidad from personajeArmaduras as pa where pa.codPersonaje = " + codPersonaje + " and pa.codArmadura = " + codArmadura + ";";
+            System.out.println("select cantidad from personajeArmas as pa where pa.codPersonaje = " + codPersonaje + " and pa.codArmadura = " + codArmadura + ";");
+            ResultSet rs = sta.executeQuery(query);
+            int size = 0;
+            if (rs != null) //VIVA STACKOVERFLOW
+            {
+                rs.last();    // moves cursor to the last row
+                size = rs.getRow(); // get row id 
+            }
+            if (size == 0) 
+            {
+                query = "INSERT INTO personajeArmaduras (`codPersonaje`,`codArmadura`,`cantidad`) " + "VALUES" + " (" + codPersonaje + ", " + codArmadura + ", 1);";
+                sta.executeUpdate(query);
+            } 
+            else 
+            {
+                String cantidad = rs.getString("cantidad");
+                int cant = Integer.valueOf(cantidad) + 1;
+                System.out.println("Cantidad " + cantidad);
+                String query2 = "UPDATE personajeArmaduras SET cantidad = " + cant + " WHERE codPersonaje = " + codPersonaje + " AND codArmadura = " + codArmadura + ";";
+                System.out.println(query2);
+                sta.executeUpdate(query2);
+            }
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println("ERROR:al consultar");
+            ex.printStackTrace();
+        }
+    }
+    
+    public void annadirObjetoPersonaje(String codPersonaje, String codObjeto) 
+    {
+        try 
+        {
+            Statement sta = conn1.createStatement();
+            String query = "select cantidad from personajeObjetos as pa where pa.codPersonaje = " + codPersonaje + " and pa.codObjeto = " + codObjeto + ";";
+            System.out.println("select cantidad from personajeArmas as pa where pa.codPersonaje = " + codPersonaje + " and pa.codArmadura = " + codObjeto + ";");
+            ResultSet rs = sta.executeQuery(query);
+            int size = 0;
+            if (rs != null) //VIVA STACKOVERFLOW
+            {
+                rs.last();    // moves cursor to the last row
+                size = rs.getRow(); // get row id 
+            }
+            if (size == 0) 
+            {
+                query = "INSERT INTO personajeObjetos (`codPersonaje`,`codObjeto`,`cantidad`) " + "VALUES" + " (" + codPersonaje + ", " + codObjeto + ", 1);";
+                sta.executeUpdate(query);
+            } 
+            else 
+            {
+                String cantidad = rs.getString("cantidad");
+                int cant = Integer.valueOf(cantidad) + 1;
+                System.out.println("Cantidad " + cantidad);
+                String query2 = "UPDATE personajeObjetos SET cantidad = " + cant + " WHERE codPersonaje = " + codPersonaje + " AND codObjeto = " + codObjeto + ";";
+                System.out.println(query2);
+                sta.executeUpdate(query2);
+            }
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println("ERROR:al consultar");
+            ex.printStackTrace();
+        }
+    }
 
     public void insertaNuevoPersonaje(String nombre, String apellidos, String alineamiento, String religion, String genero, String ptsGolpe, String idiomas, String nivel,
             String edad, String altura, String peso, String cabello, String ojos, String fuerza, String destreza, String constitucion, String inteligencia, String sabiduria,
