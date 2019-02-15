@@ -236,6 +236,79 @@ public class GestorConexion {
             ex.printStackTrace();
         }
     }
+    
+    public void insertaNuevoPersonaje(String nombre, String apellidos, String alineamiento, String religion, String genero, String ptsGolpe, String idiomas, String nivel,
+            String edad, String altura, String peso, String cabello, String ojos, String fuerza, String destreza, String constitucion, String inteligencia, String sabiduria,
+            String carisma, String acrobacias, String artesania1, String artesania1Nombre, String artesania2, String artesania2Nombre, String artesania3, String artesania3Nombre,
+            String averiguarIntenciones, String conocimientoDeConjuros, String curar, String diplomacia, String disfrazarse, String engannar, String escapismo, String interpretar1,
+            String interpretar1Nombre, String interpretar2, String interpretar2Nombre, String intimidar, String inutilizarMecanismo, String juegoDeManos, String linguistica, String montar,
+            String nadar, String percepcion, String profesion1, String profesion1Nombre, String profesion2, String profesion2Nombre, String saberArcano, String saberDungeons, 
+            String saberGeografia, String saberHistoria, String saberIngenieria, String saberLocal, String saberNaturaleza, String saberNobleza, String saberPlanos, String saberReligion, 
+            String sigilo, String supervivencia, String tasacion, String tratoConAnimales, String trepar, String usarObjetoMagico, String volar, String raza, String clase) 
+    {
+        try 
+        {
+            Statement sta = conn1.createStatement();
+            String query = "INSERT INTO `personaje` (`nombre`,`apellidos`,`alineamiento`,`religion`,`genero`,`ptsGolpe`,`idiomas`,"
+                    + "`nivel`, `edad`, `altura`, `peso`, `cabello`, `ojos`, `fuerza`, `destreza`, `constitucion`, `inteligencia`, `sabiduria`, `carisma`,\n"
+                    + "`acrobacias`,`artesania1`,`artesania1Nombre`,`artesania2`,`artesania2Nombre`,  \n"
+                    + "`artesania3`,`artesania3Nombre`,`averiguarIntenciones`,`conocimientoDeConjuros`,`curar`,`diplomacia`,`disfrazarse`,`engannar`,`escapismo`,\n"
+                    + "`interpretar1`,`interpretar1Nombre`,`interpretar2`,`interpretar2Nombre`,`intimidar`,`inutilizarMecanismo`,`juegoDeManos`,`linguistica`,\n"
+                    + "`montar`,`nadar`,`percepcion`,`profesion1`,`profesion1Nombre`,`profesion2`,`profesion2Nombre`,`saberArcano`,`saberDungeons`,`saberGeografia`,\n"
+                    + "`saberHistoria`,`saberIngenieria`,`saberLocal`,`saberNaturaleza`,`saberNobleza`,`saberPlanos`,`saberReligion`,`sigilo`,`supervivencia`,`tasacion`,\n"
+                    + "`tratoConAnimales`,`trepar`,`usarObjetoMagico`,`volar`,\n"
+                    + "`raza`, `clase`) \n"
+                    + "VALUES \n"
+                    + "('" + nombre + "', '" + apellidos + "', '" + alineamiento + "', '" + religion + "', '" + genero + "', " + ptsGolpe + ", '" + idiomas + "',\n"
+                    + "" + nivel + ", " + edad + ", " + altura + ", " + peso + ", '" + cabello + "', '" + ojos + "', " + fuerza + ", " + destreza + ", " + constitucion + ", " + inteligencia + ", " + sabiduria + ", " + carisma + ",\n"
+                    + "" + acrobacias + ", " + artesania1 + ", '" + artesania1Nombre + "', " + artesania2 + ", '" + artesania2Nombre + "',\n"
+                    + "" + artesania3 + ", '" + artesania3Nombre + "', " + averiguarIntenciones + ", " + conocimientoDeConjuros + ", " + curar + ", " + diplomacia + ", " + disfrazarse + ", " + engannar + ", " + escapismo + ", \n"
+                    + "" + interpretar1 + ", '" + interpretar1Nombre + "', " + interpretar2 + ", '" + interpretar2Nombre + "', " + intimidar + ", " + inutilizarMecanismo + ", " + juegoDeManos + ", " + linguistica + ",\n"
+                    + "" + montar + ", " + nadar + ", " + percepcion + ", " + profesion1 + ", '" + profesion1Nombre + "', " + profesion2 + ", '" + profesion2Nombre + "', " + saberArcano + ", " + saberDungeons + ", " + saberGeografia + ", \n"
+                    + "" + saberHistoria + ", " + saberIngenieria + ", " + saberLocal + ", " + saberNaturaleza + ", " + saberNobleza + ", " + saberPlanos + ", " + saberReligion + ", " + sigilo + ", " + supervivencia + ", " + tasacion + ", \n"
+                    + "" + tratoConAnimales + ", " + trepar + ", " + usarObjetoMagico + ", " + volar + ", \n"
+                    + "'" + raza + "', '" + clase + "');";
+            sta.executeUpdate(query);
+        } catch (SQLException ex) {
+            System.out.println("ERROR:al consultar");
+            ex.printStackTrace();
+        }
+    }
+    
+    public void modificarPersonaje(String nombre, String apellidos, String alineamiento, String religion, String genero, String ptsGolpe, String idiomas, String nivel,
+            String edad, String altura, String peso, String cabello, String ojos, String fuerza, String destreza, String constitucion, String inteligencia, String sabiduria,
+            String carisma, String acrobacias, String artesania1, String artesania1Nombre, String artesania2, String artesania2Nombre, String artesania3, String artesania3Nombre,
+            String averiguarIntenciones, String conocimientoDeConjuros, String curar, String diplomacia, String disfrazarse, String engannar, String escapismo, String interpretar1,
+            String interpretar1Nombre, String interpretar2, String interpretar2Nombre, String intimidar, String inutilizarMecanismo, String juegoDeManos, String linguistica, String montar,
+            String nadar, String percepcion, String profesion1, String profesion1Nombre, String profesion2, String profesion2Nombre, String saberArcano, String saberDungeons, 
+            String saberGeografia, String saberHistoria, String saberIngenieria, String saberLocal, String saberNaturaleza, String saberNobleza, String saberPlanos, String saberReligion, 
+            String sigilo, String supervivencia, String tasacion, String tratoConAnimales, String trepar, String usarObjetoMagico, String volar, String raza, String clase, String codPersonaje) 
+    {
+        try 
+        {
+            Statement sta = conn1.createStatement();
+            String query = "UPDATE personaje SET nombre = '" + nombre + "', apellidos = '" + apellidos + "', alineamiento = '" + alineamiento + "',"
+                    + "religion = '" + religion + "', genero = '" + genero + "', ptsGolpe = " + ptsGolpe + ", idiomas = '" + idiomas + "', nivel = " + nivel + ","
+                    + "edad = " + edad + ", altura = " + altura + ", peso = " + peso + ", cabello = '" + cabello + "', ojos = '" + ojos + "',"
+                    + "fuerza = " + fuerza + ", destreza = " + destreza + ", constitucion = " + constitucion + ", inteligencia = " + inteligencia + ", sabiduria = " + sabiduria + ","
+                    + "carisma = " + carisma + ", acrobacias = " + acrobacias + ", artesania1 = " + artesania1 + ", artesania1Nombre = '" + artesania1Nombre + "',"
+                    + "artesania2 = " + artesania2 + ", artesania2Nombre = '" + artesania2Nombre + "', artesania3 = " + artesania3 + ", artesania3Nombre = '" + artesania3Nombre + "',"
+                    + "averiguarIntenciones = " + averiguarIntenciones + ", conocimientoDeConjuros = " + conocimientoDeConjuros + ", curar = " + curar + ", diplomacia = " + diplomacia + ","
+                    + "disfrazarse = " + disfrazarse + ", engannar = " + engannar + ", escapismo = " + escapismo + ", interpretar1 = " + interpretar1 + ", "
+                    + "interpretar1Nombre = '" + interpretar1Nombre + "', interpretar2 = " + interpretar2 + ", interpretar2Nombre = '" + interpretar2Nombre + "',"
+                    + "intimidar = " + intimidar + ", inutilizarMecanismo = " + inutilizarMecanismo + ", juegoDeManos = " + juegoDeManos + ", linguistica = " + linguistica + ","
+                    + "montar = " + montar + ", nadar = " + nadar + ", percepcion = " + percepcion + ", profesion1 = " + profesion1 + ", profesion1Nombre = '" + profesion1Nombre + "',"
+                    + "profesion2 = " + profesion2 + ", profesion2Nombre = '" + profesion2Nombre + "', saberArcano = " + saberArcano + ", saberDungeons = " + saberDungeons + ","
+                    + "saberGeografia = " + saberGeografia + ", saberHistoria = " + saberHistoria + ", saberIngenieria = " + saberIngenieria + ", saberLocal = " + saberLocal + ","
+                    + "saberNaturaleza = " + saberNaturaleza + ", saberNobleza = " + saberNobleza + ", saberPlanos = " + saberPlanos +", saberReligion = " + saberReligion + ","
+                    + "sigilo = " + sigilo + ", supervivencia = " + supervivencia + ", tasacion = " + tasacion + ", tratoConAnimales = " + tratoConAnimales + ", trepar = " + trepar + ","
+                    + "usarObjetoMagico = " + usarObjetoMagico + ", volar = " + volar + ", raza = '" + raza + "', clase = '" + clase + "' WHERE codPersonaje = " + codPersonaje + ";";
+            sta.executeUpdate(query);
+        } catch (SQLException ex) {
+            System.out.println("ERROR: No hay tostadora en la bañera");
+            ex.printStackTrace();
+        }
+    }
 
     public DefaultTableModel devuelveArmaduraPorPersonaje(String codPersonaje) {
         DefaultTableModel resultado = new DefaultTableModel(new String[]{"id", "nombre", "bonificador", "peso", "magico", "descripcion", "velocidad", "dexBonus", "penalizacion", "falloHechizo", "cantidad"}, 0);
