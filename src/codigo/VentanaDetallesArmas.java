@@ -21,6 +21,7 @@ public class VentanaDetallesArmas extends javax.swing.JFrame {
     DefaultTableModel tabla;
 
     GestorConexion miConexion;
+    VentanaPrincipal miVentanaPrincipal;
     String personaje;
 
     boolean adaptada = false;
@@ -87,6 +88,10 @@ public class VentanaDetallesArmas extends javax.swing.JFrame {
     public void guardaConexion(GestorConexion conexion, String _pesonaje) {
         miConexion = conexion;
         personaje = _pesonaje;
+    }
+
+    public void guardaVentanaPrincipal(VentanaPrincipal _ventanaPrincipal) {
+        miVentanaPrincipal = _ventanaPrincipal;
     }
 
     /**
@@ -248,6 +253,7 @@ public class VentanaDetallesArmas extends javax.swing.JFrame {
         jButtonAnnadir.setVisible(false);
         setVisible(false);
         miConexion.annadirArmaPersonaje(personaje, tabla.getValueAt(jTableObjetos.getSelectedRow(), 0).toString());
+        miVentanaPrincipal.descargaDatosPersonajes(miVentanaPrincipal.miUsuario);
     }//GEN-LAST:event_jButtonAnnadirActionPerformed
 
     /**

@@ -21,6 +21,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     InicioSesion inicioSesion;
     VentanaDetallesArmas ventanaDetallesArmas;
     NuevoPersonaje ventanaNuevoPersonaje;
+    String miUsuario;
 
     //Tablas locales donde guardaremos los datos
     DefaultTableModel personajes;
@@ -39,11 +40,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setResizable(false);
         inicioSesion = new InicioSesion();
         inicioSesion.setVentanaPrincipal(this);
-        ventanaDetallesArmas = new VentanaDetallesArmas();
-        ventanaNuevoPersonaje = new NuevoPersonaje();
         miConexion = new GestorConexion();
+        ventanaDetallesArmas = new VentanaDetallesArmas();
+        ventanaDetallesArmas.guardaVentanaPrincipal(this);
+        ventanaNuevoPersonaje = new NuevoPersonaje();
+        ventanaNuevoPersonaje.guardaConexion(miConexion);
+        ventanaNuevoPersonaje.rellenaComboBox();
         reseteaInterfaz();
         bloquearInterfaz(false);
+
     }
 
     public void setSesion(Boolean estado, String usuario) {
@@ -51,11 +56,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         bloquearInterfaz(estado);
         if (usuarioConectado) {
             descargaDatosPersonajes(usuario);
+            miUsuario = usuario;
         }
     }
 
     //Pone los campos en blanco
-    private void reseteaInterfaz() {
+    public void reseteaInterfaz() {
         //Ponemos en blanco todos los jComboBox
         jComboBoxArmaduras.removeAllItems();
         jComboBoxArmas.removeAllItems();
@@ -68,7 +74,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         limpiaInterfaz();
     }
 
-    private void limpiaInterfaz() {
+    public void limpiaInterfaz() {
         //Ponemos en blanco todos los jLabels de habilidades que no sean Titulos
         jLabelAcrobacias.setText("");
         jLabelArtesania1.setText("");
@@ -145,7 +151,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     //Bloquea o desbloquea la interfaz
-    private void bloquearInterfaz(boolean bloquea) {
+    public void bloquearInterfaz(boolean bloquea) {
 
         //Bloqueamos los jComboBox
         jComboBoxArmaduras.setEnabled(bloquea);
@@ -174,7 +180,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     //Descarga los datos de los personajes y los guarda en local
-    private void descargaDatosPersonajes(String usuario) {
+    public void descargaDatosPersonajes(String usuario) {
         //Guardamos las tablas en local
         personajes = miConexion.devuelvePersonajeUsuario(usuario);
 
@@ -186,7 +192,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     }
 
-    private void actualizaPersonaje(int codigoPersonaje) {
+    public void actualizaPersonaje(int codigoPersonaje) {
         //Primero ponemos en blanco la interfaz guardando 
         limpiaInterfaz();
 
@@ -543,6 +549,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItemHabilidadesDeClase = new javax.swing.JMenuItem();
         jMenuItemhechizos = new javax.swing.JMenuItem();
         jMenuAnnadirPJ = new javax.swing.JMenu();
+        jMenuAnnadirPJ1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1426,12 +1433,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 jMenuAnnadirPJMousePressed(evt);
             }
         });
-        jMenuAnnadirPJ.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuAnnadirPJActionPerformed(evt);
+        jMenuBar.add(jMenuAnnadirPJ);
+
+        jMenuAnnadirPJ1.setBackground(new java.awt.Color(190, 31, 44));
+        jMenuAnnadirPJ1.setText("Modificar Personaje");
+        jMenuAnnadirPJ1.setFont(new java.awt.Font("Pokemon Classic", 0, 9)); // NOI18N
+        jMenuAnnadirPJ1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuAnnadirPJ1MousePressed(evt);
             }
         });
-        jMenuBar.add(jMenuAnnadirPJ);
+        jMenuBar.add(jMenuAnnadirPJ1);
 
         setJMenuBar(jMenuBar);
 
@@ -1506,9 +1518,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuAnnadirPJMousePressed
 
-    private void jMenuAnnadirPJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAnnadirPJActionPerformed
-
-    }//GEN-LAST:event_jMenuAnnadirPJActionPerformed
+    private void jMenuAnnadirPJ1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuAnnadirPJ1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuAnnadirPJ1MousePressed
 
     /**
      * @param args the command line arguments
@@ -1700,6 +1712,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelVelocidad;
     private javax.swing.JLabel jLabelVolar;
     private javax.swing.JMenu jMenuAnnadirPJ;
+    private javax.swing.JMenu jMenuAnnadirPJ1;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuConexion;
     private javax.swing.JMenu jMenuConsultas;

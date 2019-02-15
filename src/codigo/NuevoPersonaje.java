@@ -5,11 +5,15 @@
  */
 package codigo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Daniel
  */
 public class NuevoPersonaje extends javax.swing.JFrame {
+
+    GestorConexion miConexion;
 
     /**
      * Creates new form NuevoPersonaje
@@ -19,6 +23,26 @@ public class NuevoPersonaje extends javax.swing.JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setResizable(false);
         resetetaCampos();
+    }
+
+    public void guardaConexion(GestorConexion conexion) {
+        miConexion = conexion;
+    }
+
+    public void rellenaComboBox() {
+        jComboBoxRaza.removeAllItems();
+        jComboBoxClase.removeAllItems();
+
+        ArrayList<String> aux = new ArrayList<>(miConexion.nombreClase());
+
+        for (int i = 0; i < aux.size(); i++) {
+            jComboBoxClase.addItem(aux.get(i));
+        }
+
+        aux = new ArrayList<>(miConexion.nombreRaza());
+        for (int i = 0; i < aux.size(); i++) {
+            jComboBoxRaza.addItem(aux.get(i));
+        }
     }
 
     public void resetetaCampos() {
@@ -79,6 +103,55 @@ public class NuevoPersonaje extends javax.swing.JFrame {
         jTextFieldPeso.setText("");
         jTextFieldOjos.setText("");
         jTextFieldCabello.setText("");
+
+    }
+
+    public void annadePersonaje() {
+        miConexion.insertaNuevoPersonaje(jTextFieldNombre.getText(), jTextFieldApellido.getText(), devuelveAlineamiento(),
+                jTextFieldDios.getText(), jComboBoxGenero.getSelectedItem().toString(), "10", "comun", "0", jTextFieldEdad.getText(),
+                jTextFieldAltura.getText(), jTextFieldPeso.getText(), jTextFieldCabello.getText(), jTextFieldOjos.getText(), jTextFieldFUE.getText(),
+                jTextFieldDES.getText(), jTextFieldCON.getText(), jTextFieldINT.getText(), jTextFieldSAB.getText(), jTextFieldCAR.getText(), jTextFieldAcrobacias.getText(),
+                jTextFieldArtesania1.getText(), jTextFieldArtesaniaq1Nombre.getText(), jTextFieldArtesania2.getText(), jTextFieldArtesania2Nombre.getText(), jTextFieldArtesania3.getText(),
+                jTextFieldArtesania3Nombre.getText(), jTextFieldAveriguarIntenciones.getText(), jTextFieldConocimientoDeConjuro.getText(), jTextFieldCurar.getText(),
+                jTextFieldDiplomacia.getText(), jTextFieldDisfrarse.getText(), jTextFieldEngannar.getText(), jTextFieldEscapismo.getText(), jTextFieldInterpretar1.getText(),
+                jTextFieldInterpretar1Nombre.getText(), jTextFieldInterpretar2.getText(), jTextFieldInterpretar2Nombre.getText(), jTextFieldIntimidar.getText(),
+                jTextFieldInutilizarMecanismo.getText(), jTextFieldJuegoDeManos.getText(), jTextFieldLinguistica.getText(), jTextFieldMontar.getText(), jTextFieldNadar.getText(),
+                jTextFieldPercepcion.getText(), jTextFieldProfesion1.getText(), jTextFieldProfesion1Nombre.getText(), jTextFieldProfesion2.getText(), jTextFieldProfesion2Nombre.getText(),
+                jTextFieldSaberArcano.getText(), jTextFieldSaberDungeons.getText(), jTextFieldSaberGeografia.getText(), jTextFieldSaberHistoria.getText(),
+                jTextFieldSaberIngenieria.getText(), jTextFieldSaberLocal.getText(), jTextFieldSaberNaturaleza.getText(), jTextFieldSaberNobleza.getText(),
+                jTextFieldSaberLosPlanos.getText(), jTextFieldSaberReligion.getText(), jTextFieldSigilo.getText(), jTextFieldSupervivencia.getText(), jTextFieldTasacion.getText(),
+                jTextFieldTratoConAnimales.getText(), jTextFieldTrepar.getText(), jTextFieldUsarObjetoMagico.getText(), jTextFieldVolar.getText(),
+                jComboBoxRaza.getSelectedItem().toString(), jComboBoxClase.getSelectedItem().toString());
+
+    }
+
+    public String devuelveAlineamiento() {
+        String resultado = "";
+
+        switch (jComboBoxAlineamiento1.getSelectedItem().toString()) {
+            case "Legal":
+                resultado += "L";
+                break;
+            case "Neutral":
+                resultado += "N";
+                break;
+            case "Caotico":
+                resultado += "C";
+                break;
+        }
+
+        switch (jComboBoxAlineamiento2.getSelectedItem().toString()) {
+            case "Bueno":
+                resultado += "B";
+                break;
+            case "Neutral":
+                resultado += "N";
+                break;
+            case "Maligno":
+                resultado += "M";
+                break;
+        }
+        return resultado;
     }
 
     /**
@@ -151,10 +224,10 @@ public class NuevoPersonaje extends javax.swing.JFrame {
         jComboBoxRaza = new javax.swing.JComboBox<>();
         jLabelTAlineamiento = new javax.swing.JLabel();
         jComboBoxAlineamiento1 = new javax.swing.JComboBox<>();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        jComboBoxAlineamiento2 = new javax.swing.JComboBox<>();
         jLabelTApellido1 = new javax.swing.JLabel();
         jLabelTNombre4 = new javax.swing.JLabel();
-        jComboBox5 = new javax.swing.JComboBox<>();
+        jComboBoxGenero = new javax.swing.JComboBox<>();
         jLabelTOjos = new javax.swing.JLabel();
         jLabelTCabello = new javax.swing.JLabel();
         jLabelTEdad = new javax.swing.JLabel();
@@ -212,21 +285,21 @@ public class NuevoPersonaje extends javax.swing.JFrame {
         jTextFieldTratoConAnimales = new javax.swing.JTextField();
         jTextFieldTrepar = new javax.swing.JTextField();
         jTextFieldUsarObjetoMagico = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jLabelTAltura1 = new javax.swing.JLabel();
-        jTextFieldAltura1 = new javax.swing.JTextField();
-        jLabelTAltura2 = new javax.swing.JLabel();
-        jTextFieldAltura2 = new javax.swing.JTextField();
-        jLabelTAltura3 = new javax.swing.JLabel();
-        jTextFieldAltura3 = new javax.swing.JTextField();
-        jLabelTAltura4 = new javax.swing.JLabel();
-        jTextFieldAltura4 = new javax.swing.JTextField();
-        jTextFieldAltura5 = new javax.swing.JTextField();
-        jLabelTAltura6 = new javax.swing.JLabel();
-        jTextFieldAltura6 = new javax.swing.JTextField();
-        jLabelTAltura7 = new javax.swing.JLabel();
-        jTextFieldAltura7 = new javax.swing.JTextField();
-        jLabelTAltura8 = new javax.swing.JLabel();
+        jButtonAceptar = new javax.swing.JButton();
+        jLabelTArtasania1Nombre = new javax.swing.JLabel();
+        jTextFieldArtesaniaq1Nombre = new javax.swing.JTextField();
+        jLabelTArtesania2Nombre = new javax.swing.JLabel();
+        jTextFieldArtesania2Nombre = new javax.swing.JTextField();
+        jLabelTArtesania3Nombre = new javax.swing.JLabel();
+        jTextFieldArtesania3Nombre = new javax.swing.JTextField();
+        jLabelTProfesion1Nombre = new javax.swing.JLabel();
+        jTextFieldProfesion1Nombre = new javax.swing.JTextField();
+        jTextFieldProfesion2Nombre = new javax.swing.JTextField();
+        jLabelTInterpretar1Nombre = new javax.swing.JLabel();
+        jTextFieldInterpretar1Nombre = new javax.swing.JTextField();
+        jLabelTInterpretar2Nombre = new javax.swing.JLabel();
+        jTextFieldInterpretar2Nombre = new javax.swing.JTextField();
+        jLabelTProfesion2Nombre = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(950, 950));
@@ -493,7 +566,7 @@ public class NuevoPersonaje extends javax.swing.JFrame {
         jLabelTNadar.setText("Nadar");
         getContentPane().add(jLabelTNadar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 590, -1, -1));
 
-        jComboBoxClase.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxClase.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mago", "Bardo", "Clerigo" }));
         getContentPane().add(jComboBoxClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 190, -1));
 
         jLabelTNombre.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
@@ -505,18 +578,18 @@ public class NuevoPersonaje extends javax.swing.JFrame {
         jLabelTRaza.setText("Raza");
         getContentPane().add(jLabelTRaza, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 60, 20));
 
-        jComboBoxRaza.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxRaza.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elfo", "Enano", "Gnomo" }));
         getContentPane().add(jComboBoxRaza, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 190, -1));
 
         jLabelTAlineamiento.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
         jLabelTAlineamiento.setText("Alineamiento");
         getContentPane().add(jLabelTAlineamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 90, 20));
 
-        jComboBoxAlineamiento1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxAlineamiento1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Legal", "Neutral", "Caotico" }));
         getContentPane().add(jComboBoxAlineamiento1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 210, 130, -1));
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 240, 130, -1));
+        jComboBoxAlineamiento2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bueno", "Neutral", "Maligno" }));
+        getContentPane().add(jComboBoxAlineamiento2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 240, 130, -1));
 
         jLabelTApellido1.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
         jLabelTApellido1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -527,8 +600,8 @@ public class NuevoPersonaje extends javax.swing.JFrame {
         jLabelTNombre4.setText("Sexo");
         getContentPane().add(jLabelTNombre4, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 210, 60, 20));
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 210, 160, -1));
+        jComboBoxGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hombre", "Mujer", "Sin Genero", "Dinosaurio", "Helicoptero", "Desconocido" }));
+        getContentPane().add(jComboBoxGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 210, 160, -1));
 
         jLabelTOjos.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
         jLabelTOjos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -891,84 +964,84 @@ public class NuevoPersonaje extends javax.swing.JFrame {
         jTextFieldUsarObjetoMagico.setMinimumSize(new java.awt.Dimension(20, 20));
         getContentPane().add(jTextFieldUsarObjetoMagico, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 560, 20, 20));
 
-        jButton1.setFont(new java.awt.Font("Pokemon Classic", 1, 12)); // NOI18N
-        jButton1.setText("Aceptar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAceptar.setFont(new java.awt.Font("Pokemon Classic", 1, 12)); // NOI18N
+        jButtonAceptar.setText("Aceptar");
+        jButtonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonAceptarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 780, 140, -1));
+        getContentPane().add(jButtonAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 780, 140, -1));
 
-        jLabelTAltura1.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
-        jLabelTAltura1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTAltura1.setText("Artesania 1");
-        getContentPane().add(jLabelTAltura1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 670, 80, 20));
+        jLabelTArtasania1Nombre.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTArtasania1Nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTArtasania1Nombre.setText("Artesania 1");
+        getContentPane().add(jLabelTArtasania1Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 670, 80, 20));
 
-        jTextFieldAltura1.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
-        jTextFieldAltura1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        getContentPane().add(jTextFieldAltura1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 670, 210, 20));
+        jTextFieldArtesaniaq1Nombre.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
+        jTextFieldArtesaniaq1Nombre.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        getContentPane().add(jTextFieldArtesaniaq1Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 670, 210, 20));
 
-        jLabelTAltura2.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
-        jLabelTAltura2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTAltura2.setText("Artesania 2");
-        getContentPane().add(jLabelTAltura2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 700, 80, 20));
+        jLabelTArtesania2Nombre.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTArtesania2Nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTArtesania2Nombre.setText("Artesania 2");
+        getContentPane().add(jLabelTArtesania2Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 700, 80, 20));
 
-        jTextFieldAltura2.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
-        jTextFieldAltura2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        getContentPane().add(jTextFieldAltura2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 700, 210, 20));
+        jTextFieldArtesania2Nombre.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
+        jTextFieldArtesania2Nombre.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        getContentPane().add(jTextFieldArtesania2Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 700, 210, 20));
 
-        jLabelTAltura3.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
-        jLabelTAltura3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTAltura3.setText("Artesania 3");
-        getContentPane().add(jLabelTAltura3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 670, 80, 20));
+        jLabelTArtesania3Nombre.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTArtesania3Nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTArtesania3Nombre.setText("Artesania 3");
+        getContentPane().add(jLabelTArtesania3Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 670, 80, 20));
 
-        jTextFieldAltura3.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
-        jTextFieldAltura3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        getContentPane().add(jTextFieldAltura3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 670, 210, 20));
+        jTextFieldArtesania3Nombre.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
+        jTextFieldArtesania3Nombre.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        getContentPane().add(jTextFieldArtesania3Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 670, 210, 20));
 
-        jLabelTAltura4.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
-        jLabelTAltura4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTAltura4.setText("Profesion 1");
-        getContentPane().add(jLabelTAltura4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 730, 80, 20));
+        jLabelTProfesion1Nombre.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTProfesion1Nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTProfesion1Nombre.setText("Profesion 1");
+        getContentPane().add(jLabelTProfesion1Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 730, 80, 20));
 
-        jTextFieldAltura4.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
-        jTextFieldAltura4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        getContentPane().add(jTextFieldAltura4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 730, 210, 20));
+        jTextFieldProfesion1Nombre.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
+        jTextFieldProfesion1Nombre.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        getContentPane().add(jTextFieldProfesion1Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 730, 210, 20));
 
-        jTextFieldAltura5.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
-        jTextFieldAltura5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        getContentPane().add(jTextFieldAltura5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 760, 210, 20));
+        jTextFieldProfesion2Nombre.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
+        jTextFieldProfesion2Nombre.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        getContentPane().add(jTextFieldProfesion2Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 760, 210, 20));
 
-        jLabelTAltura6.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
-        jLabelTAltura6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTAltura6.setText("Interpretar 1");
-        getContentPane().add(jLabelTAltura6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 700, 100, 20));
+        jLabelTInterpretar1Nombre.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTInterpretar1Nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTInterpretar1Nombre.setText("Interpretar 1");
+        getContentPane().add(jLabelTInterpretar1Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 700, 100, 20));
 
-        jTextFieldAltura6.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
-        jTextFieldAltura6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        getContentPane().add(jTextFieldAltura6, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 700, 210, 20));
+        jTextFieldInterpretar1Nombre.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
+        jTextFieldInterpretar1Nombre.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        getContentPane().add(jTextFieldInterpretar1Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 700, 210, 20));
 
-        jLabelTAltura7.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
-        jLabelTAltura7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTAltura7.setText("Interpretar 2");
-        getContentPane().add(jLabelTAltura7, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 730, 100, 20));
+        jLabelTInterpretar2Nombre.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTInterpretar2Nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTInterpretar2Nombre.setText("Interpretar 2");
+        getContentPane().add(jLabelTInterpretar2Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 730, 100, 20));
 
-        jTextFieldAltura7.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
-        jTextFieldAltura7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        getContentPane().add(jTextFieldAltura7, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 730, 210, 20));
+        jTextFieldInterpretar2Nombre.setFont(new java.awt.Font("Pokemon Classic", 0, 10)); // NOI18N
+        jTextFieldInterpretar2Nombre.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        getContentPane().add(jTextFieldInterpretar2Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 730, 210, 20));
 
-        jLabelTAltura8.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
-        jLabelTAltura8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTAltura8.setText("Profesion 2");
-        getContentPane().add(jLabelTAltura8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 760, 80, 20));
+        jLabelTProfesion2Nombre.setFont(new java.awt.Font("Pokemon Classic", 0, 8)); // NOI18N
+        jLabelTProfesion2Nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTProfesion2Nombre.setText("Profesion 2");
+        getContentPane().add(jLabelTProfesion2Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 760, 80, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
+        annadePersonaje();
+    }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1006,26 +1079,22 @@ public class NuevoPersonaje extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
+    private javax.swing.JButton jButtonAceptar;
     private javax.swing.JComboBox<String> jComboBoxAlineamiento1;
+    private javax.swing.JComboBox<String> jComboBoxAlineamiento2;
     private javax.swing.JComboBox<String> jComboBoxClase;
+    private javax.swing.JComboBox<String> jComboBoxGenero;
     private javax.swing.JComboBox<String> jComboBoxRaza;
     private javax.swing.JLabel jLabelTAcrobacias;
     private javax.swing.JLabel jLabelTAlineamiento;
     private javax.swing.JLabel jLabelTAltura;
-    private javax.swing.JLabel jLabelTAltura1;
-    private javax.swing.JLabel jLabelTAltura2;
-    private javax.swing.JLabel jLabelTAltura3;
-    private javax.swing.JLabel jLabelTAltura4;
-    private javax.swing.JLabel jLabelTAltura6;
-    private javax.swing.JLabel jLabelTAltura7;
-    private javax.swing.JLabel jLabelTAltura8;
     private javax.swing.JLabel jLabelTApellido1;
+    private javax.swing.JLabel jLabelTArtasania1Nombre;
     private javax.swing.JLabel jLabelTArtesania1;
     private javax.swing.JLabel jLabelTArtesania2;
+    private javax.swing.JLabel jLabelTArtesania2Nombre;
     private javax.swing.JLabel jLabelTArtesania3;
+    private javax.swing.JLabel jLabelTArtesania3Nombre;
     private javax.swing.JLabel jLabelTAveriguarIntenciones;
     private javax.swing.JLabel jLabelTCAR;
     private javax.swing.JLabel jLabelTCON;
@@ -1048,7 +1117,9 @@ public class NuevoPersonaje extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTINT;
     private javax.swing.JLabel jLabelTInteligencia;
     private javax.swing.JLabel jLabelTInterpretar1;
+    private javax.swing.JLabel jLabelTInterpretar1Nombre;
     private javax.swing.JLabel jLabelTInterpretar2;
+    private javax.swing.JLabel jLabelTInterpretar2Nombre;
     private javax.swing.JLabel jLabelTIntimidar;
     private javax.swing.JLabel jLabelTInutilizarMecanismo;
     private javax.swing.JLabel jLabelTJuegosDeManos;
@@ -1061,7 +1132,9 @@ public class NuevoPersonaje extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTPercepcion;
     private javax.swing.JLabel jLabelTPeso;
     private javax.swing.JLabel jLabelTProfesion1;
+    private javax.swing.JLabel jLabelTProfesion1Nombre;
     private javax.swing.JLabel jLabelTProfesion2;
+    private javax.swing.JLabel jLabelTProfesion2Nombre;
     private javax.swing.JLabel jLabelTRaza;
     private javax.swing.JLabel jLabelTSAB;
     private javax.swing.JLabel jLabelTSaberArcano;
@@ -1085,17 +1158,13 @@ public class NuevoPersonaje extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelThabilidades;
     private javax.swing.JTextField jTextFieldAcrobacias;
     private javax.swing.JTextField jTextFieldAltura;
-    private javax.swing.JTextField jTextFieldAltura1;
-    private javax.swing.JTextField jTextFieldAltura2;
-    private javax.swing.JTextField jTextFieldAltura3;
-    private javax.swing.JTextField jTextFieldAltura4;
-    private javax.swing.JTextField jTextFieldAltura5;
-    private javax.swing.JTextField jTextFieldAltura6;
-    private javax.swing.JTextField jTextFieldAltura7;
     private javax.swing.JTextField jTextFieldApellido;
     private javax.swing.JTextField jTextFieldArtesania1;
     private javax.swing.JTextField jTextFieldArtesania2;
+    private javax.swing.JTextField jTextFieldArtesania2Nombre;
     private javax.swing.JTextField jTextFieldArtesania3;
+    private javax.swing.JTextField jTextFieldArtesania3Nombre;
+    private javax.swing.JTextField jTextFieldArtesaniaq1Nombre;
     private javax.swing.JTextField jTextFieldAveriguarIntenciones;
     private javax.swing.JTextField jTextFieldCAR;
     private javax.swing.JTextField jTextFieldCON;
@@ -1112,7 +1181,9 @@ public class NuevoPersonaje extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldFUE;
     private javax.swing.JTextField jTextFieldINT;
     private javax.swing.JTextField jTextFieldInterpretar1;
+    private javax.swing.JTextField jTextFieldInterpretar1Nombre;
     private javax.swing.JTextField jTextFieldInterpretar2;
+    private javax.swing.JTextField jTextFieldInterpretar2Nombre;
     private javax.swing.JTextField jTextFieldIntimidar;
     private javax.swing.JTextField jTextFieldInutilizarMecanismo;
     private javax.swing.JTextField jTextFieldJuegoDeManos;
@@ -1124,7 +1195,9 @@ public class NuevoPersonaje extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldPercepcion;
     private javax.swing.JTextField jTextFieldPeso;
     private javax.swing.JTextField jTextFieldProfesion1;
+    private javax.swing.JTextField jTextFieldProfesion1Nombre;
     private javax.swing.JTextField jTextFieldProfesion2;
+    private javax.swing.JTextField jTextFieldProfesion2Nombre;
     private javax.swing.JTextField jTextFieldSAB;
     private javax.swing.JTextField jTextFieldSaberArcano;
     private javax.swing.JTextField jTextFieldSaberDungeons;

@@ -236,18 +236,16 @@ public class GestorConexion {
             ex.printStackTrace();
         }
     }
-    
+
     public void insertaNuevoPersonaje(String nombre, String apellidos, String alineamiento, String religion, String genero, String ptsGolpe, String idiomas, String nivel,
             String edad, String altura, String peso, String cabello, String ojos, String fuerza, String destreza, String constitucion, String inteligencia, String sabiduria,
             String carisma, String acrobacias, String artesania1, String artesania1Nombre, String artesania2, String artesania2Nombre, String artesania3, String artesania3Nombre,
             String averiguarIntenciones, String conocimientoDeConjuros, String curar, String diplomacia, String disfrazarse, String engannar, String escapismo, String interpretar1,
             String interpretar1Nombre, String interpretar2, String interpretar2Nombre, String intimidar, String inutilizarMecanismo, String juegoDeManos, String linguistica, String montar,
-            String nadar, String percepcion, String profesion1, String profesion1Nombre, String profesion2, String profesion2Nombre, String saberArcano, String saberDungeons, 
-            String saberGeografia, String saberHistoria, String saberIngenieria, String saberLocal, String saberNaturaleza, String saberNobleza, String saberPlanos, String saberReligion, 
-            String sigilo, String supervivencia, String tasacion, String tratoConAnimales, String trepar, String usarObjetoMagico, String volar, String raza, String clase) 
-    {
-        try 
-        {
+            String nadar, String percepcion, String profesion1, String profesion1Nombre, String profesion2, String profesion2Nombre, String saberArcano, String saberDungeons,
+            String saberGeografia, String saberHistoria, String saberIngenieria, String saberLocal, String saberNaturaleza, String saberNobleza, String saberPlanos, String saberReligion,
+            String sigilo, String supervivencia, String tasacion, String tratoConAnimales, String trepar, String usarObjetoMagico, String volar, String raza, String clase) {
+        try {
             Statement sta = conn1.createStatement();
             String query = "INSERT INTO `personaje` (`nombre`,`apellidos`,`alineamiento`,`religion`,`genero`,`ptsGolpe`,`idiomas`,"
                     + "`nivel`, `edad`, `altura`, `peso`, `cabello`, `ojos`, `fuerza`, `destreza`, `constitucion`, `inteligencia`, `sabiduria`, `carisma`,\n"
@@ -274,18 +272,16 @@ public class GestorConexion {
             ex.printStackTrace();
         }
     }
-    
+
     public void modificarPersonaje(String nombre, String apellidos, String alineamiento, String religion, String genero, String ptsGolpe, String idiomas, String nivel,
             String edad, String altura, String peso, String cabello, String ojos, String fuerza, String destreza, String constitucion, String inteligencia, String sabiduria,
             String carisma, String acrobacias, String artesania1, String artesania1Nombre, String artesania2, String artesania2Nombre, String artesania3, String artesania3Nombre,
             String averiguarIntenciones, String conocimientoDeConjuros, String curar, String diplomacia, String disfrazarse, String engannar, String escapismo, String interpretar1,
             String interpretar1Nombre, String interpretar2, String interpretar2Nombre, String intimidar, String inutilizarMecanismo, String juegoDeManos, String linguistica, String montar,
-            String nadar, String percepcion, String profesion1, String profesion1Nombre, String profesion2, String profesion2Nombre, String saberArcano, String saberDungeons, 
-            String saberGeografia, String saberHistoria, String saberIngenieria, String saberLocal, String saberNaturaleza, String saberNobleza, String saberPlanos, String saberReligion, 
-            String sigilo, String supervivencia, String tasacion, String tratoConAnimales, String trepar, String usarObjetoMagico, String volar, String raza, String clase, String codPersonaje) 
-    {
-        try 
-        {
+            String nadar, String percepcion, String profesion1, String profesion1Nombre, String profesion2, String profesion2Nombre, String saberArcano, String saberDungeons,
+            String saberGeografia, String saberHistoria, String saberIngenieria, String saberLocal, String saberNaturaleza, String saberNobleza, String saberPlanos, String saberReligion,
+            String sigilo, String supervivencia, String tasacion, String tratoConAnimales, String trepar, String usarObjetoMagico, String volar, String raza, String clase, String codPersonaje) {
+        try {
             Statement sta = conn1.createStatement();
             String query = "UPDATE personaje SET nombre = '" + nombre + "', apellidos = '" + apellidos + "', alineamiento = '" + alineamiento + "',"
                     + "religion = '" + religion + "', genero = '" + genero + "', ptsGolpe = " + ptsGolpe + ", idiomas = '" + idiomas + "', nivel = " + nivel + ","
@@ -300,7 +296,7 @@ public class GestorConexion {
                     + "montar = " + montar + ", nadar = " + nadar + ", percepcion = " + percepcion + ", profesion1 = " + profesion1 + ", profesion1Nombre = '" + profesion1Nombre + "',"
                     + "profesion2 = " + profesion2 + ", profesion2Nombre = '" + profesion2Nombre + "', saberArcano = " + saberArcano + ", saberDungeons = " + saberDungeons + ","
                     + "saberGeografia = " + saberGeografia + ", saberHistoria = " + saberHistoria + ", saberIngenieria = " + saberIngenieria + ", saberLocal = " + saberLocal + ","
-                    + "saberNaturaleza = " + saberNaturaleza + ", saberNobleza = " + saberNobleza + ", saberPlanos = " + saberPlanos +", saberReligion = " + saberReligion + ","
+                    + "saberNaturaleza = " + saberNaturaleza + ", saberNobleza = " + saberNobleza + ", saberPlanos = " + saberPlanos + ", saberReligion = " + saberReligion + ","
                     + "sigilo = " + sigilo + ", supervivencia = " + supervivencia + ", tasacion = " + tasacion + ", tratoConAnimales = " + tratoConAnimales + ", trepar = " + trepar + ","
                     + "usarObjetoMagico = " + usarObjetoMagico + ", volar = " + volar + ", raza = '" + raza + "', clase = '" + clase + "' WHERE codPersonaje = " + codPersonaje + ";";
             sta.executeUpdate(query);

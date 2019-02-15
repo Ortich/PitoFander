@@ -165,8 +165,6 @@ VALUES
 ('Barril(vacío)', '30 libras(13,5kg)', 0, 'Un barril de gran tamaño usado para almacenar todo tipo de liquidos.'),
 ('Bolsa para el cinto(vacía)', '1/2libra(225)', 0, 'Pequeña bolsa que se pone en el cinto, usada para guardar pequeños objetos.');
 
-
-
 CREATE TABLE IF NOT EXISTS `armas`
 (
 	`codArma` int(255) NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -309,7 +307,8 @@ Cuando lleva a cabo una accion de ataque completo puede llevar acabo una ataque 
 
 CREATE TABLE IF NOT EXISTS `clases`
 (
-	`nombre` varchar(40) NOT NULL PRIMARY KEY,
+	`codClase` int(3) NOT NULL PRIMARY KEY auto_increment,
+	`nombre` varchar(40) NOT NULL,
     `alineamiento` varchar(20) NOT NULL,
     `rol` TEXT NOT NULL,
     `dadoDeGolpe` varchar(20) NOT NULL,
@@ -492,40 +491,40 @@ VALUES
 CREATE TABLE IF NOT EXISTS `personajeDotes`
 (
 	`codPersonaje` int(255) NOT NULL,
-    `nombreDote` int(3) NOT NULL,
-    PRIMARY KEY(`nombreDote`,`codPersonaje`)
+    `codDote` int(3) NOT NULL,
+    PRIMARY KEY(`codDote`,`codPersonaje`)
 )
 ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-INSERT INTO `personajeDotes` (`codPersonaje`,`nombreDote`) 
+INSERT INTO `personajeDotes` (`codPersonaje`, `codDote`) 
 VALUES 
-(1, 'Acrobático'),
-(1, 'Aguante'),
-(1, 'Acometer(Combate)'),
-(2, 'Afinidad con los animales'),
-(2, 'Alerta'),
-(2, 'Aguante'),
-(2, 'Apresurar conjuro(MetaMagica)'),
-(3, 'Acometer(Combate)'),
-(3, 'Aptitudes Magicas'),
-(3, 'Ampliar conjuro(MetaMagica)');
+(1, 2),
+(1, 4),
+(1, 1),
+(2, 3),
+(2, 5),
+(2, 4),
+(2, 7),
+(3, 1),
+(3, 8),
+(3, 6);
 
 CREATE TABLE IF NOT EXISTS `clasesHabilidadesDeClases`
 (
-	`nombreClase` varchar(40) NOT NULL,
+	`codClase` int(3) NOT NULL,
     `codHabilidadDeClase` int(3) NOT NULL,
-    PRIMARY KEY(`nombreClase`,`codHabilidadDeClase`)
+    PRIMARY KEY(`codClase`,`codHabilidadDeClase`)
 )
 ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-INSERT INTO `clasesHabilidadesDeClases` (`nombreClase`,`codHabilidadDeClase`)
+INSERT INTO `clasesHabilidadesDeClases` (`codClase`,`codHabilidadDeClase`)
 VALUES 
-('Bárbaro', 1),
-('Bárbaro', 2),
-('Bárbaro', 3),
-('Bardo', 4),
-('Bardo', 5),
-('Clérigo', 6);
+(1, 1),
+(1, 2),
+(1, 3),
+(2, 4),
+(2, 5),
+(3, 6);
 
 CREATE TABLE IF NOT EXISTS `personajeHechizos`
 (
@@ -535,7 +534,7 @@ CREATE TABLE IF NOT EXISTS `personajeHechizos`
 )
 ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-INSERT INTO `personajeHechizos` (`codPersonaje`,`nombreHechizo`) 
+INSERT INTO `personajeHechizos` (`codPersonaje`,`codHechizo`) 
 VALUES 
 (1, 1),
 (1, 4),

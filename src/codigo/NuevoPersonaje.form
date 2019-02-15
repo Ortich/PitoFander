@@ -787,11 +787,10 @@
     <Component class="javax.swing.JComboBox" name="jComboBoxClase">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="3">
+            <StringItem index="0" value="Mago"/>
+            <StringItem index="1" value="Bardo"/>
+            <StringItem index="2" value="Clerigo"/>
           </StringArray>
         </Property>
       </Properties>
@@ -834,11 +833,10 @@
     <Component class="javax.swing.JComboBox" name="jComboBoxRaza">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="3">
+            <StringItem index="0" value="Elfo"/>
+            <StringItem index="1" value="Enano"/>
+            <StringItem index="2" value="Gnomo"/>
           </StringArray>
         </Property>
       </Properties>
@@ -867,11 +865,10 @@
     <Component class="javax.swing.JComboBox" name="jComboBoxAlineamiento1">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="3">
+            <StringItem index="0" value="Legal"/>
+            <StringItem index="1" value="Neutral"/>
+            <StringItem index="2" value="Caotico"/>
           </StringArray>
         </Property>
       </Properties>
@@ -884,14 +881,13 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox4">
+    <Component class="javax.swing.JComboBox" name="jComboBoxAlineamiento2">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="3">
+            <StringItem index="0" value="Bueno"/>
+            <StringItem index="1" value="Neutral"/>
+            <StringItem index="2" value="Maligno"/>
           </StringArray>
         </Property>
       </Properties>
@@ -931,14 +927,16 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox5">
+    <Component class="javax.swing.JComboBox" name="jComboBoxGenero">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="6">
+            <StringItem index="0" value="Hombre"/>
+            <StringItem index="1" value="Mujer"/>
+            <StringItem index="2" value="Sin Genero"/>
+            <StringItem index="3" value="Dinosaurio"/>
+            <StringItem index="4" value="Helicoptero"/>
+            <StringItem index="5" value="Desconocido"/>
           </StringArray>
         </Property>
       </Properties>
@@ -2115,7 +2113,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="jButtonAceptar">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Pokemon Classic" size="12" style="1"/>
@@ -2123,7 +2121,7 @@
         <Property name="text" type="java.lang.String" value="Aceptar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAceptarActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -2131,7 +2129,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelTAltura1">
+    <Component class="javax.swing.JLabel" name="jLabelTArtasania1Nombre">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Pokemon Classic" size="8" style="0"/>
@@ -2145,7 +2143,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldAltura1">
+    <Component class="javax.swing.JTextField" name="jTextFieldArtesaniaq1Nombre">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Pokemon Classic" size="10" style="0"/>
@@ -2162,7 +2160,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelTAltura2">
+    <Component class="javax.swing.JLabel" name="jLabelTArtesania2Nombre">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Pokemon Classic" size="8" style="0"/>
@@ -2176,7 +2174,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldAltura2">
+    <Component class="javax.swing.JTextField" name="jTextFieldArtesania2Nombre">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Pokemon Classic" size="10" style="0"/>
@@ -2193,7 +2191,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelTAltura3">
+    <Component class="javax.swing.JLabel" name="jLabelTArtesania3Nombre">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Pokemon Classic" size="8" style="0"/>
@@ -2207,7 +2205,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldAltura3">
+    <Component class="javax.swing.JTextField" name="jTextFieldArtesania3Nombre">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Pokemon Classic" size="10" style="0"/>
@@ -2224,7 +2222,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelTAltura4">
+    <Component class="javax.swing.JLabel" name="jLabelTProfesion1Nombre">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Pokemon Classic" size="8" style="0"/>
@@ -2238,7 +2236,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldAltura4">
+    <Component class="javax.swing.JTextField" name="jTextFieldProfesion1Nombre">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Pokemon Classic" size="10" style="0"/>
@@ -2255,7 +2253,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldAltura5">
+    <Component class="javax.swing.JTextField" name="jTextFieldProfesion2Nombre">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Pokemon Classic" size="10" style="0"/>
@@ -2272,7 +2270,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelTAltura6">
+    <Component class="javax.swing.JLabel" name="jLabelTInterpretar1Nombre">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Pokemon Classic" size="8" style="0"/>
@@ -2286,7 +2284,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldAltura6">
+    <Component class="javax.swing.JTextField" name="jTextFieldInterpretar1Nombre">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Pokemon Classic" size="10" style="0"/>
@@ -2303,7 +2301,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelTAltura7">
+    <Component class="javax.swing.JLabel" name="jLabelTInterpretar2Nombre">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Pokemon Classic" size="8" style="0"/>
@@ -2317,7 +2315,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldAltura7">
+    <Component class="javax.swing.JTextField" name="jTextFieldInterpretar2Nombre">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Pokemon Classic" size="10" style="0"/>
@@ -2334,7 +2332,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelTAltura8">
+    <Component class="javax.swing.JLabel" name="jLabelTProfesion2Nombre">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Pokemon Classic" size="8" style="0"/>
