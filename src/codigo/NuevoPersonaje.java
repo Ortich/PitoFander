@@ -26,7 +26,7 @@ public class NuevoPersonaje extends javax.swing.JFrame {
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setResizable(false);
-        resetetaCampos();
+        reseteaCampos();
     }
     
     public void guardaConexion(GestorConexion conexion, VentanaPrincipal miVentana) {
@@ -208,7 +208,7 @@ public class NuevoPersonaje extends javax.swing.JFrame {
         }
     }
     
-    public void resetetaCampos() {
+    public void reseteaCampos() {
         //Ponemos en blanco todos los jLabels de habilidades que no sean Titulos
         jTextFieldAcrobacias.setText("");
         jTextFieldArtesania1.setText("");
@@ -266,6 +266,14 @@ public class NuevoPersonaje extends javax.swing.JFrame {
         jTextFieldPeso.setText("");
         jTextFieldOjos.setText("");
         jTextFieldCabello.setText("");
+	
+	jTextFieldArtesania1Nombre.setText("");
+	jTextFieldArtesania2Nombre.setText("");
+	jTextFieldArtesania3Nombre.setText("");
+	jTextFieldProfesion1Nombre.setText("");
+	jTextFieldProfesion2Nombre.setText("");
+	jTextFieldInterpretar1Nombre.setText("");
+	jTextFieldInterpretar2Nombre.setText("");
         
     }
     

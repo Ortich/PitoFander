@@ -1519,8 +1519,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void jMenuAnnadirPJMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuAnnadirPJMousePressed
         if (usuarioConectado) {
-            ventanaNuevoPersonaje.setVisible(true);
+            ventanaNuevoPersonaje.reseteaCampos();
+	    ventanaNuevoPersonaje.setVisible(true);
             ventanaNuevoPersonaje.abreModificacion(false, null, null, 0);
+	    
         }
     }//GEN-LAST:event_jMenuAnnadirPJMousePressed
 

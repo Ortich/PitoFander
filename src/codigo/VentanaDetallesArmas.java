@@ -31,67 +31,69 @@ public class VentanaDetallesArmas extends javax.swing.JFrame {
      * Creates new form ventanaDetallesObjetos
      */
     public VentanaDetallesArmas() {
-        initComponents();
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setResizable(false);
-        jButtonAnnadir.setVisible(false);
+	initComponents();
+	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+	setResizable(false);
+	jButtonAnnadir.setVisible(false);
     }
 
     public void estableceTabla(DefaultTableModel _tabla) {
-        tabla = _tabla;
-        jTableObjetos.setModel(tabla);
+	tabla = _tabla;
+	jTableObjetos.setModel(tabla);
 
-        if (!adaptada || abiertaVentanaTodas) {
-            jTableObjetos.removeColumn(jTableObjetos.getColumnModel().getColumn(jTableObjetos.getColumnCount() - 1));
-            jTableObjetos.removeColumn(jTableObjetos.getColumnModel().getColumn(jTableObjetos.getColumnCount() - 1));
-            jTableObjetos.removeColumn(jTableObjetos.getColumnModel().getColumn(0));
+	if (!adaptada || abiertaVentanaTodas) {
+	    jTableObjetos.removeColumn(jTableObjetos.getColumnModel().getColumn(jTableObjetos.getColumnCount() - 1));
+	    jTableObjetos.removeColumn(jTableObjetos.getColumnModel().getColumn(jTableObjetos.getColumnCount() - 1));
+	    jTableObjetos.removeColumn(jTableObjetos.getColumnModel().getColumn(0));
 
-            TableColumnModel columnModel = jTableObjetos.getColumnModel();
+	    TableColumnModel columnModel = jTableObjetos.getColumnModel();
 
-            columnModel.getColumn(0).setPreferredWidth(250);
-            adaptada = true;
-            abiertaVentanaTodas = false;
-            jTableObjetos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-                public void valueChanged(ListSelectionEvent e) {
-                    cambiaSeleccion();
-                }
-            });
-        }
+	    columnModel.getColumn(0).setPreferredWidth(250);
+	    adaptada = true;
+	    abiertaVentanaTodas = false;
+	    jTableObjetos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+		public void valueChanged(ListSelectionEvent e) {
+		    cambiaSeleccion();
+		}
+	    });
+	}
 
     }
 
     public void cambioDeTabla() {
-        adaptada = false;
+	adaptada = false;
     }
 
     public void abriendoVentanaTotal() {
-        abiertaVentanaTodas = true;
+	abiertaVentanaTodas = true;
     }
 
     public void cambiaSeleccion() {
-        jLabelNombre.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 1).toString());
-        jLabelPeso.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 2).toString());
-        jLabelDannoP.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 4).toString());
-        jLabelDannoM.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 5).toString());
-        jLabelCritico.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 6).toString());
-        jLabelRango.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 7).toString());
-        jLabelTipo.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 8).toString());
-        jLabelEspecial.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 9).toString());
-        jLabelDescripcion.setText("<html><p align='center' margin-top=2em;>" + tabla.getValueAt(jTableObjetos.getSelectedRow(), 10).toString() + "</p></html>");
-        //Hay que poner el Magico
+	if (jTableObjetos.getSelectedRow() >= 0) {
+	    jLabelNombre.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 1).toString());
+	    jLabelPeso.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 2).toString());
+	    jLabelDannoP.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 4).toString());
+	    jLabelDannoM.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 5).toString());
+	    jLabelCritico.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 6).toString());
+	    jLabelRango.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 7).toString());
+	    jLabelTipo.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 8).toString());
+	    jLabelEspecial.setText(tabla.getValueAt(jTableObjetos.getSelectedRow(), 9).toString());
+	    jLabelDescripcion.setText("<html><p align='center' margin-top=2em;>" + tabla.getValueAt(jTableObjetos.getSelectedRow(), 10).toString() + "</p></html>");
+	}
+//Hay que poner el Magico
     }
 
     public void abreVentanaAnnadir(boolean abre) {
-        jButtonAnnadir.setVisible(abre);
+	jButtonAnnadir.setVisible(abre);
     }
 
     public void guardaConexion(GestorConexion conexion, String _pesonaje) {
-        miConexion = conexion;
-        personaje = _pesonaje;
+	miConexion = conexion;
+	personaje = _pesonaje;
     }
 
     public void guardaVentanaPrincipal(VentanaPrincipal _ventanaPrincipal) {
-        miVentanaPrincipal = _ventanaPrincipal;
+	miVentanaPrincipal = _ventanaPrincipal;
     }
 
     /**
@@ -250,48 +252,48 @@ public class VentanaDetallesArmas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAnnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnadirActionPerformed
-        jButtonAnnadir.setVisible(false);
-        setVisible(false);
-        miConexion.annadirArmaPersonaje(personaje, tabla.getValueAt(jTableObjetos.getSelectedRow(), 0).toString());
-        miVentanaPrincipal.descargaDatosPersonajes(miVentanaPrincipal.miUsuario);
+	jButtonAnnadir.setVisible(false);
+	setVisible(false);
+	miConexion.annadirArmaPersonaje(personaje, tabla.getValueAt(jTableObjetos.getSelectedRow(), 0).toString());
+	miVentanaPrincipal.descargaDatosPersonajes(miVentanaPrincipal.miUsuario);
     }//GEN-LAST:event_jButtonAnnadirActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+	/* Set the Nimbus look and feel */
+	//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+	/* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaDetallesArmas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaDetallesArmas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaDetallesArmas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaDetallesArmas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+	 */
+	try {
+	    for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+		if ("Nimbus".equals(info.getName())) {
+		    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+		    break;
+		}
+	    }
+	} catch (ClassNotFoundException ex) {
+	    java.util.logging.Logger.getLogger(VentanaDetallesArmas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+	} catch (InstantiationException ex) {
+	    java.util.logging.Logger.getLogger(VentanaDetallesArmas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+	} catch (IllegalAccessException ex) {
+	    java.util.logging.Logger.getLogger(VentanaDetallesArmas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+	} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+	    java.util.logging.Logger.getLogger(VentanaDetallesArmas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+	}
+	//</editor-fold>
+	//</editor-fold>
+	//</editor-fold>
+	//</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaDetallesArmas().setVisible(true);
-            }
-        });
+	/* Create and display the form */
+	java.awt.EventQueue.invokeLater(new Runnable() {
+	    public void run() {
+		new VentanaDetallesArmas().setVisible(true);
+	    }
+	});
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
