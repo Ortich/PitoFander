@@ -550,6 +550,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItemhechizos = new javax.swing.JMenuItem();
         jMenuAnnadirPJ = new javax.swing.JMenu();
         jMenuModificarPJ = new javax.swing.JMenu();
+        jMenuModificarPJ1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1450,6 +1451,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenuBar.add(jMenuModificarPJ);
 
+        jMenuModificarPJ1.setBackground(new java.awt.Color(190, 31, 44));
+        jMenuModificarPJ1.setText("Borrar Personaje");
+        jMenuModificarPJ1.setFont(new java.awt.Font("Pokemon Classic", 0, 9)); // NOI18N
+        jMenuModificarPJ1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuModificarPJ1MousePressed(evt);
+            }
+        });
+        jMenuBar.add(jMenuModificarPJ1);
+
         setJMenuBar(jMenuBar);
 
         pack();
@@ -1520,9 +1531,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jMenuAnnadirPJMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuAnnadirPJMousePressed
         if (usuarioConectado) {
             ventanaNuevoPersonaje.reseteaCampos();
-	    ventanaNuevoPersonaje.setVisible(true);
+            ventanaNuevoPersonaje.setVisible(true);
             ventanaNuevoPersonaje.abreModificacion(false, null, null, 0);
-	    
+
         }
     }//GEN-LAST:event_jMenuAnnadirPJMousePressed
 
@@ -1536,6 +1547,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jMenuItemArmadurasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemArmadurasActionPerformed
 
     }//GEN-LAST:event_jMenuItemArmadurasActionPerformed
+
+    private void jMenuModificarPJ1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuModificarPJ1MousePressed
+        if (usuarioConectado) {
+            miConexion.borraPersonaje(personajes.getValueAt(jComboBoxListaPersonajes.getSelectedIndex(), 67).toString());
+            descargaDatosPersonajes(miUsuario);
+        }
+    }//GEN-LAST:event_jMenuModificarPJ1MousePressed
 
     /**
      * @param args the command line arguments
@@ -1739,5 +1757,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemhechizos;
     private javax.swing.JMenuItem jMenuItemobjetos;
     private javax.swing.JMenu jMenuModificarPJ;
+    private javax.swing.JMenu jMenuModificarPJ1;
     // End of variables declaration//GEN-END:variables
 }

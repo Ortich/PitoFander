@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Daniel
  */
 public class NuevoPersonaje extends javax.swing.JFrame {
-    
+
     GestorConexion miConexion;
     VentanaPrincipal vP;
     private boolean modificando = false;
@@ -28,18 +28,18 @@ public class NuevoPersonaje extends javax.swing.JFrame {
         setResizable(false);
         reseteaCampos();
     }
-    
+
     public void guardaConexion(GestorConexion conexion, VentanaPrincipal miVentana) {
         miConexion = conexion;
         vP = miVentana;
     }
-    
+
     public void abreModificacion(boolean _modificando, String _codPersonaje, DefaultTableModel personajes, int index) {
         modificando = _modificando;
         codPersonaje = _codPersonaje;
         rellenaCajas(personajes, index);
     }
-    
+
     public void ponAlineamiento(String alineamiento) {
         switch (alineamiento) {
             case ("LB"):
@@ -80,134 +80,137 @@ public class NuevoPersonaje extends javax.swing.JFrame {
                 break;
         }
     }
-    
+
     public void rellenaCajas(DefaultTableModel personajes, int index) {
-        //Ahora metemos los objetos del personaje seleccionado en los comboBox
-        rellenaComboBox();
+        try {
+            //Ahora metemos los objetos del personaje seleccionado en los comboBox
+            rellenaComboBox();
 
-        //Ponemos los comboBox
-        boolean encontrado = false;
-        for (int i = 0; i < jComboBoxGenero.getItemCount() && !encontrado; i++) {
-            jComboBoxGenero.setSelectedIndex(i);
-            if (personajes.getValueAt(index, 4).toString().equals(jComboBoxGenero.getSelectedItem().toString())) {
-                encontrado = true;
+            //Ponemos los comboBox
+            boolean encontrado = false;
+            for (int i = 0; i < jComboBoxGenero.getItemCount() && !encontrado; i++) {
+                jComboBoxGenero.setSelectedIndex(i);
+                if (personajes.getValueAt(index, 4).toString().equals(jComboBoxGenero.getSelectedItem().toString())) {
+                    encontrado = true;
+                }
             }
-        }
-        encontrado = false;
-        for (int i = 0; i < jComboBoxRaza.getItemCount() && !encontrado; i++) {
-            jComboBoxRaza.setSelectedIndex(i);
-            if (personajes.getValueAt(index, 65).toString().equals(jComboBoxRaza.getSelectedItem().toString())) {
-                encontrado = true;
+            encontrado = false;
+            for (int i = 0; i < jComboBoxRaza.getItemCount() && !encontrado; i++) {
+                jComboBoxRaza.setSelectedIndex(i);
+                if (personajes.getValueAt(index, 65).toString().equals(jComboBoxRaza.getSelectedItem().toString())) {
+                    encontrado = true;
+                }
             }
-        }
-        encontrado = false;
-        for (int i = 0; i < jComboBoxClase.getItemCount() && !encontrado; i++) {
-            jComboBoxClase.setSelectedIndex(i);
-            if (personajes.getValueAt(index, 66).toString().equals(jComboBoxClase.getSelectedItem().toString())) {
-                encontrado = true;
+            encontrado = false;
+            for (int i = 0; i < jComboBoxClase.getItemCount() && !encontrado; i++) {
+                jComboBoxClase.setSelectedIndex(i);
+                if (personajes.getValueAt(index, 66).toString().equals(jComboBoxClase.getSelectedItem().toString())) {
+                    encontrado = true;
+                }
             }
-        }
-        ponAlineamiento(personajes.getValueAt(index, 2).toString());
+            ponAlineamiento(personajes.getValueAt(index, 2).toString());
 
-        //Guardamos los datos base del primer personaje
-        jTextFieldNombre.setText(personajes.getValueAt(index, 0).toString());
-        jTextFieldApellido.setText(personajes.getValueAt(index, 1).toString());
-        
-        jTextFieldDios.setText(personajes.getValueAt(index, 3).toString());
-        
-        jTextFieldEdad.setText(personajes.getValueAt(index, 8).toString());
-        jTextFieldAltura.setText(personajes.getValueAt(index, 9).toString());
-        jTextFieldPeso.setText(personajes.getValueAt(index, 10).toString());
-        jTextFieldCabello.setText(personajes.getValueAt(index, 11).toString());
-        jTextFieldOjos.setText(personajes.getValueAt(index, 12).toString());
-        jTextFieldFUE.setText(personajes.getValueAt(index, 13).toString());
-        jTextFieldDES.setText(personajes.getValueAt(index, 14).toString());
-        jTextFieldCON.setText(personajes.getValueAt(index, 15).toString());
-        jTextFieldINT.setText(personajes.getValueAt(index, 16).toString());
-        jTextFieldSAB.setText(personajes.getValueAt(index, 17).toString());
-        jTextFieldCAR.setText(personajes.getValueAt(index, 18).toString());
+            //Guardamos los datos base del primer personaje
+            jTextFieldNombre.setText(personajes.getValueAt(index, 0).toString());
+            jTextFieldApellido.setText(personajes.getValueAt(index, 1).toString());
 
-        //Guardamos ahora las habilidades del primer personaje
-        jTextFieldAcrobacias.setText(personajes.getValueAt(index, 19).toString());
-        jTextFieldArtesania1.setText(personajes.getValueAt(index, 20).toString());
-        jTextFieldArtesania2.setText(personajes.getValueAt(index, 22).toString());
-        jTextFieldArtesania3.setText(personajes.getValueAt(index, 24).toString());
-        jTextFieldAveriguarIntenciones.setText(personajes.getValueAt(index, 26).toString());
-        jTextFieldConocimientoDeConjuro.setText(personajes.getValueAt(index, 27).toString());
-        jTextFieldCurar.setText(personajes.getValueAt(index, 28).toString());
-        jTextFieldDiplomacia.setText(personajes.getValueAt(index, 29).toString());
-        jTextFieldDisfrarse.setText(personajes.getValueAt(index, 30).toString());
-        jTextFieldEngannar.setText(personajes.getValueAt(index, 31).toString());
-        jTextFieldEscapismo.setText(personajes.getValueAt(index, 32).toString());
-        jTextFieldInterpretar1.setText(personajes.getValueAt(index, 33).toString());
-        jTextFieldInterpretar2.setText(personajes.getValueAt(index, 35).toString());
-        jTextFieldIntimidar.setText(personajes.getValueAt(index, 37).toString());
-        jTextFieldInutilizarMecanismo.setText(personajes.getValueAt(index, 38).toString());
-        jTextFieldJuegoDeManos.setText(personajes.getValueAt(index, 39).toString());
-        jTextFieldLinguistica.setText(personajes.getValueAt(index, 40).toString());
-        jTextFieldMontar.setText(personajes.getValueAt(index, 41).toString());
-        jTextFieldNadar.setText(personajes.getValueAt(index, 42).toString());
-        jTextFieldPercepcion.setText(personajes.getValueAt(index, 43).toString());
-        jTextFieldProfesion1.setText(personajes.getValueAt(index, 44).toString());
-        jTextFieldProfesion2.setText(personajes.getValueAt(index, 46).toString());
-        jTextFieldSaberArcano.setText(personajes.getValueAt(index, 48).toString());
-        jTextFieldSaberDungeons.setText(personajes.getValueAt(index, 49).toString());
-        jTextFieldSaberGeografia.setText(personajes.getValueAt(index, 50).toString());
-        jTextFieldSaberHistoria.setText(personajes.getValueAt(index, 51).toString());
-        jTextFieldSaberIngenieria.setText(personajes.getValueAt(index, 52).toString());
-        jTextFieldSaberLocal.setText(personajes.getValueAt(index, 53).toString());
-        jTextFieldSaberNaturaleza.setText(personajes.getValueAt(index, 54).toString());
-        jTextFieldSaberNobleza.setText(personajes.getValueAt(index, 55).toString());
-        jTextFieldSaberLosPlanos.setText(personajes.getValueAt(index, 56).toString());
-        jTextFieldSaberReligion.setText(personajes.getValueAt(index, 57).toString());
-        jTextFieldSigilo.setText(personajes.getValueAt(index, 58).toString());
-        jTextFieldSupervivencia.setText(personajes.getValueAt(index, 59).toString());
-        jTextFieldTasacion.setText(personajes.getValueAt(index, 60).toString());
-        jTextFieldTratoConAnimales.setText(personajes.getValueAt(index, 61).toString());
-        jTextFieldTrepar.setText(personajes.getValueAt(index, 62).toString());
-        jTextFieldUsarObjetoMagico.setText(personajes.getValueAt(index, 63).toString());
-        jTextFieldVolar.setText(personajes.getValueAt(index, 64).toString());
+            jTextFieldDios.setText(personajes.getValueAt(index, 3).toString());
 
-        //Ahora miramos si tiene habilidades con nombre propio y los cambiamos 
-        if (!personajes.getValueAt(index, 21).toString().equals("-")) {
-            jTextFieldArtesania1Nombre.setText(personajes.getValueAt(index, 21).toString());
-        }
-        if (!personajes.getValueAt(index, 23).toString().equals("-")) {
-            jTextFieldArtesania2Nombre.setText(personajes.getValueAt(index, 23).toString());
-        }
-        if (!personajes.getValueAt(index, 25).toString().equals("-")) {
-            jTextFieldArtesania3Nombre.setText(personajes.getValueAt(index, 25).toString());
-        }
-        if (!personajes.getValueAt(index, 34).toString().equals("-")) {
-            jTextFieldInterpretar1Nombre.setText(personajes.getValueAt(index, 34).toString());
-        }
-        if (!personajes.getValueAt(index, 36).toString().equals("-")) {
-            jTextFieldInterpretar2Nombre.setText(personajes.getValueAt(index, 36).toString());
-        }
-        if (!personajes.getValueAt(index, 45).toString().equals("-")) {
-            jTextFieldProfesion1Nombre.setText(personajes.getValueAt(index, 45).toString());
-        }
-        if (!personajes.getValueAt(index, 47).toString().equals("-")) {
-            jTextFieldProfesion2Nombre.setText(personajes.getValueAt(index, 47).toString());
+            jTextFieldEdad.setText(personajes.getValueAt(index, 8).toString());
+            jTextFieldAltura.setText(personajes.getValueAt(index, 9).toString());
+            jTextFieldPeso.setText(personajes.getValueAt(index, 10).toString());
+            jTextFieldCabello.setText(personajes.getValueAt(index, 11).toString());
+            jTextFieldOjos.setText(personajes.getValueAt(index, 12).toString());
+            jTextFieldFUE.setText(personajes.getValueAt(index, 13).toString());
+            jTextFieldDES.setText(personajes.getValueAt(index, 14).toString());
+            jTextFieldCON.setText(personajes.getValueAt(index, 15).toString());
+            jTextFieldINT.setText(personajes.getValueAt(index, 16).toString());
+            jTextFieldSAB.setText(personajes.getValueAt(index, 17).toString());
+            jTextFieldCAR.setText(personajes.getValueAt(index, 18).toString());
+
+            //Guardamos ahora las habilidades del primer personaje
+            jTextFieldAcrobacias.setText(personajes.getValueAt(index, 19).toString());
+            jTextFieldArtesania1.setText(personajes.getValueAt(index, 20).toString());
+            jTextFieldArtesania2.setText(personajes.getValueAt(index, 22).toString());
+            jTextFieldArtesania3.setText(personajes.getValueAt(index, 24).toString());
+            jTextFieldAveriguarIntenciones.setText(personajes.getValueAt(index, 26).toString());
+            jTextFieldConocimientoDeConjuro.setText(personajes.getValueAt(index, 27).toString());
+            jTextFieldCurar.setText(personajes.getValueAt(index, 28).toString());
+            jTextFieldDiplomacia.setText(personajes.getValueAt(index, 29).toString());
+            jTextFieldDisfrarse.setText(personajes.getValueAt(index, 30).toString());
+            jTextFieldEngannar.setText(personajes.getValueAt(index, 31).toString());
+            jTextFieldEscapismo.setText(personajes.getValueAt(index, 32).toString());
+            jTextFieldInterpretar1.setText(personajes.getValueAt(index, 33).toString());
+            jTextFieldInterpretar2.setText(personajes.getValueAt(index, 35).toString());
+            jTextFieldIntimidar.setText(personajes.getValueAt(index, 37).toString());
+            jTextFieldInutilizarMecanismo.setText(personajes.getValueAt(index, 38).toString());
+            jTextFieldJuegoDeManos.setText(personajes.getValueAt(index, 39).toString());
+            jTextFieldLinguistica.setText(personajes.getValueAt(index, 40).toString());
+            jTextFieldMontar.setText(personajes.getValueAt(index, 41).toString());
+            jTextFieldNadar.setText(personajes.getValueAt(index, 42).toString());
+            jTextFieldPercepcion.setText(personajes.getValueAt(index, 43).toString());
+            jTextFieldProfesion1.setText(personajes.getValueAt(index, 44).toString());
+            jTextFieldProfesion2.setText(personajes.getValueAt(index, 46).toString());
+            jTextFieldSaberArcano.setText(personajes.getValueAt(index, 48).toString());
+            jTextFieldSaberDungeons.setText(personajes.getValueAt(index, 49).toString());
+            jTextFieldSaberGeografia.setText(personajes.getValueAt(index, 50).toString());
+            jTextFieldSaberHistoria.setText(personajes.getValueAt(index, 51).toString());
+            jTextFieldSaberIngenieria.setText(personajes.getValueAt(index, 52).toString());
+            jTextFieldSaberLocal.setText(personajes.getValueAt(index, 53).toString());
+            jTextFieldSaberNaturaleza.setText(personajes.getValueAt(index, 54).toString());
+            jTextFieldSaberNobleza.setText(personajes.getValueAt(index, 55).toString());
+            jTextFieldSaberLosPlanos.setText(personajes.getValueAt(index, 56).toString());
+            jTextFieldSaberReligion.setText(personajes.getValueAt(index, 57).toString());
+            jTextFieldSigilo.setText(personajes.getValueAt(index, 58).toString());
+            jTextFieldSupervivencia.setText(personajes.getValueAt(index, 59).toString());
+            jTextFieldTasacion.setText(personajes.getValueAt(index, 60).toString());
+            jTextFieldTratoConAnimales.setText(personajes.getValueAt(index, 61).toString());
+            jTextFieldTrepar.setText(personajes.getValueAt(index, 62).toString());
+            jTextFieldUsarObjetoMagico.setText(personajes.getValueAt(index, 63).toString());
+            jTextFieldVolar.setText(personajes.getValueAt(index, 64).toString());
+
+            //Ahora miramos si tiene habilidades con nombre propio y los cambiamos 
+            if (!personajes.getValueAt(index, 21).toString().equals("-")) {
+                jTextFieldArtesania1Nombre.setText(personajes.getValueAt(index, 21).toString());
+            }
+            if (!personajes.getValueAt(index, 23).toString().equals("-")) {
+                jTextFieldArtesania2Nombre.setText(personajes.getValueAt(index, 23).toString());
+            }
+            if (!personajes.getValueAt(index, 25).toString().equals("-")) {
+                jTextFieldArtesania3Nombre.setText(personajes.getValueAt(index, 25).toString());
+            }
+            if (!personajes.getValueAt(index, 34).toString().equals("-")) {
+                jTextFieldInterpretar1Nombre.setText(personajes.getValueAt(index, 34).toString());
+            }
+            if (!personajes.getValueAt(index, 36).toString().equals("-")) {
+                jTextFieldInterpretar2Nombre.setText(personajes.getValueAt(index, 36).toString());
+            }
+            if (!personajes.getValueAt(index, 45).toString().equals("-")) {
+                jTextFieldProfesion1Nombre.setText(personajes.getValueAt(index, 45).toString());
+            }
+            if (!personajes.getValueAt(index, 47).toString().equals("-")) {
+                jTextFieldProfesion2Nombre.setText(personajes.getValueAt(index, 47).toString());
+            }
+        } catch (Exception e) {
         }
     }
-    
+
     public void rellenaComboBox() {
         jComboBoxRaza.removeAllItems();
         jComboBoxClase.removeAllItems();
-        
+
         ArrayList<String> aux = new ArrayList<>(miConexion.nombreClase());
-        
+
         for (int i = 0; i < aux.size(); i++) {
             jComboBoxClase.addItem(aux.get(i));
         }
-        
+
         aux = new ArrayList<>(miConexion.nombreRaza());
         for (int i = 0; i < aux.size(); i++) {
             jComboBoxRaza.addItem(aux.get(i));
         }
     }
-    
+
     public void reseteaCampos() {
         //Ponemos en blanco todos los jLabels de habilidades que no sean Titulos
         jTextFieldAcrobacias.setText("");
@@ -266,17 +269,17 @@ public class NuevoPersonaje extends javax.swing.JFrame {
         jTextFieldPeso.setText("");
         jTextFieldOjos.setText("");
         jTextFieldCabello.setText("");
-	
-	jTextFieldArtesania1Nombre.setText("");
-	jTextFieldArtesania2Nombre.setText("");
-	jTextFieldArtesania3Nombre.setText("");
-	jTextFieldProfesion1Nombre.setText("");
-	jTextFieldProfesion2Nombre.setText("");
-	jTextFieldInterpretar1Nombre.setText("");
-	jTextFieldInterpretar2Nombre.setText("");
-        
+
+        jTextFieldArtesania1Nombre.setText("");
+        jTextFieldArtesania2Nombre.setText("");
+        jTextFieldArtesania3Nombre.setText("");
+        jTextFieldProfesion1Nombre.setText("");
+        jTextFieldProfesion2Nombre.setText("");
+        jTextFieldInterpretar1Nombre.setText("");
+        jTextFieldInterpretar2Nombre.setText("");
+
     }
-    
+
     public void annadePersonaje() {
         if (!modificando) {
             miConexion.insertaNuevoPersonaje(jTextFieldNombre.getText(), jTextFieldApellido.getText(), devuelveAlineamiento(),
@@ -311,13 +314,13 @@ public class NuevoPersonaje extends javax.swing.JFrame {
                     jTextFieldTratoConAnimales.getText(), jTextFieldTrepar.getText(), jTextFieldUsarObjetoMagico.getText(), jTextFieldVolar.getText(),
                     jComboBoxRaza.getSelectedItem().toString(), jComboBoxClase.getSelectedItem().toString(), codPersonaje);
         }
-        
+
         vP.descargaDatosPersonajes(vP.miUsuario);
     }
-    
+
     public String devuelveAlineamiento() {
         String resultado = "";
-        
+
         switch (jComboBoxAlineamiento1.getSelectedItem().toString()) {
             case "Legal":
                 resultado += "L";
@@ -329,7 +332,7 @@ public class NuevoPersonaje extends javax.swing.JFrame {
                 resultado += "C";
                 break;
         }
-        
+
         switch (jComboBoxAlineamiento2.getSelectedItem().toString()) {
             case "Bueno":
                 resultado += "B";

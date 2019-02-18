@@ -33,7 +33,7 @@ public class GestorConexion {
         try {
             String url1 = "jdbc:mysql://localhost:3306/pathmanager?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
             String user = "root";
-            String password = "root";
+            String password = "";
 
             conn1 = (Connection) DriverManager.getConnection(url1, user, password);
         } catch (SQLException ex) {
@@ -78,6 +78,17 @@ public class GestorConexion {
             System.out.println("ERROR:al consultar");
             ex.printStackTrace();
             return existe;
+        }
+    }
+
+    public void borraPersonaje(String codPersonaje) {
+        try {
+            Statement sta = conn1.createStatement();
+            String query = "delete from personaje where codPersonaje =" + codPersonaje + ";";
+            sta.executeUpdate(query);
+        } catch (SQLException ex) {
+            System.out.println("ERROR:al consultar");
+            ex.printStackTrace();
         }
     }
 

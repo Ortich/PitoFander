@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `objetos`
 (
 	`codObjeto` int(255) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `nombre` varchar(30) NOT NULL,
-    `peso` int(4) NOT NULL,
+    `peso` varchar(30) NOT NULL,
     `magico` BOOL NOT NULL,
     `descripcion` TEXT NOT NULL
 )
@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `armas`
 (
 	`codArma` int(255) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `nombre` varchar(30) NOT NULL,
-    `peso` int(4) NOT NULL,
+    `peso` varchar(30) NOT NULL,
     `magico` BOOL NOT NULL,
     `descripcion` TEXT NOT NULL,
     `dannoP` varchar(20) NOT NULL,
@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `armaduras`
 	`codArmadura` int(255) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `nombre` varchar(30) NOT NULL,
     `bonificador` int(4) NOT NULL,
-    `peso` int(4) NOT NULL,
+    `peso` varchar(30) NOT NULL,
     `magico` BOOL NOT NULL,
     `descripcion` TEXT NOT NULL,
     `velocidad` varchar(30) NOT NULL,
@@ -265,8 +265,8 @@ CREATE TABLE IF NOT EXISTS `hechizos`
     `tiempoCasteo` varchar(20) NOT NULL,
     `componentes` TEXT NOT NULL,
     `descripcion` TEXT NOT NULL,
-    `rango` varchar(30) NOT NULL,
-    `objetivo` varchar(30),
+    `rango` varchar(50) NOT NULL,
+    `objetivo` varchar(90),
     `efecto` varchar(30) NOT NULL,
     `duracion` varchar(30),
     `tiradaSalvacion` TEXT NOT NULL,
@@ -310,10 +310,10 @@ CREATE TABLE IF NOT EXISTS `clases`
 (
 	`codClase` int(3) NOT NULL PRIMARY KEY auto_increment,
 	`nombre` varchar(40) NOT NULL,
-    `alineamiento` varchar(20) NOT NULL,
+    `alineamiento` varchar(60) NOT NULL,
     `rol` TEXT NOT NULL,
     `dadoDeGolpe` varchar(20) NOT NULL,
-    `rangoPorNivel` varchar(20) NOT NULL,
+    `rangoPorNivel` varchar(60) NOT NULL,
     `ataqueBase` int(2) NOT NULL,
     `tiradaSalvacionFortaleza` int(2) NOT NULL,
     `tiradaSalvacionReflejos` int(2) NOT NULL,
